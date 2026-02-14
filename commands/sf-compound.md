@@ -19,59 +19,25 @@ If no scope specified, analyze recent commits and changes.
 
 ---
 
-## MANDATORY: Work Classification
+## Routing Guidance (Index-First)
 
-**STOP. Before analyzing, you MUST classify the work that was completed.**
-
-### Step 1: Identify What Was Built
-
-Analyze the recent changes and determine the PRIMARY Salesforce component type:
-
-| If Work Involved... | Classification | Update ONLY These Resources |
-|---------------------|----------------|----------------------------|
-| Flows, Automation | **AUTOMATION** | `agents/automation/*.md` + `skills/flow-patterns/` |
-| Apex Classes, Triggers | **APEX** | `agents/apex/*.md` + `skills/apex-patterns/` |
-| LWC Components | **LWC** | `agents/lwc/*.md` + `skills/lwc-patterns/` |
-| Integrations, Callouts, APIs | **INTEGRATION** | `agents/integration/*.md` + `skills/integration-patterns/` |
-| Data Model, Sharing | **ARCHITECTURE** | `agents/architecture/*.md` + `skills/security-guide/` |
-
-### Step 2: Output Your Classification
-
-**You MUST explicitly state:** `Work Classification: [AUTOMATION|APEX|LWC|INTEGRATION|ARCHITECTURE]`
-
-### Step 3: Capture Learnings to Correct Files
-
-- Add Flow patterns to `skills/flow-patterns/SKILL.md`, NOT to `skills/apex-patterns/SKILL.md`
-- Add Apex patterns to `skills/apex-patterns/SKILL.md`, NOT to `skills/flow-patterns/SKILL.md`
-- Add checks to agents matching the work type
-
-### Step 4: DO NOT Cross-Contaminate
-
-**CRITICAL RULES:**
-- Learnings from Flow work → Update ONLY automation agents and flow-patterns skill
-- Learnings from Apex work → Update ONLY apex agents and apex-patterns skill
-- Mixing learnings into wrong files corrupts future routing
+Classify recent work, then route updates via index files:
+- Use `agents/index.md` to choose agent files for new checks
+- Use `skills/index.md` to choose skill files for new patterns
+- Update only files relevant to the work classification
+- Avoid cross-contamination across Apex/Flow/LWC/Integration domains
 
 ---
 
-## Web Research (Parallel Guidance)
+## Parallel Research (Optional Guidance)
 
 If the work involved newer features or unusual patterns, consider running web research in parallel to validate learnings.
-
-### What to Research
-
-Cross-check learnings against multiple sources:
+Cross-check learnings with:
 - Official docs: `site:developer.salesforce.com`
 - Community Q&A: `site:salesforce.stackexchange.com`
 - External Salesforce authors (blogs)
 - Salesforce consulting companies (implementation writeups)
-
-### Suggested Output
-
-Include research-validated insights in the compound report:
-- **Confirmed best practices**
-- **Documented pitfalls**
-- **Version-specific notes**
+Include brief research notes: confirmed practice, pitfall, and any version-specific detail.
 
 ---
 
@@ -90,10 +56,12 @@ This is what makes each iteration smarter than the last.
 ## Available Resources
 
 ### Agents (to enhance)
-Read `.claude/agents/index.md` - agents can have new checks added based on issues found.
+Read `agents/index.md` to route to target agent files.  
+If running from CLI bootstrap, the equivalent path is `.claude/agents/index.md`.
 
 ### Skills (to expand)
-Read `.claude/skills/index.md` - skills can have new patterns added based on work done.
+Read `skills/index.md` to route to target skill files.  
+If running from CLI bootstrap, the equivalent path is `.claude/skills/index.md`.
 
 ### CLAUDE.md (to update)
 Project-specific context and learnings.
@@ -102,83 +70,25 @@ Project-specific context and learnings.
 
 ## What to Capture
 
-### 1. Patterns
-New reusable patterns discovered during implementation:
-- Apex patterns (trigger handlers, services, utilities)
-- Flow patterns (subflows, invocable actions)
-- LWC patterns (component communication, state management)
-- Test patterns (factories, mocks)
-
-### 2. Issues Prevented
-Problems encountered that could be caught earlier:
-- Add new checks to relevant agent files
-- Document the issue and how to detect it
-
-### 3. Project Context
-Org-specific knowledge for CLAUDE.md:
-- Naming conventions discovered
-- Architecture decisions made
-- Integration endpoints configured
-- Gotchas and tips
-
-### 4. Test Fixtures
-Reusable test data and mocks:
-- TestDataFactory methods
-- Mock implementations
-- Test helper utilities
+- Reusable patterns from recent work.
+- Preventable issues and checks to add.
+- Project context updates for `CLAUDE.md`.
+- Test fixture improvements (if applicable).
 
 ---
 
 ## Your Process
 
-1. **Analyze recent work** - What was built, what decisions were made
-
-2. **Identify new patterns** - Code patterns not yet in skills
-
-3. **Find preventable issues** - Problems that could be caught earlier
-
-4. **Extract project context** - Org-specific learnings
-
-5. **Update the knowledge base**:
-   - Add patterns to relevant skill files
-   - Add checks to relevant agent files
-   - Update CLAUDE.md with project context
-
-6. **Create compound report** - Document what was captured
+1. Analyze recent work and classification.
+2. Identify patterns/issues/context worth codifying.
+3. Update relevant skill/agent files and `CLAUDE.md`.
+4. Create a compound report.
 
 ---
 
 ## Output
 
-### Update Files
-
-Based on what was learned, update:
-- `.claude/skills/*/SKILL.md` - New patterns
-- `.claude/agents/*/*.md` - New checks
-- `CLAUDE.md` - Project context
-
-### Create Compound Report
-
-Save to `.specify/compounds/<date>-<feature>.md`:
-
-```markdown
-# Compound Report: [Feature]
-
-## What Was Built
-[Summary of components created]
-
-## Patterns Captured
-[New patterns added to skills]
-
-## Agent Enhancements
-[New checks added to agents]
-
-## CLAUDE.md Updates
-[New project context]
-
-## Impact
-[How this makes future work easier]
-```
+Update relevant skills/agents/`CLAUDE.md`, then save a report to `.specify/compounds/<date>-<feature>.md` with: what was built, patterns captured, agent enhancements, context updates, and impact.
 
 ---
 

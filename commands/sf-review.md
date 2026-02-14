@@ -19,68 +19,37 @@ If no target specified, review uncommitted changes (`git diff`).
 
 ---
 
-## MANDATORY: Task Classification
+## Routing Guidance (Index-First)
 
-**STOP. Before reading any agents or skills, you MUST classify the files being reviewed.**
-
-### Step 1: Identify File Types Being Reviewed
-
-Analyze the files and determine their PRIMARY Salesforce component type:
-
-| If Reviewing... | Classification | Load ONLY These Agents |
-|-----------------|----------------|------------------------|
-| `.flow-meta.xml`, Flow metadata | **AUTOMATION** | `agents/automation/*.md` |
-| `.cls`, `.trigger`, Apex files | **APEX** | `agents/apex/*.md` |
-| `.js`, `.html`, `.css` in `/lwc/` folder | **LWC** | `agents/lwc/*.md` |
-| Callout classes, Named Credentials, Platform Events | **INTEGRATION** | `agents/integration/*.md` |
-| `.object-meta.xml`, `.field-meta.xml`, sharing rules | **ARCHITECTURE** | `agents/architecture/*.md` |
-
-### Step 2: Output Your Classification
-
-**You MUST explicitly state:** `Files Classification: [AUTOMATION|APEX|LWC|INTEGRATION|ARCHITECTURE]`
-
-For mixed file types, state: `Files Classification: [TYPE1], [TYPE2]`
-
-### Step 3: Load Agents for ONLY Those Classifications
-
-- Read the agents listed for your classification(s)
-- DO NOT load agents for file types not being reviewed
-
-### Step 4: DO NOT Cross-Apply
-
-**CRITICAL ROUTING RULES:**
-- If reviewing Flows → DO NOT apply Apex review checklists
-- If reviewing Apex → DO NOT apply Flow review checklists
-- If reviewing LWC → Apply LWC agents; only apply Apex agents if reviewing Apex controllers
-- Each agent type has specific checklists for specific file types
+Classify reviewed files first, then route via index files:
+- Use `agents/index.md` to map file types to agent categories
+- Load only agent categories that match files in scope
+- For mixed diffs, apply each checklist only to matching file types
+- Use skills only when a finding needs additional pattern/limit context
 
 ---
 
-## Web Research (Parallel Guidance)
+## Parallel Research (Optional Guidance)
 
 If review criteria are unclear or the feature uses newer platform capabilities, consider running web research in parallel.
-
-### What to Research
-
-Validate review criteria against multiple sources:
+Validate review criteria against:
 - Official docs: `site:developer.salesforce.com`
 - Community Q&A: `site:salesforce.stackexchange.com`
 - External Salesforce authors (blogs)
 - Salesforce consulting companies (implementation writeups)
-
-### Suggested Output
-
-Summarize any research-backed review criteria and cite common pitfalls.
+Summarize research-backed criteria and common pitfalls briefly.
 
 ---
 
 ## Available Resources
 
 ### Agents (Review Expertise)
-Read `.claude/agents/index.md` to find agents relevant to the files being reviewed.
+Read `agents/index.md` to route to relevant review agents.  
+If running from CLI bootstrap, the equivalent path is `.claude/agents/index.md`.
 
 ### Skills (Domain Knowledge)
-Read `.claude/skills/index.md` to understand what constitutes good Salesforce code.
+Use `skills/index.md` only when review findings need extra pattern/limit context.  
+If running from CLI bootstrap, the equivalent path is `.claude/skills/index.md`.
 
 ---
 
@@ -114,64 +83,23 @@ Read `.claude/skills/index.md` to understand what constitutes good Salesforce co
 
 ## Your Process
 
-1. **Identify files to review** - Get list of changed files or specified target
-
-2. **Classify files** - Apex, LWC, Flow, Configuration
-
-3. **Read relevant agents** - Based on file types, read applicable agent files for review criteria
-
-4. **Review each file** - Apply the checklists from the agent files
-
-5. **Categorize findings** - By severity (Critical, High, Medium, Low)
-
-6. **Report findings** - With file, line, issue, and fix suggestion
+1. Identify files in scope.
+2. Classify file types.
+3. Read relevant agent checklists.
+4. Review and categorize findings by severity.
+5. Report issue + fix suggestion.
 
 ---
 
-## Severity Levels
+## Severity
 
-| Severity | Meaning | Action |
-|----------|---------|--------|
-| Critical | Security vulnerability, data loss risk, will fail in production | Must fix |
-| High | Governor limit risk, significant bug, poor practice | Should fix |
-| Medium | Code quality issue, maintainability concern | Consider fixing |
-| Low | Style issue, minor improvement | Nice to have |
+Use four levels: Critical, High, Medium, Low.
 
 ---
 
 ## Output Format
 
-```
-Review: [target]
-
-Files reviewed:
-- [list of files]
-
-Findings:
-
-CRITICAL (X)
-1. [File:Line] - [Issue]
-   Fix: [How to fix]
-
-HIGH (X)
-1. [File:Line] - [Issue]
-   Fix: [How to fix]
-
-MEDIUM (X)
-...
-
-LOW (X)
-...
-
-Positive Observations:
-- [Good patterns found]
-
-Summary:
-- Critical: X (must fix)
-- High: X (should fix)
-- Medium: X
-- Low: X
-```
+Report: target, files reviewed, findings grouped by severity, fix suggestions, and a short summary.
 
 ---
 

@@ -17,95 +17,41 @@ Create a specification and technical design for: `$ARGUMENTS.feature`
 
 ---
 
-## MANDATORY: Task Classification
+## Routing Guidance (Index-First)
 
-**STOP. Before reading any agents or skills, you MUST classify this task.**
-
-### Step 1: Identify Primary Component Type
-
-Analyze the feature request and determine the PRIMARY Salesforce component:
-
-| If Request Mentions... | Classification | Load ONLY These Resources |
-|------------------------|----------------|---------------------------|
-| Flow, Record-Triggered Flow, Screen Flow, Scheduled Flow, Automation, Process Builder | **AUTOMATION** | `agents/automation/*.md` + `skills/flow-patterns/` |
-| Apex, Trigger, Class, Batch, Schedulable, Queueable, Service, Handler | **APEX** | `agents/apex/*.md` + `skills/apex-patterns/` |
-| LWC, Lightning Web Component, Component, Aura, Frontend | **LWC** | `agents/lwc/*.md` + `skills/lwc-patterns/` |
-| API, REST, Callout, Integration, External System, Platform Event, Webhook | **INTEGRATION** | `agents/integration/*.md` + `skills/integration-patterns/` |
-| Object, Field, Relationship, Data Model, Sharing, Permission, OWD | **ARCHITECTURE** | `agents/architecture/*.md` + `skills/security-guide/` |
-
-### Step 2: Output Your Classification
-
-**You MUST explicitly state:** `Task Classification: [AUTOMATION|APEX|LWC|INTEGRATION|ARCHITECTURE]`
-
-### Step 3: Load Resources for ONLY That Classification
-
-- Read the agents listed for your classification
-- Read the skills listed for your classification
-- Read `skills/governor-limits/` (applies to all classifications)
-
-### Step 4: DO NOT Cross-Load
-
-**CRITICAL ROUTING RULES:**
-- If classification is AUTOMATION → DO NOT read `agents/apex/*.md` or `skills/apex-patterns/`
-- If classification is APEX → DO NOT read `agents/automation/*.md` or `skills/flow-patterns/`
-- If classification is LWC → DO NOT read `agents/apex/*.md` (unless Apex controller is needed)
-- Mixing patterns from wrong domains causes incorrect recommendations
+Classify the task first, then route via index files:
+- Use `agents/index.md` as the source of truth for which agent category to read
+- Use `skills/index.md` as the source of truth for which skills to read
+- Read only relevant sections/files for the chosen classification
+- Keep reads selective: index first, deep-read only what applies
+- Include `skills/governor-limits/SKILL.md` when backend limits are relevant
 
 ---
 
-## Internal-First Solution Discovery (Guidance)
+## Internal-First Discovery (Guidance)
 
-Before considering any external service or third-party tool, identify native Salesforce solutions first.
-
-### Step 1: Enumerate Native Options
-
-Consider and prefer Salesforce-native capabilities first:
+Prefer Salesforce-native capabilities first:
 - Declarative automation (Flows, Validation Rules, Approval Processes)
 - Apex and platform events
 - LWC, Aura, Visualforce, and standard UI patterns
 - Standard objects, fields, and metadata
-- Reports, dashboards, and standard security model
+- Standard security model
 
-### Step 2: Choose the Simplest Native Approach
-
-Select the lowest-complexity internal approach that meets requirements.
-Only consider external services if native options cannot meet the requirements.
-
-### Step 3: Justify External Dependencies (If Any)
-
-If you recommend any external tool or service, explicitly state:
+If external services are proposed, state:
 - Why native Salesforce options are insufficient
 - What capability is missing internally
 - Why the external option is necessary
 
 ---
 
-## Web Research (Parallel Guidance)
+## Parallel Research (Optional Guidance)
 
-If the requirement is new, unclear, or could have multiple approaches, consider running web research in parallel.
-
-### What to Research
-
-Run WebSearch across multiple sources to validate the internal-first approach:
+If the requirement is unclear, novel, or has multiple valid approaches, consider parallel research across:
 - Official docs: `site:developer.salesforce.com`
 - Community Q&A: `site:salesforce.stackexchange.com`
-- External Salesforce authors (blogs)
-- Salesforce consulting companies (implementation writeups)
+- External Salesforce authors and consulting writeups
 
-### How to Search
-
-Run parallel searches with the same core intent but different sources. Example:
-- "record-triggered flow bulkification site:developer.salesforce.com"
-- "record-triggered flow bulkification site:salesforce.stackexchange.com"
-- "record-triggered flow bulkification blog salesforce"
-- "record-triggered flow bulkification consulting implementation"
-
-### Suggested Output
-
-Summarize findings into:
-- **Native-first confirmation** (what Salesforce supports natively)
-- **Common pitfalls** (from Stack Exchange)
-- **Recommended patterns** (from docs and blogs)
+When research is used, include short evidence notes: native option considered, key pitfall/limit, chosen pattern.
 
 ---
 
@@ -123,13 +69,13 @@ Code implementation happens in `/sf-work`.
 
 ## Available Resources
 
-Before starting, understand what resources are available:
-
 ### Agents (Expertise)
-Read `.claude/agents/index.md` to find agents relevant to this task.
+Read `agents/index.md` to route to relevant agents.  
+If running from CLI bootstrap, the equivalent path is `.claude/agents/index.md`.
 
 ### Skills (Domain Knowledge)
-Read `.claude/skills/index.md` to find skills relevant to this task.
+Read `skills/index.md` to route to relevant skills.  
+If running from CLI bootstrap, the equivalent path is `.claude/skills/index.md`.
 
 ### Existing Codebase
 Explore the codebase to understand existing patterns, naming conventions, and architecture.
@@ -138,78 +84,21 @@ Explore the codebase to understand existing patterns, naming conventions, and ar
 
 ## Your Process
 
-1. **Understand the request** - What Salesforce components are needed? (Flow? Apex? LWC? Integration?)
-
-2. **Read relevant resources** - Based on what's being built, read ONLY the applicable agents and skills from the index files.
-
-3. **Explore the codebase** - Find existing patterns to follow.
-
-4. **Use WebSearch if needed** - When local knowledge doesn't cover the specific scenario.
-
-5. **Design the solution** - Architecture, not code.
-
-6. **Save the plan** - To `.specify/specs/` folder.
+1. Classify and route with index files.
+2. Read only relevant agent/skill files.
+3. Explore existing code patterns.
+4. Use WebSearch only when needed.
+5. Design architecture (no code).
+6. Save under `.specify/specs/`.
 
 ---
 
-## Output Format
+## Output
 
-Create a folder: `.specify/specs/<NNN>-<feature-slug>/`
-
-### spec.md (Business Requirements)
-```markdown
-# [Feature Name] - Specification
-
-## Overview
-[What this feature does and why]
-
-## User Stories
-[Who needs this, what they do, why it matters]
-
-## Acceptance Criteria
-[How we know it's done]
-
-## Constraints
-[Limits, security requirements, dependencies]
-```
-
-### plan.md (Technical Design)
-```markdown
-# [Feature Name] - Technical Plan
-
-## Components
-[What will be built - list of Flows, Classes, LWC, Objects, etc.]
-
-## Architecture
-[How components connect, data flow, sequence]
-
-## Design Decisions
-[Why this approach was chosen]
-
-## Governor Limit Considerations
-[Relevant limits and how they're addressed]
-
-## Security Considerations
-[CRUD/FLS, sharing, permissions needed]
-```
-
-### tasks.md (Implementation Checklist)
-```markdown
-# [Feature Name] - Tasks
-
-## Implementation Tasks
-- [ ] Task 1
-- [ ] Task 2
-...
-
-## Testing Tasks
-- [ ] Task 1
-...
-
-## Deployment Tasks
-- [ ] Task 1
-...
-```
+Create `.specify/specs/<NNN>-<feature-slug>/` with:
+- `spec.md` (business requirements, acceptance criteria, constraints)
+- `plan.md` (components, architecture, design decisions, limits, security)
+- `tasks.md` (implementation, testing, deployment checklist)
 
 ---
 
@@ -220,7 +109,7 @@ Use WebSearch when:
 - Need latest Salesforce documentation
 - Working with newer features
 - Need community solutions
- - Native-first evaluation is complete and still insufficient
+- Native-first evaluation is complete and still insufficient
 
 Search sites:
 - `site:developer.salesforce.com` - Official docs
@@ -228,25 +117,11 @@ Search sites:
 
 ---
 
-## Examples of Good Output
+## Quality Bar
 
-**For a Flow request:**
-- Describe Flow type, trigger conditions, entry criteria
-- List Flow elements (Decisions, Loops, Actions)
-- Specify any Invocable Apex needed
-- Do NOT include actual Flow XML or Apex code
-
-**For an Apex request:**
-- Describe classes and their responsibilities
-- List method signatures with parameters and return types
-- Describe relationships between classes
-- Do NOT include implementation code
-
-**For an LWC request:**
-- Describe component hierarchy
-- List props, events, and wire adapters
-- Specify Apex controller methods needed
-- Do NOT include actual JavaScript or HTML
+- Keep output architecture-focused (no implementation code).
+- Include Salesforce limits and security implications.
+- Prefer simple, native-first designs.
 
 ---
 

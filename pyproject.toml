@@ -34,6 +34,9 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development",
 ]
+dependencies = [
+    "tomli; python_version < '3.11'",
+]
 
 [project.scripts]
 sfce = "sfce:main"

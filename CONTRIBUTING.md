@@ -1,146 +1,68 @@
 # Contributing to SF Compound Engineering
 
-Thank you for your interest in contributing! This document provides guidelines for contributing to the project.
+Thanks for contributing.
 
 ## How to Contribute
 
-### Reporting Issues
-
-- Check existing issues before creating a new one
-- Use issue templates when available
-- Provide detailed reproduction steps
-- Include relevant environment information (Python version, OS, etc.)
-
-### Submitting Changes
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Test locally (see Testing section)
-5. Commit with a descriptive message
-6. Push to your branch
-7. Open a Pull Request
+1. Fork the repository.
+2. Create a branch (`git checkout -b feature/my-change`).
+3. Make and test your changes.
+4. Open a pull request with a clear description.
 
 ## Project Structure
 
-```
-sf-compound-engineering/
-├── sfce.py              # Main CLI application
-├── __init__.py          # Package init
-├── commands/            # Slash command definitions
-│   ├── sf-plan.md       # /sf-plan
-│   ├── sf-work.md       # /sf-work
-│   ├── sf-review.md     # /sf-review
-│   ├── sf-triage.md     # /sf-triage
-│   ├── sf-resolve.md    # /sf-resolve
-│   ├── sf-test.md       # /sf-test
-│   ├── sf-document.md   # /sf-document
-│   ├── sf-health.md     # /sf-health
-│   └── sf-deploy.md     # /sf-deploy
-├── pyproject.toml       # Python package config
+```text
+sf-compound-engineering-plugin/
+├── .claude-plugin/              # Plugin metadata (Claude plugin-first)
+├── commands/                    # 4 commands: sf-plan/sf-work/sf-review/sf-compound
+├── agents/                      # 23 specialized agents + index.md
+├── skills/                      # 7 skills + index.md
+├── tests/                       # Prompt validation checks
+├── sfce.py                      # Optional CLI bootstrap/update utility
+├── pyproject.toml               # Packaging metadata
 ├── README.md
-├── CONTRIBUTING.md
-└── LICENSE
+└── CONTRIBUTING.md
 ```
 
-## Adding/Modifying Commands
+## Command Authoring Guidelines
 
-### Command File Format
+- Keep prompts concise and selective in context use.
+- Route through `agents/index.md` and `skills/index.md`.
+- Prefer guidance language (`prefer`, `consider`) over rigid mandates.
+- Keep Salesforce-native options first; use external research when needed.
 
-Commands are markdown files with YAML frontmatter:
+## Frontmatter Requirements
+
+### Commands and Agents
 
 ```yaml
 ---
-name: sf-command-name
-description: What the command does
-arguments:
-  - name: arg1
-    description: Argument description
-    required: true/false
+name: some-name
+description: Short description
 ---
-
-# Command Title
-
-Description and workflow steps...
 ```
 
-### Best Practices for Commands
+### Skills
 
-1. **Clear Structure**: Include workflow steps with headers
-2. **Examples**: Provide real-world usage examples
-3. **Salesforce-Specific**: Reference governor limits, security, patterns
-4. **Output Format**: Define expected output structure
-
-## Modifying the CLI
-
-### Key Functions in `sfce.py`
-
-- `create_directory_structure()` - Creates `.specify/` folder
-- `install_commands()` - Installs commands to `.claude/commands/`
-- `setup_ai_agent()` - Configures for specific AI agents
-- `init_command()` - Main initialization logic
-
-### Adding New AI Agent Support
-
-1. Add entry to `AI_AGENTS` dictionary
-2. Implement any agent-specific setup in `setup_ai_agent()`
-3. Update README with new agent info
+Each `skills/*/SKILL.md` must include frontmatter with `name` and `description`.
 
 ## Testing
 
-### Local Testing
+Run these checks before opening a PR:
 
 ```bash
-# Test the CLI
+python tests/validate_prompts.py
 python sfce.py --help
-python sfce.py init --help
-
-# Test initialization in a temp directory
-mkdir /tmp/test-project
-cd /tmp/test-project
-python /path/to/sfce.py init . --ai claude
-
-# Verify structure
-find . -type f | sort
 ```
 
-### Verify Commands
+Optional CLI smoke test:
 
 ```bash
-# Count command files
-ls commands/*.md | wc -l  # Should be 9
-
-# Validate command frontmatter
-head -10 commands/sf-plan.md
+mkdir /tmp/sfce-test && cd /tmp/sfce-test
+python /path/to/sfce.py init . --ai claude
 ```
 
-## Code Style
+## Notes on Scope
 
-### Python
-
-- Follow PEP 8
-- Use type hints where possible
-- Keep functions focused and documented
-
-### Markdown
-
-- Use ATX-style headers (`#`, `##`, `###`)
-- Include code examples with syntax highlighting
-- Keep lines under 100 characters when possible
-
-### Command Examples (Apex)
-
-- Follow Salesforce naming conventions
-- Include proper error handling
-- Show bulk-safe patterns
-- Include CRUD/FLS checks
-
-### Command Examples (LWC)
-
-- Use modern ES6+ syntax
-- Follow LWC best practices
-- Include accessibility considerations
-
-## Questions?
-
-Feel free to open an issue for any questions about contributing.
+- Current focus is Claude Code plugin behavior.
+- The CLI remains available as an optional bootstrap path.

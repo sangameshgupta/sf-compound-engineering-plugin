@@ -1,0 +1,12 @@
+{
+  "name": "sf-compound-engineering",
+  "version": "1.0.0",
+  "description": "Salesforce-focused compound engineering workflow for Claude Code",
+  "author": "Gella Sangamesh Gupta",
+  "repository": "https://github.com/gellasangameshgupta/sf-compound-engineering-plugin",
+  "components": {
+    "commands": 4,
+    "agents": 23,
+    "skills": 7
+  }
+}

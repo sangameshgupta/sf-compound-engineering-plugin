@@ -1,14 +1,14 @@
 # Salesforce Skills Index
 
-This index helps you find the right skill (domain knowledge) for your task. Read only the skills relevant to what you're building.
+Use this index to route to the right skills for the task.
 
 ---
 
-## CRITICAL: Routing Validation
+## Routing Map
 
-**Before reading any skill files, confirm your task classification from the command.**
+Use this file as the canonical skill router.
 
-| Your Classification | Read These Skills | DO NOT Read |
+| Classification | Read Skills | Avoid |
 |--------------------|-------------------|-------------|
 | AUTOMATION | `governor-limits`, `flow-patterns`, `security-guide` | `apex-patterns`, `lwc-patterns` |
 | APEX | `governor-limits`, `apex-patterns`, `security-guide`, `test-factory` | `flow-patterns`, `lwc-patterns` |
@@ -16,16 +16,14 @@ This index helps you find the right skill (domain knowledge) for your task. Read
 | INTEGRATION | `governor-limits`, `integration-patterns`, `security-guide` | `flow-patterns`, `lwc-patterns` |
 | ARCHITECTURE | `governor-limits`, `security-guide` | Context-dependent |
 
-**STOP: If your task is about Flows, do NOT read `apex-patterns`. If your task is about Apex, do NOT read `flow-patterns`.**
-
 ---
 
-## How to Use This Index
+## Usage Guidance
 
-1. **CONFIRM** your task classification from the command
-2. **READ** `governor-limits` (applies to ALL classifications)
-3. **READ ONLY** the skills matching your classification
-4. **DO NOT** read skills for other classifications
+1. Confirm classification from the command.
+2. Route to matching skills.
+3. Read only sections needed for the current step.
+4. Keep `governor-limits` in scope when limits apply.
 
 ---
 
@@ -45,59 +43,24 @@ This index helps you find the right skill (domain knowledge) for your task. Read
 
 ## Quick Reference: Which Skills for Which Task?
 
-**VALIDATION**: Match your task classification to the correct row. Do NOT cross-load skills.
-
-| If you're building... | Classification | Read these skills | DO NOT Read |
-|-----------------------|----------------|-------------------|-------------|
-| Apex Trigger | APEX | `governor-limits`, `apex-patterns`, `security-guide` | `flow-patterns` |
-| Apex Service Class | APEX | `governor-limits`, `apex-patterns` | `flow-patterns` |
-| Apex Test Class | APEX | `test-factory`, `governor-limits` | `flow-patterns` |
-| Record-Triggered Flow | AUTOMATION | `governor-limits`, `flow-patterns` | `apex-patterns` |
-| Screen Flow | AUTOMATION | `flow-patterns` | `apex-patterns` |
-| Scheduled Flow | AUTOMATION | `governor-limits`, `flow-patterns` | `apex-patterns` |
-| LWC Component | LWC | `lwc-patterns`, `security-guide` | `flow-patterns`, `apex-patterns` |
-| LWC with Apex | LWC + APEX | `lwc-patterns`, `apex-patterns`, `governor-limits` | `flow-patterns` |
-| REST API | INTEGRATION | `integration-patterns`, `security-guide`, `governor-limits` | `flow-patterns` |
-| External Callout | INTEGRATION | `integration-patterns`, `governor-limits` | `flow-patterns` |
-| Platform Event | INTEGRATION | `integration-patterns`, `governor-limits` | `flow-patterns` |
-| AppExchange Package | UNIVERSAL | `security-guide`, `governor-limits` | Context-dependent |
+| Task | Classification | Read Skills |
+|------|----------------|-------------|
+| Apex Trigger | APEX | `governor-limits`, `apex-patterns`, `security-guide` |
+| Apex Service Class | APEX | `governor-limits`, `apex-patterns` |
+| Apex Test Class | APEX | `test-factory`, `governor-limits` |
+| Record-Triggered Flow | AUTOMATION | `governor-limits`, `flow-patterns` |
+| Screen Flow | AUTOMATION | `flow-patterns` |
+| Scheduled Flow | AUTOMATION | `governor-limits`, `flow-patterns` |
+| LWC Component | LWC | `lwc-patterns`, `security-guide` |
+| LWC with Apex | LWC + APEX | `lwc-patterns`, `apex-patterns`, `governor-limits` |
+| REST API | INTEGRATION | `integration-patterns`, `security-guide`, `governor-limits` |
+| External Callout | INTEGRATION | `integration-patterns`, `governor-limits` |
+| Platform Event | INTEGRATION | `integration-patterns`, `governor-limits` |
+| AppExchange Package | UNIVERSAL | `security-guide`, `governor-limits` |
 
 ---
 
-## Skill Summaries
+## Notes
 
-### Governor Limits
-The most critical skill. Contains all Salesforce limits (SOQL, DML, CPU, Heap) and patterns to avoid limit exceptions. **Read this for any backend work.**
-
-### Apex Patterns
-Trigger handler frameworks, service layer patterns, selector patterns, domain patterns. Use when designing Apex class structure.
-
-### Flow Patterns
-Flow design patterns, bulkification in Flows, subflows, invocable actions. Use when building declarative automation.
-
-### LWC Patterns
-Component architecture, wire vs imperative, event handling, state management. Use when building frontend components.
-
-### Security Guide
-CRUD/FLS enforcement, sharing model, permission sets, secure coding. **Required for AppExchange or any security review.**
-
-### Integration Patterns
-Named Credentials, callout patterns, retry logic, Platform Events, Change Data Capture. Use for any external system integration.
-
-### Test Factory
-TestDataFactory patterns, mock patterns, bulk test strategies. Use when writing test classes.
-
----
-
-## When to Use WebSearch Instead
-
-Use WebSearch when:
-- The skill doesn't cover your specific scenario
-- You need the latest Salesforce release notes
-- You're working with a newer feature not in the skills
-- You need community solutions from Salesforce Stack Exchange
-
-Search these sites:
-- `site:developer.salesforce.com` - Official documentation
-- `site:salesforce.stackexchange.com` - Community solutions
-- `site:help.salesforce.com` - Admin documentation
+- Prefer skill subsections relevant to the immediate task rather than reading the full file.
+- If skills are insufficient, follow command-level research guidance.

@@ -1,0 +1,14 @@
+{
+  "name": "sf-compound-engineering-marketplace",
+  "owner": "gellasangameshgupta",
+  "plugins": [
+    {
+      "name": "sf-compound-engineering",
+      "description": "Salesforce-focused compound engineering workflow for Claude Code",
+      "source": {
+        "type": "github",
+        "repo": "gellasangameshgupta/sf-compound-engineering-plugin"
+      }
+    }
+  ]
+}
