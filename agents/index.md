@@ -1,14 +1,14 @@
 # Salesforce Agents Index
 
-This index helps you find the right agent for your task. Read only the agents relevant to what you're building.
+Use this index to route to relevant agents only.
 
 ---
 
-## CRITICAL: Routing Validation
+## Routing Map
 
-**Before reading any agent files, confirm your task classification from the command.**
+Use this file as the canonical agent router.
 
-| Your Classification | Read ONLY This Section | DO NOT Read |
+| Classification | Read Section | Avoid |
 |--------------------|------------------------|-------------|
 | AUTOMATION | Flow & Automation | Apex Development, LWC |
 | APEX | Apex Development | Flow & Automation |
@@ -16,25 +16,20 @@ This index helps you find the right agent for your task. Read only the agents re
 | INTEGRATION | Integration | Flow & Automation |
 | ARCHITECTURE | Architecture & Data Model | N/A (applies broadly) |
 
-**STOP: If your task is about Flows/Automation, skip directly to "Flow & Automation" section. Do NOT read Apex agents.**
-
 ---
 
-## How to Use This Index
+## Usage Guidance
 
-1. **CONFIRM** your task classification from the command
-2. **NAVIGATE** directly to the matching category below
-3. **READ ONLY** the agents in that category
-4. **DO NOT** read agents from other categories
+1. Confirm classification from the command.
+2. Jump to matching section.
+3. Read only applicable agent files.
+4. For mixed work, apply each agent only to matching files.
 
 ---
 
 ## Apex Development
 
-**SCOPE: APEX_ONLY** - Use these agents ONLY when building Apex classes, triggers, or batch jobs.
-**DO NOT** use these agents for Flows, LWC frontend-only work, or declarative automation.
-
-Use these agents when building Apex classes, triggers, or batch jobs.
+**SCOPE: APEX_ONLY** - Apex classes, triggers, batch jobs.
 
 | Agent | File | Use When |
 |-------|------|----------|
@@ -49,10 +44,7 @@ Use these agents when building Apex classes, triggers, or batch jobs.
 
 ## Flow & Automation
 
-**SCOPE: AUTOMATION_ONLY** - Use these agents ONLY when building Flows, Process Builder, or declarative automation.
-**DO NOT** use these agents for Apex code, LWC components, or custom integrations.
-
-**If you came here but your task is Apex → STOP. Go back to "Apex Development" section.**
+**SCOPE: AUTOMATION_ONLY** - Flows and declarative automation.
 
 | Agent | File | Use When |
 |-------|------|----------|
@@ -65,10 +57,8 @@ Use these agents when building Apex classes, triggers, or batch jobs.
 
 ## Lightning Web Components (LWC)
 
-**SCOPE: LWC_ONLY** - Use these agents ONLY when building LWC components or migrating from Aura.
-**DO NOT** use these agents for Flows or backend-only Apex.
-
-**Exception:** If your LWC needs an Apex controller, you may ALSO read Apex agents for the controller portion only.
+**SCOPE: LWC_ONLY** - LWC components and Aura migrations.  
+Use Apex agents only if reviewing Apex controllers.
 
 | Agent | File | Use When |
 |-------|------|----------|
@@ -82,8 +72,7 @@ Use these agents when building Apex classes, triggers, or batch jobs.
 
 ## Integration
 
-**SCOPE: INTEGRATION_ONLY** - Use these agents ONLY when building APIs, callouts, Platform Events, or external system connections.
-**DO NOT** use these agents for Flows, LWC frontend, or internal Apex logic.
+**SCOPE: INTEGRATION_ONLY** - APIs, callouts, events, external systems.
 
 | Agent | File | Use When |
 |-------|------|----------|
@@ -96,8 +85,7 @@ Use these agents when building Apex classes, triggers, or batch jobs.
 
 ## Architecture & Data Model
 
-**SCOPE: UNIVERSAL** - These agents apply to org-wide design decisions and can be used alongside other categories.
-Use for data modeling, sharing configuration, and cross-cutting architectural concerns.
+**SCOPE: UNIVERSAL** - Cross-cutting org design and metadata concerns.
 
 | Agent | File | Use When |
 |-------|------|----------|
@@ -110,17 +98,15 @@ Use for data modeling, sharing configuration, and cross-cutting architectural co
 
 ## Quick Reference: Which Agents for Which Task?
 
-**VALIDATION**: Confirm your task classification matches the row you're using.
-
-| If you're building... | Classification | Use these agents | DO NOT Use |
-|-----------------------|----------------|------------------|------------|
-| Apex Trigger | APEX | `apex-trigger-architect`, `apex-bulkification-reviewer`, `apex-governor-guardian` | Flow agents |
-| Apex Service Class | APEX | `apex-governor-guardian`, `apex-security-sentinel`, `apex-exception-handler` | Flow agents |
-| Apex Test Class | APEX | `apex-test-coverage-analyst` | Flow agents |
-| Record-Triggered Flow | AUTOMATION | `flow-governor-monitor`, `flow-complexity-analyzer` | Apex agents |
-| Screen Flow | AUTOMATION | `flow-complexity-analyzer`, `process-automation-strategist` | Apex agents |
-| LWC Component | LWC | `lwc-architecture-strategist`, `lwc-performance-oracle` | Flow agents |
-| REST API | INTEGRATION | `rest-api-architect`, `integration-security-sentinel` | Flow agents |
-| External Callout | INTEGRATION | `callout-pattern-reviewer`, `integration-security-sentinel` | Flow agents |
-| Platform Event | INTEGRATION | `platform-event-strategist` | Flow agents |
-| Custom Object | ARCHITECTURE | `data-model-architect`, `sharing-security-analyst` | N/A |
+| Task | Classification | Primary Agents |
+|------|----------------|----------------|
+| Apex Trigger | APEX | `apex-trigger-architect`, `apex-bulkification-reviewer`, `apex-governor-guardian` |
+| Apex Service Class | APEX | `apex-governor-guardian`, `apex-security-sentinel`, `apex-exception-handler` |
+| Apex Test Class | APEX | `apex-test-coverage-analyst` |
+| Record-Triggered Flow | AUTOMATION | `flow-governor-monitor`, `flow-complexity-analyzer` |
+| Screen Flow | AUTOMATION | `flow-complexity-analyzer`, `process-automation-strategist` |
+| LWC Component | LWC | `lwc-architecture-strategist`, `lwc-performance-oracle` |
+| REST API | INTEGRATION | `rest-api-architect`, `integration-security-sentinel` |
+| External Callout | INTEGRATION | `callout-pattern-reviewer`, `integration-security-sentinel` |
+| Platform Event | INTEGRATION | `platform-event-strategist` |
+| Custom Object | ARCHITECTURE | `data-model-architect`, `sharing-security-analyst` |

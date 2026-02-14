@@ -19,55 +19,23 @@ If a plan file path is provided, read it first. If a description is provided, im
 
 ---
 
-## MANDATORY: Task Classification
+## Routing Guidance (Index-First)
 
-**STOP. Before reading any agents or skills, you MUST classify this task.**
-
-### Step 1: Identify Primary Component Type
-
-Analyze the implementation request and determine the PRIMARY Salesforce component:
-
-| If Building... | Classification | Load ONLY These Resources |
-|----------------|----------------|---------------------------|
-| Flow, Record-Triggered Flow, Screen Flow, Scheduled Flow, Automation | **AUTOMATION** | `agents/automation/*.md` + `skills/flow-patterns/` |
-| Apex Class, Trigger, Batch, Schedulable, Queueable, Service, Handler | **APEX** | `agents/apex/*.md` + `skills/apex-patterns/` |
-| LWC, Lightning Web Component, Aura Component | **LWC** | `agents/lwc/*.md` + `skills/lwc-patterns/` |
-| REST API, Callout, Integration, Platform Event | **INTEGRATION** | `agents/integration/*.md` + `skills/integration-patterns/` |
-| Custom Object, Fields, Relationships, Sharing Rules | **ARCHITECTURE** | `agents/architecture/*.md` + `skills/security-guide/` |
-
-### Step 2: Output Your Classification
-
-**You MUST explicitly state:** `Task Classification: [AUTOMATION|APEX|LWC|INTEGRATION|ARCHITECTURE]`
-
-### Step 3: Load Resources for ONLY That Classification
-
-- Read the agents listed for your classification
-- Read the skills listed for your classification
-- Read `skills/governor-limits/` (applies to all classifications)
-
-### Step 4: DO NOT Cross-Load
-
-**CRITICAL ROUTING RULES:**
-- If classification is AUTOMATION → DO NOT read `agents/apex/*.md` or `skills/apex-patterns/`
-- If classification is APEX → DO NOT read `agents/automation/*.md` or `skills/flow-patterns/`
-- If classification is LWC → DO NOT read `agents/apex/*.md` (unless Apex controller is needed)
-- Mixing patterns from wrong domains causes incorrect recommendations
+Classify the implementation first, then route via index files:
+- Use `agents/index.md` to decide applicable agent category
+- Use `skills/index.md` to decide applicable skills
+- Read only the selected category files (not all agents/skills)
+- Include `skills/governor-limits/SKILL.md` for limit-sensitive backend work
 
 ---
 
 ## Internal-First Implementation (Guidance)
-
-Before using any external service or third-party tool, prefer Salesforce-native capabilities first.
-
-### Step 1: Prefer Native Salesforce Features
 
 Use built-in platform features wherever possible:
 - Flows, Validation Rules, Approval Processes
 - Apex, Platform Events, and standard metadata
 - LWC, Aura, Visualforce for UI
 - Standard security model (CRUD/FLS, sharing)
-
-### Step 2: Only Use External Dependencies if Required
 
 If external services are needed, justify them explicitly by documenting:
 - The exact platform gap
@@ -76,42 +44,26 @@ If external services are needed, justify them explicitly by documenting:
 
 ---
 
-## Web Research (Parallel Guidance)
+## Parallel Research (Optional Guidance)
 
-If implementation details are uncertain or platform behavior is version-sensitive, consider running web research in parallel.
-
-### What to Research
-
-Use multiple sources to validate the chosen approach:
+If behavior is uncertain, version-sensitive, or new, consider parallel research across:
 - Official docs: `site:developer.salesforce.com`
 - Community Q&A: `site:salesforce.stackexchange.com`
-- External Salesforce authors (blogs)
-- Salesforce consulting companies (implementation writeups)
+- External Salesforce authors and consulting writeups
 
-### How to Search
-
-Run parallel searches with consistent intent and different sources. Example:
-- "platform event publish limits site:developer.salesforce.com"
-- "platform event publish limits site:salesforce.stackexchange.com"
-- "platform event publish limits blog salesforce"
-- "platform event publish limits consulting implementation"
-
-### Suggested Output
-
-Summarize findings into:
-- **Native-first confirmation** (what the platform supports)
-- **Edge cases** (from community and blogs)
-- **Implementation guardrails** (limits, pitfalls, best practices)
+When research is used, include short evidence notes: native option considered, key edge case/pitfall, implementation guardrail.
 
 ---
 
 ## Available Resources
 
 ### Agents (Expertise)
-Read `.claude/agents/index.md` to find agents relevant to implementation.
+Read `agents/index.md` to route to relevant agents.  
+If running from CLI bootstrap, the equivalent path is `.claude/agents/index.md`.
 
 ### Skills (Domain Knowledge)
-Read `.claude/skills/index.md` to find patterns and best practices.
+Read `skills/index.md` to route to relevant skills.  
+If running from CLI bootstrap, the equivalent path is `.claude/skills/index.md`.
 
 ### Existing Codebase
 Follow existing patterns, naming conventions, and architecture in the project.
@@ -149,17 +101,12 @@ Follow existing patterns, naming conventions, and architecture in the project.
 
 ## Your Process
 
-1. **Read the plan** - Understand what needs to be built
-
-2. **Read relevant skills** - Get patterns for the component type being built
-
-3. **Explore existing code** - Find patterns to follow in the codebase
-
-4. **Implement** - Write the code following standards above
-
-5. **Create tests** - Write test classes for Apex code
-
-6. **Validate** - Ensure code compiles and tests pass
+1. Read plan/requirements.
+2. Route via indexes and read only relevant skills/agents.
+3. Follow existing codebase patterns.
+4. Implement with native-first approach.
+5. Add tests as needed.
+6. Validate compile/tests.
 
 ---
 
@@ -170,17 +117,13 @@ Use WebSearch when:
 - Implementing a feature not covered in skills
 - Need latest best practices
 - Troubleshooting errors
- - Native-first evaluation is complete and still insufficient
+- Native-first evaluation is complete and still insufficient
 
 ---
 
 ## Output
 
-Create the necessary files in the appropriate directories:
-- Apex classes: `force-app/main/default/classes/`
-- Apex triggers: `force-app/main/default/triggers/`
-- LWC: `force-app/main/default/lwc/`
-- Flows: `force-app/main/default/flows/`
+Create/modify only the required Salesforce files (Apex, Flows, LWC, metadata) and list changed files in your response.
 
 ---
 

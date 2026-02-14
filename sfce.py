@@ -21,9 +21,23 @@ import os
 import sys
 import shutil
 from pathlib import Path
+from importlib.metadata import version as pkg_version, PackageNotFoundError
 
-# Version
-__version__ = "1.0.0"
+try:
+    import tomllib  # Python 3.11+
+except ModuleNotFoundError:  # pragma: no cover - Python 3.8-3.10
+    import tomli as tomllib
+
+# Version (single source of truth: installed package or pyproject.toml)
+try:
+    __version__ = pkg_version("sfce-cli")
+except PackageNotFoundError:
+    pyproject_file = Path(__file__).parent / "pyproject.toml"
+    if pyproject_file.exists():
+        with pyproject_file.open("rb") as f:
+            __version__ = tomllib.load(f)["project"]["version"]
+    else:
+        __version__ = "0.0.0"
 
 # ANSI colors
 class Colors:

@@ -1,6 +1,6 @@
 # SF Compound Engineering
 
-**Instruction-Based Compound Engineering for Salesforce** — A CLI tool that provides domain knowledge and expertise for Salesforce development, where each iteration becomes smarter than the last.
+**Instruction-Based Compound Engineering for Salesforce** — a Claude Code plugin-first workflow for Salesforce development, where each iteration becomes smarter than the last.
 
 Inspired by [Every's Compound Engineering](https://every.to/chain-of-thought/compound-engineering-how-every-codes-with-agents) and [GitHub Spec-Kit](https://github.com/github/spec-kit).
 
@@ -21,18 +21,30 @@ Plan (40%) → Work (20%) → Review (20%) → Compound (20%) → Repeat
 
 ---
 
-## Quick Start
+## Quick Start (Claude Plugin First)
+
+```bash
+# Add this repository as a plugin source
+/plugin marketplace add https://github.com/gellasangameshgupta/sf-compound-engineering-plugin
+
+# Install the Salesforce plugin
+/plugin install sf-compound-engineering
+```
+
+The plugin provides:
+- **4 slash commands** for the compound engineering workflow
+- **23 specialized agents** (apex, lwc, automation, integration, architecture)
+- **7 skills** with Salesforce domain knowledge
+- **Index files** for low-context, selective routing
+
+---
+
+## Quick Start (CLI Bootstrap - Optional)
 
 ```bash
 # Initialize in your Salesforce project (no install required)
 uvx --from git+https://github.com/gellasangameshgupta/sf-compound-engineering-plugin.git sfce init . --ai claude
 ```
-
-That's it! You now have:
-- **4 slash commands** for the compound engineering workflow
-- **23 specialized agents** (apex, lwc, automation, integration, architecture)
-- **7 skills** with domain knowledge (governor-limits, apex-patterns, flow-patterns, etc.)
-- **Index files** that help Claude find relevant resources automatically
 
 ---
 
@@ -292,6 +304,14 @@ Constraints: No code, save to .specify/specs/
 - No hallucination from irrelevant research
 - Faster execution (only reads what's needed)
 - Adapts to the actual task
+
+### Context-Efficient Behavior
+
+Commands and indexes are designed for selective reads:
+- Start with index files for routing
+- Read only relevant agents/skills for the selected classification
+- Prefer native Salesforce options first
+- Use web research in parallel only when uncertainty is meaningful
 
 ---
 
