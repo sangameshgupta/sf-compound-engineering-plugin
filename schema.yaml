@@ -15,16 +15,16 @@ required_fields:
   category:
     type: enum
     values:
-      - governor-limits
-      - deployment
-      - test-failure
-      - security
-      - integration
-      - flow
-      - lwc
-      - data-model
-      - best-practice
-      - pattern
+      - governor-limit-issues
+      - deployment-issues
+      - test-failures
+      - security-issues
+      - integration-issues
+      - flow-issues
+      - lwc-issues
+      - data-model-issues
+      - best-practices
+      - patterns
     description: Primary classification for routing and search
 
   severity:
@@ -72,7 +72,7 @@ optional_fields:
 # ---
 # title: "SOQL 101 error in Account trigger"
 # date: 2026-03-02
-# category: governor-limits
+# category: governor-limit-issues
 # severity: critical
 # tags: ["soql", "trigger", "bulk", "account"]
 # ---
