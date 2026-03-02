@@ -49,3 +49,24 @@ Compound-Engineering-Plugin-Teardown.md
 # Salesforce local auth
 .sfdx/
 .sf/
+
+# CLI build artifacts
+cli/dist/
+cli/node_modules/
+bun.lockb
+
+# Generated converter output (test artifacts)
+.github/agents/
+.github/skills/
+.github/copilot-mcp-config.json
+.windsurf/
+.gemini/
+.kiro/
+.codex/
+.cursor/skills/
+.cursor/mcp.json
+.factory/
+.pi/
+.openclaw/
+.qwen/
+.opencode/

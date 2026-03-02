@@ -1,0 +1,44 @@
+{
+  "name": "@sangameshgupta/sf-compound-plugin",
+  "version": "1.0.0",
+  "description": "Multi-tool installer for SF Compound Engineering Plugin — converts Claude Code plugins to Copilot, Windsurf, Gemini, Kiro, OpenCode, Codex",
+  "type": "module",
+  "bin": {
+    "sf-compound-plugin": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "bun build src/index.ts --outdir dist --target node",
+    "dev": "bun run src/index.ts",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "citty": "^0.1.6",
+    "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.7.0"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "salesforce",
+    "claude-code",
+    "copilot",
+    "windsurf",
+    "gemini",
+    "kiro",
+    "opencode",
+    "codex",
+    "compound-engineering"
+  ],
+  "author": "Gella Sangamesh Gupta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sangameshgupta/sf-compound-engineering-plugin"
+  }
+}

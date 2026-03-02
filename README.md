@@ -23,9 +23,11 @@ Brainstorm → Plan (40%) → Deepen → Work (20%) → Review (20%) → Compoun
 
 ***
 
-## <span data-proof="authored" data-by="ai:claude">Quick Start</span>
+## Quick Start
 
-```bash proof:W3sidHlwZSI6InByb29mQXV0aG9yZWQiLCJmcm9tIjowLCJ0byI6MTY5LCJhdHRycyI6eyJieSI6ImFpOmNsYXVkZSJ9fV0=
+### Claude Code (Native)
+
+```bash
 # Add as a Claude Code plugin
 /plugin marketplace add https://github.com/sangameshgupta/sf-compound-engineering-plugin
 
@@ -33,19 +35,78 @@ Brainstorm → Plan (40%) → Deepen → Work (20%) → Review (20%) → Compoun
 /plugin install sf-compound-engineering
 ```
 
-<span data-proof="authored" data-by="ai:claude">The plugin provides:</span>
+### Other AI Coding Tools (11 platforms)
 
-* **<span data-proof="authored" data-by="ai:claude">7 slash commands</span>** <span data-proof="authored" data-by="ai:claude">for the full compound engineering workflow</span>
+```bash
+# GitHub Copilot
+bunx @sangameshgupta/sf-compound-plugin install sf-compound-engineering --to copilot
 
-* **<span data-proof="authored" data-by="ai:claude">33 specialized agents</span>** <span data-proof="authored" data-by="ai:claude">across 7 categories</span>
+# Cursor
+bunx @sangameshgupta/sf-compound-plugin install sf-compound-engineering --to cursor
 
-* **<span data-proof="authored" data-by="ai:claude">12 skills</span>** <span data-proof="authored" data-by="ai:claude">with Salesforce domain knowledge</span>
+# Windsurf
+bunx @sangameshgupta/sf-compound-plugin install sf-compound-engineering --to windsurf
 
-* **<span data-proof="authored" data-by="ai:claude">MCP integration</span>** <span data-proof="authored" data-by="ai:claude">with Context7 for live framework documentation</span>
+# Gemini CLI
+bunx @sangameshgupta/sf-compound-plugin install sf-compound-engineering --to gemini
 
-* **<span data-proof="authored" data-by="ai:claude">Institutional knowledge system</span>** <span data-proof="authored" data-by="ai:claude">in</span> <span data-proof="authored" data-by="ai:claude">`docs/solutions/`</span> <span data-proof="authored" data-by="ai:claude">with YAML schema</span>
+# OpenCode
+bunx @sangameshgupta/sf-compound-plugin install sf-compound-engineering --to opencode
 
-* **<span data-proof="authored" data-by="ai:claude">Index-based routing</span>** <span data-proof="authored" data-by="ai:claude">for low-context, selective agent/skill dispatch</span>
+# Codex
+bunx @sangameshgupta/sf-compound-plugin install sf-compound-engineering --to codex
+
+# Kiro
+bunx @sangameshgupta/sf-compound-plugin install sf-compound-engineering --to kiro
+
+# Factory Droid
+bunx @sangameshgupta/sf-compound-plugin install sf-compound-engineering --to droid
+
+# Pi
+bunx @sangameshgupta/sf-compound-plugin install sf-compound-engineering --to pi
+
+# OpenClaw
+bunx @sangameshgupta/sf-compound-plugin install sf-compound-engineering --to openclaw
+
+# Qwen Code
+bunx @sangameshgupta/sf-compound-plugin install sf-compound-engineering --to qwen
+
+# Auto-detect and install to all detected tools
+bunx @sangameshgupta/sf-compound-plugin install sf-compound-engineering --to all
+
+# Sync from current directory to all detected tools
+bunx @sangameshgupta/sf-compound-plugin sync
+```
+
+### What Gets Converted
+
+| Platform | Commands | Agents | Skills | MCP Config |
+|----------|----------|--------|--------|------------|
+| **Copilot** | `.github/skills/` | `.github/agents/*.agent.md` | `.github/skills/` | `copilot-mcp-config.json` |
+| **Cursor** | Sync only | Sync only | `.cursor/skills/` (symlinks) | `.cursor/mcp.json` |
+| **Windsurf** | `workflows/*.md` | `skills/*/SKILL.md` | `skills/` | `mcp_config.json` |
+| **Gemini** | `.gemini/commands/*.toml` | `.gemini/skills/` | `.gemini/skills/` | `settings.json` |
+| **OpenCode** | `commands/*.md` | `agents/*.md` | `skills/` | `opencode.json` |
+| **Codex** | `prompts/*.md` + `skills/` | `skills/*/SKILL.md` | `skills/` | `config.toml` |
+| **Kiro** | `.kiro/skills/` | `.kiro/agents/*.json` + prompts | `.kiro/skills/` | `mcp.json` |
+| **Droid** | `commands/*.md` | `agents/*.md` | `skills/` | `mcp.json` |
+| **Pi** | `prompts/*.md` | `skills/*/SKILL.md` | `skills/` | `mcp.json` |
+| **OpenClaw** | `commands/*.md` | `agents/*.md` | `skills/` | TS entry point |
+| **Qwen** | `commands/*.md` | `agents/*.yaml` | `skills/` | N/A |
+
+The plugin provides:
+
+* **7 slash commands** for the full compound engineering workflow
+
+* **33 specialized agents** across 7 categories
+
+* **12 skills** with Salesforce domain knowledge
+
+* **MCP integration** with Context7 for live framework documentation
+
+* **Institutional knowledge system** in `docs/solutions/` with YAML schema
+
+* **Index-based routing** for low-context, selective agent/skill dispatch
 
 ***
 
@@ -199,16 +260,16 @@ Plan → Deepen → Work → Review → Resolve → Test → Deploy → Compound
 
 ```
 docs/solutions/
-├── governor-limits/      # Limit handling patterns
-├── apex-patterns/        # Code architecture solutions
-├── flow-patterns/        # Automation solutions
-├── lwc-patterns/         # Component solutions
-├── security/             # Security implementations
-├── integration/          # External system patterns
-├── deployment/           # CI/CD and deployment fixes
-├── data-model/           # Schema design decisions
-├── performance/          # Optimization solutions
-└── debugging/            # Troubleshooting guides
+├── governor-limit-issues/   # Limit handling patterns
+├── deployment-issues/       # CI/CD and deployment fixes
+├── test-failures/           # Test troubleshooting guides
+├── security-issues/         # Security implementations
+├── integration-issues/      # External system patterns
+├── flow-issues/             # Automation solutions
+├── lwc-issues/              # Component solutions
+├── data-model-issues/       # Schema design decisions
+├── best-practices/          # Proven patterns and approaches
+└── patterns/                # Reusable code patterns
 ```
 
 <span data-proof="authored" data-by="ai:claude">The</span> <span data-proof="authored" data-by="ai:claude">`sf-learnings-researcher`</span> <span data-proof="authored" data-by="ai:claude">agent searches these documents by frontmatter metadata before every plan and implementation phase to surface relevant institutional knowledge.</span>
@@ -220,12 +281,22 @@ docs/solutions/
 ```
 sf-compound-engineering-plugin/
 ├── .claude-plugin/
-│   └── plugin.json           # Plugin manifest (v2.0.0)
+│   ├── plugin.json           # Plugin manifest (v2.0.0)
+│   └── marketplace.json      # Marketplace loader schema
 ├── .mcp.json                 # Context7 MCP server config
 ├── schema.yaml               # YAML validation for docs/solutions/
 ├── CLAUDE.md                 # Project context and protected artifacts
 ├── hooks/
 │   └── hooks.json            # Pre/post tool-use hooks
+├── cli/                      # Multi-tool installer CLI
+│   ├── package.json           # @sangameshgupta/sf-compound-plugin
+│   ├── src/
+│   │   ├── index.ts           # CLI entry (citty)
+│   │   ├── parser/            # Plugin reader + markdown parser
+│   │   ├── converters/        # 11 platform converters
+│   │   ├── transforms/        # Path, reference, frontmatter rewriting
+│   │   └── utils/             # Auto-detect, merge helpers
+│   └── tests/
 ├── commands/                 # 7 slash commands
 │   ├── sf-brainstorm.md
 │   ├── sf-plan.md
