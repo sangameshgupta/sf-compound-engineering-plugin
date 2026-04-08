@@ -10,7 +10,7 @@
 
 * **<span data-proof="authored" data-by="ai:claude">Commands</span>** <span data-proof="authored" data-by="ai:claude">(7):</span> <span data-proof="authored" data-by="ai:claude">`commands/sf-*.md`</span> <span data-proof="authored" data-by="ai:claude">— Workflow commands (brainstorm, plan, deepen, work, review, compound, lfg)</span>
 
-* **<span data-proof="authored" data-by="ai:claude">Skills</span>** <span data-proof="authored" data-by="ai:claude">(12):</span> <span data-proof="authored" data-by="ai:claude">`skills/*/SKILL.md`</span> <span data-proof="authored" data-by="ai:claude">— Domain knowledge reference</span>
+* **<span data-proof="authored" data-by="ai:claude">Skills</span>** <span data-proof="authored" data-by="ai:claude">(14):</span> <span data-proof="authored" data-by="ai:claude">`skills/*/SKILL.md`</span> <span data-proof="authored" data-by="ai:claude">— Domain knowledge reference</span>
 
 * **<span data-proof="authored" data-by="ai:claude">Knowledge</span>**<span data-proof="authored" data-by="ai:claude">:</span> <span data-proof="authored" data-by="ai:claude">`docs/solutions/`</span> <span data-proof="authored" data-by="ai:claude">— Institutional knowledge with YAML frontmatter</span>
 
@@ -49,7 +49,8 @@
 
 ## <span data-proof="authored" data-by="ai:claude">MCP Servers</span>
 
-* **<span data-proof="authored" data-by="ai:claude">Context7</span>**<span data-proof="authored" data-by="ai:claude">: Framework documentation via</span> <span data-proof="authored" data-by="ai:claude">`@upstash/context7-mcp`</span>
+* **<span data-proof="authored" data-by="ai:claude">Context7</span>**<span data-proof="authored" data-by="ai:claude">: Framework documentation via</span> <span data-proof="authored" data-by="ai:claude">`@upstash/context7-mcp`</span><span data-proof="suggestion" data-id="m1775681235127_1" data-by="ai:claude" data-kind="insert"><span data-proof="authored" data-by="ai:claude">`
+  Salesforce DX: Live org operations via @salesforce/mcp (60+ tools — SOQL, deploy, retrieve, code analysis, LWC experts, testing)`</span></span>
 
 ## <span data-proof="authored" data-by="ai:claude">Key Files</span>
 
@@ -61,3 +62,24 @@
 | <span data-proof="authored" data-by="ai:claude">`.mcp.json`</span>                  | <span data-proof="authored" data-by="ai:claude">MCP server configuration</span>                                       |
 | <span data-proof="authored" data-by="ai:claude">`schema.yaml`</span>                | <span data-proof="authored" data-by="ai:claude">YAML frontmatter validation schema for solution documents</span>      |
 | <span data-proof="authored" data-by="ai:claude">`hooks/hooks.json`</span>           | <span data-proof="authored" data-by="ai:claude">Lifecycle hook configuration</span>                                   |
+
+<!-- PROOF
+{
+  "version": 2,
+  "marks": {
+    "m1775681235127_1": {
+      "kind": "insert",
+      "by": "ai:claude",
+      "createdAt": "2026-04-08T20:47:15.127Z",
+      "range": {
+        "from": 1865,
+        "to": 1994
+      },
+      "content": "\nSalesforce DX: Live org operations via @salesforce/mcp (60+ tools — SOQL, deploy, retrieve, code analysis, LWC experts, testing)",
+      "status": "pending"
+    }
+  }
+}
+-->
+
+<!-- PROOF:END -->
