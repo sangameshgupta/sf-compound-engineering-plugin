@@ -17,7 +17,8 @@
     "security",
     "workflow-automation",
     "agentforce",
-    "agent-script"
+    "agent-script",
+    "prompt-builder"
   ],
   "mcpServers": {
     "context7": {
