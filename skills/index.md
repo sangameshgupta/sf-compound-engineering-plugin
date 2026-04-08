@@ -1,134 +1,102 @@
-# Salesforce Skills Index
+# <span data-proof="authored" data-by="ai:claude">Salesforce Skills Index</span>
 
-Use this index to route to the right skills for the task.
-
-***
-
-## Routing Map
-
-Use this file as the canonical skill router.
-
-| Classification                                                     | Read Skills                                                          | Avoid                                                     |
-| ------------------------------------------------------------------ | -------------------------------------------------------------------- | --------------------------------------------------------- |
-| AUTOMATION                                                         | `governor-limits`, `flow-patterns`, `security-guide`                 | `apex-patterns`, `lwc-patterns`                           |
-| APEX                                                               | `governor-limits`, `apex-patterns`, `security-guide`, `test-factory` | `flow-patterns`, `lwc-patterns`                           |
-| LWC                                                                | `governor-limits`, `lwc-patterns`, `security-guide`                  | `flow-patterns`, `apex-patterns` (unless Apex controller) |
-| <span data-proof="authored" data-by="ai:claude">INTEGRATION</span> | `governor-limits`, `integration-patterns`, `security-guide`          | `flow-patterns`, `lwc-patterns`                           |
-| AGENTFORCE SCRIPT BUILDER                                          | `agent-script`                                                       | `apex-patterns`, `flow-patterns`, `lwc-patterns`          |
-| ARCHITECTURE                                                       | `governor-limits`, `security-guide`                                  | Context-dependent                                         |
-| WORKFLOW                                                           | `sf-cli`, `compound-docs`                                            | Context-dependent                                         |
-| TOOLING                                                            | `git-worktree`, `create-agent-skills`                                | Context-dependent                                         |
+<span data-proof="authored" data-by="ai:claude">Use this index to route to the right skills for the task.</span>
 
 ***
 
-## Usage Guidance
+## <span data-proof="authored" data-by="ai:claude">Routing Map</span>
 
-1. Confirm classification from the command.
-2. Route to matching skills.
-3. Read only sections needed for the current step.
-4. Keep `governor-limits` in scope when limits apply.
+<span data-proof="authored" data-by="ai:claude">Use this file as the canonical skill router.</span>
 
-***
-
-## Domain Skills
-
-| Skill                | File                            | Scope                 | Use When                                                                                                                                                                                                                                                                  |
-| -------------------- | ------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Governor Limits      | `governor-limits/SKILL.md`      | **UNIVERSAL**         | **Always** - Any Apex, Flow, or trigger work                                                                                                                                                                                                                              |
-| Apex Patterns        | `apex-patterns/SKILL.md`        | **APEX\_ONLY**        | Writing Apex classes, triggers, services. **NOT for Flows.**                                                                                                                                                                                                              |
-| Flow Patterns        | `flow-patterns/SKILL.md`        | **AUTOMATION\_ONLY**  | Building any type of Flow. **NOT for Apex.**                                                                                                                                                                                                                              |
-| LWC Patterns         | `lwc-patterns/SKILL.md`         | **LWC\_ONLY**         | Building Lightning Web Components                                                                                                                                                                                                                                         |
-| Security Guide       | `security-guide/SKILL.md`       | **UNIVERSAL**         | CRUD/FLS, sharing, permissions, AppExchange                                                                                                                                                                                                                               |
-| Integration Patterns | `integration-patterns/SKILL.md` | **INTEGRATION\_ONLY** | Callouts, APIs, Platform Events                                                                                                                                                                                                                                           |
-| Test Factory         | `test-factory/SKILL.md`         | **APEX\_ONLY**        | Writing Apex test classes, test data factories<span data-proof="suggestion" data-id="m1775583117187_1" data-by="ai:claude" data-kind="insert">
-Agent Script
-agent-script/SKILL.md
-AGENTFORCE_SCRIPT_BUILDER
-Building Agentforce agents using Agent Script language</span> |
+| <span data-proof="authored" data-by="ai:claude">Classification</span>            | <span data-proof="authored" data-by="ai:claude">Read Skills</span>                                                                                                                                                                                                                               | <span data-proof="authored" data-by="ai:claude">Avoid</span>                                                                                                                                                                   |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| <span data-proof="authored" data-by="ai:claude">AUTOMATION</span>                | <span data-proof="authored" data-by="ai:claude">`governor-limits`,</span> <span data-proof="authored" data-by="ai:claude">`flow-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`security-guide`</span>                                                                        | <span data-proof="authored" data-by="ai:claude">`apex-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`lwc-patterns`</span>                                                                                  |
+| <span data-proof="authored" data-by="ai:claude">APEX</span>                      | <span data-proof="authored" data-by="ai:claude">`governor-limits`,</span> <span data-proof="authored" data-by="ai:claude">`apex-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`security-guide`,</span> <span data-proof="authored" data-by="ai:claude">`test-factory`</span> | <span data-proof="authored" data-by="ai:claude">`flow-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`lwc-patterns`</span>                                                                                  |
+| <span data-proof="authored" data-by="ai:claude">LWC</span>                       | <span data-proof="authored" data-by="ai:claude">`governor-limits`,</span> <span data-proof="authored" data-by="ai:claude">`lwc-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`security-guide`</span>                                                                         | <span data-proof="authored" data-by="ai:claude">`flow-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`apex-patterns`</span> <span data-proof="authored" data-by="ai:claude">(unless Apex controller)</span> |
+| <span data-proof="authored" data-by="ai:claude">INTEGRATION</span>               | <span data-proof="authored" data-by="ai:claude">`governor-limits`,</span> <span data-proof="authored" data-by="ai:claude">`integration-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`security-guide`</span>                                                                 | <span data-proof="authored" data-by="ai:claude">`flow-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`lwc-patterns`</span>                                                                                  |
+| <span data-proof="authored" data-by="ai:claude">AGENTFORCE SCRIPT BUILDER</span> | <span data-proof="authored" data-by="ai:claude">`agent-script`</span>                                                                                                                                                                                                                            | <span data-proof="authored" data-by="ai:claude">`apex-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`flow-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`lwc-patterns`</span>          |
+| <span data-proof="authored" data-by="ai:claude">AGENTFORCE PROMPT BUILDER</span> | <span data-proof="authored" data-by="ai:claude">`prompt-builder`</span>                                                                                                                                                                                                                          | <span data-proof="authored" data-by="ai:claude">`flow-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`lwc-patterns`</span>                                                                                  |
+| <span data-proof="authored" data-by="ai:claude">ARCHITECTURE</span>              | <span data-proof="authored" data-by="ai:claude">`governor-limits`,</span> <span data-proof="authored" data-by="ai:claude">`security-guide`</span>                                                                                                                                                | <span data-proof="authored" data-by="ai:claude">Context-dependent</span>                                                                                                                                                       |
+| <span data-proof="authored" data-by="ai:claude">WORKFLOW</span>                  | <span data-proof="authored" data-by="ai:claude">`sf-cli`,</span> <span data-proof="authored" data-by="ai:claude">`compound-docs`</span>                                                                                                                                                          | <span data-proof="authored" data-by="ai:claude">Context-dependent</span>                                                                                                                                                       |
+| <span data-proof="authored" data-by="ai:claude">TOOLING</span>                   | <span data-proof="authored" data-by="ai:claude">`git-worktree`,</span> <span data-proof="authored" data-by="ai:claude">`create-agent-skills`</span>                                                                                                                                              | <span data-proof="authored" data-by="ai:claude">Context-dependent</span>                                                                                                                                                       |
 
 ***
 
-## Workflow Skills
+## <span data-proof="authored" data-by="ai:claude">Usage Guidance</span>
 
-| Skill         | File                     | Scope         | Use When                                             |
-| ------------- | ------------------------ | ------------- | ---------------------------------------------------- |
-| SF CLI        | `sf-cli/SKILL.md`        | **UNIVERSAL** | Deploy, retrieve, test, org management via `sf` CLI  |
-| Compound Docs | `compound-docs/SKILL.md` | **UNIVERSAL** | Writing solution documents with YAML schema          |
-| File Todos    | `file-todos/SKILL.md`    | **UNIVERSAL** | File-based task tracking with status/priority naming |
-
-***
-
-## Tooling Skills
-
-| Skill               | File                           | Scope         | Use When                                      |
-| ------------------- | ------------------------------ | ------------- | --------------------------------------------- |
-| Git Worktree        | `git-worktree/SKILL.md`        | **UNIVERSAL** | Isolated parallel development branches        |
-| Create Agent Skills | `create-agent-skills/SKILL.md` | **UNIVERSAL** | Creating new agents and skills for the plugin |
+1. <span data-proof="authored" data-by="ai:claude">Confirm classification from the command.</span>
+2. <span data-proof="authored" data-by="ai:claude">Route to matching skills.</span>
+3. <span data-proof="authored" data-by="ai:claude">Read only sections needed for the current step.</span>
+4. <span data-proof="authored" data-by="ai:claude">Keep</span> <span data-proof="authored" data-by="ai:claude">`governor-limits`</span> <span data-proof="authored" data-by="ai:claude">in scope when limits apply.</span>
 
 ***
 
-## Quick Reference: Which Skills for Which Task?
+## <span data-proof="authored" data-by="ai:claude">Domain Skills</span>
 
-| Task                  | Classification | Read Skills                                                                                                |
-| --------------------- | -------------- | ---------------------------------------------------------------------------------------------------------- |
-| Apex Trigger          | APEX           | `governor-limits`, `apex-patterns`, `security-guide`                                                       |
-| Apex Service Class    | APEX           | `governor-limits`, `apex-patterns`                                                                         |
-| Apex Test Class       | APEX           | `test-factory`, `governor-limits`                                                                          |
-| Record-Triggered Flow | AUTOMATION     | `governor-limits`, `flow-patterns`                                                                         |
-| Screen Flow           | AUTOMATION     | `flow-patterns`                                                                                            |
-| Scheduled Flow        | AUTOMATION     | `governor-limits`, `flow-patterns`                                                                         |
-| LWC Component         | LWC            | `lwc-patterns`, `security-guide`                                                                           |
-| LWC with Apex         | LWC + APEX     | `lwc-patterns`, `apex-patterns`, `governor-limits`                                                         |
-| REST API              | INTEGRATION    | `integration-patterns`, `security-guide`, `governor-limits`                                                |
-| External Callout      | INTEGRATION    | `integration-patterns`, `governor-limits`                                                                  |
-| Platform Event        | INTEGRATION    | `integration-patterns`, `governor-limits``
-Agentforce Agent Script
-AGENTFORCE SCRIPT BUILDER
-agent-script` |
-| AppExchange Package   | UNIVERSAL      | `security-guide`, `governor-limits`                                                                        |
-| Deployment            | WORKFLOW       | `sf-cli`                                                                                                   |
-| Knowledge Capture     | WORKFLOW       | `compound-docs`                                                                                            |
-| Parallel Development  | TOOLING        | `git-worktree`                                                                                             |
-| Extend Plugin         | TOOLING        | `create-agent-skills`                                                                                      |
+| <span data-proof="authored" data-by="ai:claude">Skill</span>                | <span data-proof="authored" data-by="ai:claude">File</span>                            | <span data-proof="authored" data-by="ai:claude">Scope</span>                         | <span data-proof="authored" data-by="ai:claude">Use When</span>                                                                                                            |
+| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <span data-proof="authored" data-by="ai:claude">Governor Limits</span>      | <span data-proof="authored" data-by="ai:claude">`governor-limits/SKILL.md`</span>      | **<span data-proof="authored" data-by="ai:claude">UNIVERSAL</span>**                 | **<span data-proof="authored" data-by="ai:claude">Always</span>** <span data-proof="authored" data-by="ai:claude">- Any Apex, Flow, or trigger work</span>                 |
+| <span data-proof="authored" data-by="ai:claude">Apex Patterns</span>        | <span data-proof="authored" data-by="ai:claude">`apex-patterns/SKILL.md`</span>        | **<span data-proof="authored" data-by="ai:claude">APEX_ONLY</span>**                 | <span data-proof="authored" data-by="ai:claude">Writing Apex classes, triggers, services.</span> **<span data-proof="authored" data-by="ai:claude">NOT for Flows.</span>** |
+| <span data-proof="authored" data-by="ai:claude">Flow Patterns</span>        | <span data-proof="authored" data-by="ai:claude">`flow-patterns/SKILL.md`</span>        | **<span data-proof="authored" data-by="ai:claude">AUTOMATION_ONLY</span>**           | <span data-proof="authored" data-by="ai:claude">Building any type of Flow.</span> **<span data-proof="authored" data-by="ai:claude">NOT for Apex.</span>**                 |
+| <span data-proof="authored" data-by="ai:claude">LWC Patterns</span>         | <span data-proof="authored" data-by="ai:claude">`lwc-patterns/SKILL.md`</span>         | **<span data-proof="authored" data-by="ai:claude">LWC_ONLY</span>**                  | <span data-proof="authored" data-by="ai:claude">Building Lightning Web Components</span>                                                                                   |
+| <span data-proof="authored" data-by="ai:claude">Security Guide</span>       | <span data-proof="authored" data-by="ai:claude">`security-guide/SKILL.md`</span>       | **<span data-proof="authored" data-by="ai:claude">UNIVERSAL</span>**                 | <span data-proof="authored" data-by="ai:claude">CRUD/FLS, sharing, permissions, AppExchange</span>                                                                         |
+| <span data-proof="authored" data-by="ai:claude">Integration Patterns</span> | <span data-proof="authored" data-by="ai:claude">`integration-patterns/SKILL.md`</span> | **<span data-proof="authored" data-by="ai:claude">INTEGRATION_ONLY</span>**          | <span data-proof="authored" data-by="ai:claude">Callouts, APIs, Platform Events</span>                                                                                     |
+| <span data-proof="authored" data-by="ai:claude">Test Factory</span>         | <span data-proof="authored" data-by="ai:claude">`test-factory/SKILL.md`</span>         | **<span data-proof="authored" data-by="ai:claude">APEX_ONLY</span>**                 | <span data-proof="authored" data-by="ai:claude">Writing Apex test classes, test data factories</span>                                                                      |
+| <span data-proof="authored" data-by="ai:claude">Agent Script</span>         | <span data-proof="authored" data-by="ai:claude">`agent-script/SKILL.md`</span>         | **<span data-proof="authored" data-by="ai:claude">AGENTFORCE_SCRIPT_BUILDER</span>** | <span data-proof="authored" data-by="ai:claude">Building Agentforce agents using Agent Script language</span>                                                              |
+| <span data-proof="authored" data-by="ai:claude">Prompt Builder</span>       | <span data-proof="authored" data-by="ai:claude">`prompt-builder/SKILL.md`</span>       | **<span data-proof="authored" data-by="ai:claude">AGENTFORCE_PROMPT_BUILDER</span>** | <span data-proof="authored" data-by="ai:claude">Creating prompt templates, Apex/LWC/API integration, metadata XML generation</span>                                        |
 
 ***
 
-## Notes
+## <span data-proof="authored" data-by="ai:claude">Workflow Skills</span>
 
-* Prefer skill subsections relevant to the immediate task rather than reading the full file.
+| <span data-proof="authored" data-by="ai:claude">Skill</span>         | <span data-proof="authored" data-by="ai:claude">File</span>                     | <span data-proof="authored" data-by="ai:claude">Scope</span>         | <span data-proof="authored" data-by="ai:claude">Use When</span>                                                                                                                                                          |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| <span data-proof="authored" data-by="ai:claude">SF CLI</span>        | <span data-proof="authored" data-by="ai:claude">`sf-cli/SKILL.md`</span>        | **<span data-proof="authored" data-by="ai:claude">UNIVERSAL</span>** | <span data-proof="authored" data-by="ai:claude">Deploy, retrieve, test, org management via</span> <span data-proof="authored" data-by="ai:claude">`sf`</span> <span data-proof="authored" data-by="ai:claude">CLI</span> |
+| <span data-proof="authored" data-by="ai:claude">Compound Docs</span> | <span data-proof="authored" data-by="ai:claude">`compound-docs/SKILL.md`</span> | **<span data-proof="authored" data-by="ai:claude">UNIVERSAL</span>** | <span data-proof="authored" data-by="ai:claude">Writing solution documents with YAML schema</span>                                                                                                                       |
+| <span data-proof="authored" data-by="ai:claude">File Todos</span>    | <span data-proof="authored" data-by="ai:claude">`file-todos/SKILL.md`</span>    | **<span data-proof="authored" data-by="ai:claude">UNIVERSAL</span>** | <span data-proof="authored" data-by="ai:claude">File-based task tracking with status/priority naming</span>                                                                                                              |
 
-* If skills are insufficient, follow command-level research guidance.
+***
 
-* Use Context7 MCP for additional framework documentation.
+## <span data-proof="authored" data-by="ai:claude">Tooling Skills</span>
 
-<!-- PROOF
-{
-  "version": 2,
-  "marks": {
-    "m1775583117187_1": {
-      "kind": "insert",
-      "by": "ai:claude",
-      "createdAt": "2026-04-07T17:31:57.187Z",
-      "range": {
-        "from": 1910,
-        "to": 2026
-      },
-      "content": "\nAgent Script\nagent-script/SKILL.md\nAGENTFORCE_SCRIPT_BUILDER\nBuilding Agentforce agents using Agent Script language",
-      "status": "pending"
-    },
-    "m1775583121577_2": {
-      "kind": "insert",
-      "by": "ai:claude",
-      "createdAt": "2026-04-07T17:32:01.577Z",
-      "range": {
-        "from": 3539,
-        "to": 3602
-      },
-      "content": "\nAgentforce Agent Script\nAGENTFORCE SCRIPT BUILDER\nagent-script",
-      "status": "pending"
-    }
-  }
-}
--->
+| <span data-proof="authored" data-by="ai:claude">Skill</span>               | <span data-proof="authored" data-by="ai:claude">File</span>                           | <span data-proof="authored" data-by="ai:claude">Scope</span>         | <span data-proof="authored" data-by="ai:claude">Use When</span>                                      |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| <span data-proof="authored" data-by="ai:claude">Git Worktree</span>        | <span data-proof="authored" data-by="ai:claude">`git-worktree/SKILL.md`</span>        | **<span data-proof="authored" data-by="ai:claude">UNIVERSAL</span>** | <span data-proof="authored" data-by="ai:claude">Isolated parallel development branches</span>        |
+| <span data-proof="authored" data-by="ai:claude">Create Agent Skills</span> | <span data-proof="authored" data-by="ai:claude">`create-agent-skills/SKILL.md`</span> | **<span data-proof="authored" data-by="ai:claude">UNIVERSAL</span>** | <span data-proof="authored" data-by="ai:claude">Creating new agents and skills for the plugin</span> |
 
-<!-- PROOF:END -->
+***
+
+## <span data-proof="authored" data-by="ai:claude">Quick Reference: Which Skills for Which Task?</span>
+
+| <span data-proof="authored" data-by="ai:claude">Task</span>                    | <span data-proof="authored" data-by="ai:claude">Classification</span>                   | <span data-proof="authored" data-by="ai:claude">Read Skills</span>                                                                                                                                                               |
+| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <span data-proof="authored" data-by="ai:claude">Apex Trigger</span>            | <span data-proof="authored" data-by="ai:claude">APEX</span>                             | <span data-proof="authored" data-by="ai:claude">`governor-limits`,</span> <span data-proof="authored" data-by="ai:claude">`apex-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`security-guide`</span>        |
+| <span data-proof="authored" data-by="ai:claude">Apex Service Class</span>      | <span data-proof="authored" data-by="ai:claude">APEX</span>                             | <span data-proof="authored" data-by="ai:claude">`governor-limits`,</span> <span data-proof="authored" data-by="ai:claude">`apex-patterns`</span>                                                                                 |
+| <span data-proof="authored" data-by="ai:claude">Apex Test Class</span>         | <span data-proof="authored" data-by="ai:claude">APEX</span>                             | <span data-proof="authored" data-by="ai:claude">`test-factory`,</span> <span data-proof="authored" data-by="ai:claude">`governor-limits`</span>                                                                                  |
+| <span data-proof="authored" data-by="ai:claude">Record-Triggered Flow</span>   | <span data-proof="authored" data-by="ai:claude">AUTOMATION</span>                       | <span data-proof="authored" data-by="ai:claude">`governor-limits`,</span> <span data-proof="authored" data-by="ai:claude">`flow-patterns`</span>                                                                                 |
+| <span data-proof="authored" data-by="ai:claude">Screen Flow</span>             | <span data-proof="authored" data-by="ai:claude">AUTOMATION</span>                       | <span data-proof="authored" data-by="ai:claude">`flow-patterns`</span>                                                                                                                                                           |
+| <span data-proof="authored" data-by="ai:claude">Scheduled Flow</span>          | <span data-proof="authored" data-by="ai:claude">AUTOMATION</span>                       | <span data-proof="authored" data-by="ai:claude">`governor-limits`,</span> <span data-proof="authored" data-by="ai:claude">`flow-patterns`</span>                                                                                 |
+| <span data-proof="authored" data-by="ai:claude">LWC Component</span>           | <span data-proof="authored" data-by="ai:claude">LWC</span>                              | <span data-proof="authored" data-by="ai:claude">`lwc-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`security-guide`</span>                                                                                   |
+| <span data-proof="authored" data-by="ai:claude">LWC with Apex</span>           | <span data-proof="authored" data-by="ai:claude">LWC + APEX</span>                       | <span data-proof="authored" data-by="ai:claude">`lwc-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`apex-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`governor-limits`</span>          |
+| <span data-proof="authored" data-by="ai:claude">REST API</span>                | <span data-proof="authored" data-by="ai:claude">INTEGRATION</span>                      | <span data-proof="authored" data-by="ai:claude">`integration-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`security-guide`,</span> <span data-proof="authored" data-by="ai:claude">`governor-limits`</span> |
+| <span data-proof="authored" data-by="ai:claude">External Callout</span>        | <span data-proof="authored" data-by="ai:claude">INTEGRATION</span>                      | <span data-proof="authored" data-by="ai:claude">`integration-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`governor-limits`</span>                                                                          |
+| <span data-proof="authored" data-by="ai:claude">Platform Event</span>          | <span data-proof="authored" data-by="ai:claude">INTEGRATION</span>                      | <span data-proof="authored" data-by="ai:claude">`integration-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`governor-limits`</span>                                                                          |
+| <span data-proof="authored" data-by="ai:claude">Agentforce Agent Script</span> | <span data-proof="authored" data-by="ai:claude">AGENTFORCE SCRIPT BUILDER</span>        | <span data-proof="authored" data-by="ai:claude">`agent-script`</span>                                                                                                                                                            |
+| <span data-proof="authored" data-by="ai:claude">Prompt Template</span>         | <span data-proof="authored" data-by="ai:claude">AGENTFORCE PROMPT BUILDER</span>        | <span data-proof="authored" data-by="ai:claude">`prompt-builder`</span>                                                                                                                                                          |
+| <span data-proof="authored" data-by="ai:claude">Prompt Template + LWC</span>   | <span data-proof="authored" data-by="ai:claude">AGENTFORCE PROMPT BUILDER + LWC</span>  | <span data-proof="authored" data-by="ai:claude">`prompt-builder`,</span> <span data-proof="authored" data-by="ai:claude">`lwc-patterns`</span>                                                                                   |
+| <span data-proof="authored" data-by="ai:claude">Prompt Template + Apex</span>  | <span data-proof="authored" data-by="ai:claude">AGENTFORCE PROMPT BUILDER + APEX</span> | <span data-proof="authored" data-by="ai:claude">`prompt-builder`,</span> <span data-proof="authored" data-by="ai:claude">`apex-patterns`,</span> <span data-proof="authored" data-by="ai:claude">`governor-limits`</span>        |
+| <span data-proof="authored" data-by="ai:claude">AppExchange Package</span>     | <span data-proof="authored" data-by="ai:claude">UNIVERSAL</span>                        | <span data-proof="authored" data-by="ai:claude">`security-guide`,</span> <span data-proof="authored" data-by="ai:claude">`governor-limits`</span>                                                                                |
+| <span data-proof="authored" data-by="ai:claude">Deployment</span>              | <span data-proof="authored" data-by="ai:claude">WORKFLOW</span>                         | <span data-proof="authored" data-by="ai:claude">`sf-cli`</span>                                                                                                                                                                  |
+| <span data-proof="authored" data-by="ai:claude">Knowledge Capture</span>       | <span data-proof="authored" data-by="ai:claude">WORKFLOW</span>                         | <span data-proof="authored" data-by="ai:claude">`compound-docs`</span>                                                                                                                                                           |
+| <span data-proof="authored" data-by="ai:claude">Parallel Development</span>    | <span data-proof="authored" data-by="ai:claude">TOOLING</span>                          | <span data-proof="authored" data-by="ai:claude">`git-worktree`</span>                                                                                                                                                            |
+| <span data-proof="authored" data-by="ai:claude">Extend Plugin</span>           | <span data-proof="authored" data-by="ai:claude">TOOLING</span>                          | <span data-proof="authored" data-by="ai:claude">`create-agent-skills`</span>                                                                                                                                                     |
+
+***
+
+## <span data-proof="authored" data-by="ai:claude">Notes</span>
+
+* <span data-proof="authored" data-by="ai:claude">Prefer skill subsections relevant to the immediate task rather than reading the full file.</span>
+
+* <span data-proof="authored" data-by="ai:claude">If skills are insufficient, follow command-level research guidance.</span>
+
+* <span data-proof="authored" data-by="ai:claude">Use Context7 MCP for additional framework documentation.</span>
