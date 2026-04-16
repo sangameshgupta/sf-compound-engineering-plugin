@@ -1,6 +1,6 @@
 {
   "name": "sf-compound-engineering",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Salesforce-focused compound engineering workflow for Claude Code with parallel agent dispatch and institutional knowledge",
   "author": {
     "name": "Gella Sangamesh Gupta",
@@ -18,7 +18,10 @@
     "workflow-automation",
     "agentforce",
     "agent-script",
-    "prompt-builder"
+    "prompt-builder",
+    "hosted-mcp",
+    "external-client-apps",
+    "mcp-tools"
   ],
   "mcpServers": {
     "context7": {
