@@ -6,11 +6,11 @@
 
 ## <span data-proof="authored" data-by="ai:claude">Architecture</span>
 
-* **<span data-proof="authored" data-by="ai:claude">Agents</span>** <span data-proof="authored" data-by="ai:claude">(33):</span> <span data-proof="authored" data-by="ai:claude">`agents/{category}/`</span> <span data-proof="authored" data-by="ai:claude">— Review, research, and workflow agents dispatched in parallel</span>
+* **<span data-proof="authored" data-by="ai:claude">Agents</span>** (35): <span data-proof="authored" data-by="ai:claude">`agents/{category}/`</span> <span data-proof="authored" data-by="ai:claude">— Review, research, and workflow agents dispatched in parallel</span>
 
 * **<span data-proof="authored" data-by="ai:claude">Commands</span>** <span data-proof="authored" data-by="ai:claude">(7):</span> <span data-proof="authored" data-by="ai:claude">`commands/sf-*.md`</span> <span data-proof="authored" data-by="ai:claude">— Workflow commands (brainstorm, plan, deepen, work, review, compound, lfg)</span>
 
-* **<span data-proof="authored" data-by="ai:claude">Skills</span>** <span data-proof="authored" data-by="ai:claude">(14):</span> <span data-proof="authored" data-by="ai:claude">`skills/*/SKILL.md`</span> <span data-proof="authored" data-by="ai:claude">— Domain knowledge reference</span>
+* **<span data-proof="suggestion" data-id="m1776327085868_3" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">Skills</span></span>**<span data-proof="suggestion" data-id="m1776327085868_3" data-by="ai:claude" data-kind="replace"></span> <span data-proof="suggestion" data-id="m1776327085868_3" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">(14):</span></span> <span data-proof="suggestion" data-id="m1776327085868_3" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">`skills/*/SKILL.md`</span></span> <span data-proof="suggestion" data-id="m1776327085868_3" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">— Domain knowledge reference</span></span>
 
 * **<span data-proof="authored" data-by="ai:claude">Knowledge</span>**<span data-proof="authored" data-by="ai:claude">:</span> <span data-proof="authored" data-by="ai:claude">`docs/solutions/`</span> <span data-proof="authored" data-by="ai:claude">— Institutional knowledge with YAML frontmatter</span>
 
@@ -50,7 +50,8 @@
 ## <span data-proof="authored" data-by="ai:claude">MCP Servers</span>
 
 * **<span data-proof="authored" data-by="ai:claude">Context7</span>**<span data-proof="authored" data-by="ai:claude">: Framework documentation via</span> <span data-proof="authored" data-by="ai:claude">`@upstash/context7-mcp`</span><span data-proof="suggestion" data-id="m1775681235127_1" data-by="ai:claude" data-kind="insert"><span data-proof="authored" data-by="ai:claude">`
-  Salesforce DX: Live org operations via @salesforce/mcp (60+ tools — SOQL, deploy, retrieve, code analysis, LWC experts, testing)`</span></span>
+  Salesforce DX: Live org operations via @salesforce/mcp (60+ tools — SOQL, deploy, retrieve, code analysis, LWC experts, testing)`</span></span><span data-proof="suggestion" data-id="m1776327085865_2" data-by="ai:claude" data-kind="insert"><span data-proof="authored" data-by="ai:claude">`
+  Hosted MCP Servers: Salesforce's cloud-managed MCP infrastructure (GA April 2026). Not configured in .mcp.json — this is per-org setup. See hosted-mcp-servers and mcp-tool-builder skills for setup and development guidance.`</span></span>
 
 ## <span data-proof="authored" data-by="ai:claude">Key Files</span>
 
@@ -67,6 +68,17 @@
 {
   "version": 2,
   "marks": {
+    "m1776327085868_3": {
+      "kind": "replace",
+      "by": "ai:claude",
+      "createdAt": "2026-04-16T08:11:25.868Z",
+      "range": {
+        "from": 463,
+        "to": 522
+      },
+      "content": "Skills (16): skills/*/SKILL.md — Domain knowledge reference",
+      "status": "pending"
+    },
     "m1775681235127_1": {
       "kind": "insert",
       "by": "ai:claude",
@@ -76,6 +88,17 @@
         "to": 1994
       },
       "content": "\nSalesforce DX: Live org operations via @salesforce/mcp (60+ tools — SOQL, deploy, retrieve, code analysis, LWC experts, testing)",
+      "status": "pending"
+    },
+    "m1776327085865_2": {
+      "kind": "insert",
+      "by": "ai:claude",
+      "createdAt": "2026-04-16T08:11:25.865Z",
+      "range": {
+        "from": 1994,
+        "to": 2217
+      },
+      "content": "\nHosted MCP Servers: Salesforce's cloud-managed MCP infrastructure (GA April 2026). Not configured in .mcp.json — this is per-org setup. See hosted-mcp-servers and mcp-tool-builder skills for setup and development guidance.",
       "status": "pending"
     }
   }

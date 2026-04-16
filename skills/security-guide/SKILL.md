@@ -9,7 +9,7 @@ scope: UNIVERSAL
 **SCOPE: UNIVERSAL** - This skill applies to ALL Salesforce development requiring security considerations.
 **READ** this skill for Apex (CRUD/FLS), LWC (XSS), Integrations (OAuth), and AppExchange security reviews.
 
----
+***
 
 Complete reference for implementing security best practices in Salesforce development.
 
@@ -129,15 +129,16 @@ public inherited sharing class UtilityClass {
 
 ### When to Use Each
 
-| Keyword | Use Case |
-|---------|----------|
-| `with sharing` | User-facing controllers, AuraEnabled methods |
-| `without sharing` | System processes, data cleanup, reports |
-| `inherited sharing` | Utility classes, shared libraries |
+| Keyword             | Use Case                                     |
+| ------------------- | -------------------------------------------- |
+| `with sharing`      | User-facing controllers, AuraEnabled methods |
+| `without sharing`   | System processes, data cleanup, reports      |
+| `inherited sharing` | Utility classes, shared libraries            |
 
 ## SOQL Injection Prevention
 
 ### Vulnerable Code
+
 ```apex
 // NEVER DO THIS
 String searchTerm = userInput;
@@ -165,6 +166,7 @@ List<List<SObject>> results = [FIND :searchTerm IN ALL FIELDS RETURNING Account(
 ## XSS Prevention
 
 ### In Visualforce
+
 ```html
 <!-- Text output - auto-escaped -->
 {!account.Name}
@@ -177,6 +179,7 @@ List<List<SObject>> results = [FIND :searchTerm IN ALL FIELDS RETURNING Account(
 ```
 
 ### In LWC
+
 ```javascript
 // Safe: Template expressions are auto-escaped
 // In template: {userInput}
@@ -191,6 +194,7 @@ element.textContent = userInput;
 ## Sensitive Data Handling
 
 ### Never Hardcode Credentials
+
 ```apex
 // WRONG
 String apiKey = 'sk-12345abcdef';  // Never do this!
@@ -208,6 +212,7 @@ API_Config__mdt config = [SELECT API_Key__c FROM API_Config__mdt WHERE Developer
 ```
 
 ### Secure Logging
+
 ```apex
 // Never log sensitive data
 System.debug('Processing user: ' + userId);  // OK
@@ -234,19 +239,64 @@ public PageReference setSecurityHeaders() {
 }
 ```
 
+## Hosted MCP Server Security
+
+Salesforce Hosted MCP Servers enforce security automatically, but configuration choices affect the security posture.
+
+### Key Security Principles
+
+* **`mcp_api`** **scope isolation**: The `mcp_api` OAuth scope is separate from REST API access. An MCP connection cannot access REST APIs — this prevents MCP clients from becoming general-purpose API bridges.
+
+* **PKCE required**: All External Client Apps for MCP must enable Proof Key for Code Exchange (PKCE) to prevent authorization code interception.
+
+* **Automatic CRUD/FLS/Sharing**: Hosted MCP Servers enforce the authenticated user's object, field, and record-level access automatically. No additional code is needed.
+
+* **Named user audit trail**: Every MCP operation is logged with the authenticated user's identity. There is no anonymous or service-account access.
+
+* **One ECA per client**: Create separate External Client Apps for each AI client (Claude, Cursor, ChatGPT) to enable per-client auditing and revocation.
+
+* **JWT tokens**: Enable JWT-based access tokens for self-contained identity verification without per-request validation callouts.
+
+### Production Hardening
+
+* Set refresh token expiry to 30 days or less
+
+* Enable refresh token rotation
+
+* Restrict ECA access via Permission Sets
+
+* Enable Single Logout for shared workstations
+
+* Monitor API quota consumption (MCP calls count against daily limit)
+
+> **Full reference:** See `hosted-mcp-servers` skill for complete setup, URL patterns, and troubleshooting.
+
+***
+
 ## Security Checklist
 
 ### Before Code Review
-- [ ] All queries use bind variables or SECURITY_ENFORCED
-- [ ] CRUD/FLS checks on all DML operations
-- [ ] Classes use appropriate sharing keyword
-- [ ] No hardcoded credentials or sensitive data
-- [ ] User input validated and sanitized
-- [ ] Sensitive data not logged
-- [ ] LWC components don't use innerHTML with user data
+
+* [ ] All queries use bind variables or SECURITY\_ENFORCED
+
+* [ ] CRUD/FLS checks on all DML operations
+
+* [ ] Classes use appropriate sharing keyword
+
+* [ ] No hardcoded credentials or sensitive data
+
+* [ ] User input validated and sanitized
+
+* [ ] Sensitive data not logged
+
+* [ ] LWC components don't use innerHTML with user data
 
 ### Before Deployment
-- [ ] Security review completed
-- [ ] Penetration testing (if applicable)
-- [ ] Permission sets configured correctly
-- [ ] Sharing rules validated
+
+* [ ] Security review completed
+
+* [ ] Penetration testing (if applicable)
+
+* [ ] Permission sets configured correctly
+
+* [ ] Sharing rules validated
