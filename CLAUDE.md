@@ -53,6 +53,17 @@
   Salesforce DX: Live org operations via @salesforce/mcp (60+ tools — SOQL, deploy, retrieve, code analysis, LWC experts, testing)`</span></span><span data-proof="suggestion" data-id="m1776327085865_2" data-by="ai:claude" data-kind="insert"><span data-proof="authored" data-by="ai:claude">`
   Hosted MCP Servers: Salesforce's cloud-managed MCP infrastructure (GA April 2026). Not configured in .mcp.json — this is per-org setup. See hosted-mcp-servers and mcp-tool-builder skills for setup and development guidance.`</span></span>
 
+### Hosted MCP Key Gotchas (From Real Testing)
+
+1. **`global` not `public`** — MCP tools require `global` access modifier on class, method, AND all inner classes. `public` silently hides the tool.
+2. **Flow data providers break MCP** — `templateDataProviders` with `flow://` causes "Failed to attach prompt" in Claude. Remove for MCP templates.
+3. **Claude ignores template formatting** — Prompt templates are passive in MCP. Pre-format output server-side or include EXAMPLE OUTPUT in template.
+4. **Template type** — Use `einstein_gpt__global` for MCP (not `FlexTemplate` which the API rejects). Use `einstein_gpt__flex` for Agentforce.
+5. **Input definitions** — Use `primitive://String` for text inputs (undocumented — discovered from standard templates). Use `SOBJECT://ObjectName` for records.
+6. **API 66.0 changes** — Omit `activeVersion` (removed) and `versionIdentifier` (let platform auto-generate).
+7. **Dual architecture** — Same Apex can serve both MCP and Agentforce but needs separate templates and wiring. Share the service layer.
+8. **Accept both IDs and names** — AI clients pass Case Numbers, not Salesforce IDs. Tools should detect format and query accordingly.
+
 ## <span data-proof="authored" data-by="ai:claude">Key Files</span>
 
 | <span data-proof="authored" data-by="ai:claude">File</span>                         | <span data-proof="authored" data-by="ai:claude">Purpose</span>                                                        |
