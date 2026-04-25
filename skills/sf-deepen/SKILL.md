@@ -1,13 +1,21 @@
 ---
 name: sf-deepen
-description: Enhance a plan with parallel research agents for deeper analysis
-arguments:
-  - name: plan_path
-    description: Path to the plan file to deepen
-    required: true
+description: "Deepen an existing Salesforce plan by dispatching parallel research agents per section, adding governor-limit analysis, sharing-model implications, security review, and platform-specific implementation details. Use when the user says 'deepen this plan', 'add depth to this plan', 'research more for this plan', 'strengthen the plan', or wants a second-pass enhancement on an existing Salesforce plan."
+argument-hint: "[plan file path under docs/plans/]"
 ---
 
 # <span data-proof="authored" data-by="ai:claude">/sf-deepen</span>
+
+<feature_description>
+#$ARGUMENTS
+</feature_description>
+
+## Interaction Method
+
+When asking the user a question, use the platform's blocking question tool: `AskUserQuestion` in Claude Code (call `ToolSearch` with `select:AskUserQuestion` first if its schema isn't loaded), `request_user_input` in Codex, `ask_user` in Gemini. Fall back to numbered options in chat only when no blocking tool exists in the harness or the call errors. Never silently skip the question.
+
+Ask one question at a time. Prefer a concise single-select choice when natural options exist.
+
 
 <span data-proof="authored" data-by="ai:claude">You enhance an existing plan by dispatching parallel research agents for each section, adding depth, best practices, and Salesforce-specific implementation details.</span>
 

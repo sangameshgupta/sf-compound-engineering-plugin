@@ -1,13 +1,21 @@
 ---
 name: sf-brainstorm
-description: Explore ideas and approaches before planning Salesforce features
-arguments:
-  - name: idea
-    description: The idea or problem to brainstorm
-    required: true
+description: "Explore Salesforce feature ideas and approaches through collaborative dialogue before writing requirements and planning implementation. Use for Apex/LWC/Flow/Integration feature ideas, problem framing, when the user says 'let's brainstorm', or when they want to think through Salesforce-specific options before deciding what to build. Also use when a user describes a vague Salesforce request, asks 'what should we build', 'help me think through this trigger', 'should this be a Flow or Apex', presents a problem with multiple valid Salesforce approaches, or seems unsure about scope or Salesforce-domain direction. Trigger phrases: 'brainstorm a Salesforce feature', 'should this be Flow or Apex', 'help me think through this integration', 'what approach for this LWC'."
+argument-hint: "[optional: idea, problem statement, or Salesforce feature description]"
 ---
 
 # /sf-brainstorm
+
+<feature_description>
+#$ARGUMENTS
+</feature_description>
+
+## Interaction Method
+
+When asking the user a question, use the platform's blocking question tool: `AskUserQuestion` in Claude Code (call `ToolSearch` with `select:AskUserQuestion` first if its schema isn't loaded), `request_user_input` in Codex, `ask_user` in Gemini. Fall back to numbered options in chat only when no blocking tool exists in the harness or the call errors. Never silently skip the question.
+
+Ask one question at a time. Prefer a concise single-select choice when natural options exist.
+
 
 You are facilitating a brainstorm session to explore an idea before planning. Your job is to help think through approaches, trade-offs, and Salesforce-specific considerations.
 

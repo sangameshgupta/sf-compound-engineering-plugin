@@ -1,13 +1,7 @@
 ---
 name: sf-review
-description: Review Salesforce code for quality, security, and best practices using parallel agents
-arguments:
-  - name: target
-    description: File path, directory, or PR number to review (defaults to uncommitted changes)
-    required: false
-  - name: depth
-    description: "Review depth: fast, thorough, or comprehensive (default: thorough)"
-    required: false
+description: "Review Salesforce code for quality, governor limits, bulkification, security (CRUD/FLS/SOQL injection), sharing model, performance, and platform best practices using parallel agent dispatch. Use when the user says 'review this Apex', 'review this LWC', 'review this Flow', 'check this trigger', 'audit this SOQL', 'security review', or wants multi-persona review of a PR or local diff. Supports fast, thorough, and comprehensive depth levels."
+argument-hint: "[optional: file path, directory, PR number; defaults to uncommitted changes; pass 'fast'/'thorough'/'comprehensive' for depth]"
 ---
 
 # /sf-review

@@ -1,13 +1,21 @@
 ---
 name: sf-plan
-description: Research and design Salesforce features using parallel research agents
-arguments:
-  - name: feature
-    description: Description of the feature to plan
-    required: true
+description: "Create structured implementation plans for Salesforce features. Use when planning Apex changes, LWC components, Flow automation, integrations, metadata deployments, or any multi-step Salesforce build. Also deepen existing plans. Use when the user says 'plan this Apex feature', 'how should I build this LWC', 'plan the integration', 'break down this Salesforce requirement', 'plan a trigger refactor', 'plan the deployment', or when a brainstorm/requirements document is ready for planning. For exploratory or ambiguous requests, prefer sf-brainstorm first."
+argument-hint: "[optional: feature description, requirements doc path, plan path to deepen, or Salesforce work to plan]"
 ---
 
 # <span data-proof="authored" data-by="ai:claude">/sf-plan</span>
+
+<feature_description>
+#$ARGUMENTS
+</feature_description>
+
+## Interaction Method
+
+When asking the user a question, use the platform's blocking question tool: `AskUserQuestion` in Claude Code (call `ToolSearch` with `select:AskUserQuestion` first if its schema isn't loaded), `request_user_input` in Codex, `ask_user` in Gemini. Fall back to numbered options in chat only when no blocking tool exists in the harness or the call errors. Never silently skip the question.
+
+Ask one question at a time. Prefer a concise single-select choice when natural options exist.
+
 
 <span data-proof="authored" data-by="ai:claude">You are planning a Salesforce implementation using parallel research agents. Your job is to research and design —</span> **<span data-proof="authored" data-by="ai:claude">NOT write code</span>**<span data-proof="authored" data-by="ai:claude">.</span>
 
