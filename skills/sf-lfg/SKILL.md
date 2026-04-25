@@ -1,16 +1,21 @@
 ---
 name: sf-lfg
-description: Full autonomous pipeline — plan, deepen, work, review, resolve, test, deploy
-arguments:
-  - name: feature
-    description: Feature description or plan file path to execute end-to-end
-    required: true
-  - name: deploy
-    description: "Deploy target: scratch, sandbox, or none (default: none)"
-    required: false
+description: "Full autonomous Salesforce delivery pipeline: brainstorm (if needed) -> plan -> deepen -> work -> review -> resolve feedback -> test -> optionally deploy. Use when the user says 'lfg', 'ship this', 'do the whole thing', 'autopilot this Salesforce feature', 'end-to-end this' and wants the full plan-to-deploy flow. Honors Salesforce constraints (governor limits, sharing, deploy targets) and respects deploy-target choice (scratch, sandbox, none)."
+argument-hint: "[feature description or plan path; optionally pass 'deploy=scratch'/'deploy=sandbox'/'deploy=none']"
 ---
 
 # <span data-proof="authored" data-by="ai:claude">/sf-lfg</span>
+
+<feature_description>
+#$ARGUMENTS
+</feature_description>
+
+## Interaction Method
+
+When asking the user a question, use the platform's blocking question tool: `AskUserQuestion` in Claude Code (call `ToolSearch` with `select:AskUserQuestion` first if its schema isn't loaded), `request_user_input` in Codex, `ask_user` in Gemini. Fall back to numbered options in chat only when no blocking tool exists in the harness or the call errors. Never silently skip the question.
+
+Ask one question at a time. Prefer a concise single-select choice when natural options exist.
+
 
 <span data-proof="authored" data-by="ai:claude">Full autonomous pipeline. Takes a feature from idea to deployment with minimal human intervention.</span>
 

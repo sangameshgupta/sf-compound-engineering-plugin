@@ -1,13 +1,21 @@
 ---
 name: sf-compound
-description: Capture learnings from completed work into institutional knowledge system
-arguments:
-  - name: scope
-    description: What to compound (defaults to recent work)
-    required: false
+description: "Document a recently solved Salesforce problem to compound institutional knowledge. Use when the user says 'compound this learning', 'capture this fix', 'document this for later', 'add this to docs/solutions', 'we should remember this', after debugging a tricky governor-limit issue, after fixing a deploy failure, or after resolving a subtle Apex/LWC/Flow bug. Writes structured YAML-frontmatter solution docs to docs/solutions/ that sf-learnings-researcher can find on future work."
+argument-hint: "[optional: scope of what to compound; defaults to recent work in this session]"
 ---
 
 # /sf-compound
+
+<feature_description>
+#$ARGUMENTS
+</feature_description>
+
+## Interaction Method
+
+When asking the user a question, use the platform's blocking question tool: `AskUserQuestion` in Claude Code (call `ToolSearch` with `select:AskUserQuestion` first if its schema isn't loaded), `request_user_input` in Codex, `ask_user` in Gemini. Fall back to numbered options in chat only when no blocking tool exists in the harness or the call errors. Never silently skip the question.
+
+Ask one question at a time. Prefer a concise single-select choice when natural options exist.
+
 
 You are capturing learnings from completed work into the institutional knowledge system. Every solution documented makes the next iteration smarter.
 

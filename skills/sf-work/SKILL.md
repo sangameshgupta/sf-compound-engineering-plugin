@@ -1,13 +1,21 @@
 ---
 name: sf-work
-description: Implement Salesforce features with parallel agents and system-wide test checks
-arguments:
-  - name: plan
-    description: Path to plan file or feature description
-    required: true
+description: "Execute work efficiently against a Salesforce plan or feature description while maintaining quality and finishing complete features. Use when implementing Apex classes, LWC components, Flow automation, integrations, or any planned Salesforce work. Includes a Salesforce-aware system-wide test check (trigger contexts, bulkification, governor limits, sharing scenarios, mock callouts). Trigger phrases: 'work on this plan', 'implement this Salesforce feature', 'build out this Apex', 'execute this trigger plan', 'ship this LWC'."
+argument-hint: "[plan file path under docs/plans/, or feature description for bare-prompt work]"
 ---
 
 # <span data-proof="authored" data-by="ai:claude">/sf-work</span>
+
+<feature_description>
+#$ARGUMENTS
+</feature_description>
+
+## Interaction Method
+
+When asking the user a question, use the platform's blocking question tool: `AskUserQuestion` in Claude Code (call `ToolSearch` with `select:AskUserQuestion` first if its schema isn't loaded), `request_user_input` in Codex, `ask_user` in Gemini. Fall back to numbered options in chat only when no blocking tool exists in the harness or the call errors. Never silently skip the question.
+
+Ask one question at a time. Prefer a concise single-select choice when natural options exist.
+
 
 <span data-proof="authored" data-by="ai:claude">You are implementing a Salesforce feature with parallel agent support and built-in quality checks.</span>
 
