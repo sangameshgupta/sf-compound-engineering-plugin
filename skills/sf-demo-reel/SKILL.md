@@ -23,12 +23,15 @@ When asking the user a question, use the platform's blocking question tool (`Ask
 
 ## Procedure
 
-This skill ports EveryInc's V3 [`ce-demo-reel`](~/.claude/plugins/cache/every-marketplace/compound-engineering/3.0.6/skills/ce-demo-reel/SKILL.md) procedure to Salesforce. The full step-by-step procedure (phases, decision points, sub-references) lives in the V3 source. This Salesforce variant inherits that procedure and applies the **Salesforce Angle** notes above wherever the V3 procedure mentions inputs, examples, or outputs.
+This skill follows the standard sf-compound-engineering execution discipline:
 
-When implementing this skill at execution time, read the V3 procedure for structure, then substitute Salesforce contexts, file paths (`force-app/main/default/...`), test commands (`sf apex run test`), and deploy commands (`sf project deploy validate` / `sf project deploy start`) for the V3 examples.
+1. **Understand the input** — read the `<feature_description>` block above and any referenced files, plans, or issues.
+2. **Plan a small set of phases** — break the work into 2-5 ordered steps that an implementer (or another skill) can verify.
+3. **Apply the Salesforce Angle notes above** — these encode the platform-specific considerations (governor limits, sharing context, deploy ordering, FLS, metadata semantics) that distinguish this skill from generic counterparts.
+4. **Use Salesforce-aware contexts and commands** — file paths under `force-app/main/default/...`, test commands like `sf apex run test`, deploy commands like `sf project deploy validate` and `sf project deploy start`, query the org with `sf data query` when state inspection is needed.
+5. **Surface decisions back to the user** — when a step requires a choice that materially affects scope or risk, ask using the platform's blocking question tool rather than guessing.
 
-## Reference
+## Related
 
-- V3 source skill: `ce-demo-reel` in [EveryInc compound-engineering-plugin v3.x](https://github.com/EveryInc/compound-engineering-plugin)
-- Salesforce knowledge: `docs/solutions/` (search via `sf-learnings-researcher` agent)
-- Migration plan: `docs/plans/2026-04-25-001-feat-v3-architecture-migration-plan.md` (U6 unit)
+- Salesforce knowledge: `docs/solutions/` (search via the `sf-learnings-researcher` agent).
+- Plugin conventions: see `CLAUDE.md` for frontmatter, naming, and protected-artifact rules.

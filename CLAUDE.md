@@ -1,105 +1,87 @@
-# <span data-proof="authored" data-by="ai:claude">SF Compound Engineering Plugin</span>
+# SF Compound Engineering Plugin
 
-## <span data-proof="authored" data-by="ai:claude">Project Overview</span>
+## Project Overview
 
-<span data-proof="authored" data-by="ai:claude">Salesforce-focused compound engineering plugin for Claude Code, Cursor, and Codex. V3 skills-first architecture with parallel agent dispatch, institutional knowledge compounding, and a full Salesforce development lifecycle (Apex, LWC, Flow, Integration, metadata, deploy).</span>
+Salesforce-focused compound engineering plugin for Claude Code, Cursor, and Codex. V3 skills-first architecture with parallel agent dispatch, institutional knowledge compounding, and a full Salesforce development lifecycle (Apex, LWC, Flow, Integration, metadata, deploy).
 
-<span data-proof="authored" data-by="ai:claude">This plugin is a Salesforce-flavored counterpart to Every's</span> [<span data-proof="authored" data-by="ai:claude">compound-engineering-plugin</span>](https://github.com/EveryInc/compound-engineering-plugin) <span data-proof="authored" data-by="ai:claude">v3.x. It mirrors V3's architecture (skills replace commands, flat agent layout, multi-platform manifests) and ports its capability surface as</span> <span data-proof="authored" data-by="ai:claude">`sf-*`</span> <span data-proof="authored" data-by="ai:claude">skills and agents that carry Salesforce-specific knowledge.</span>
+The plugin's architecture is skills-first: skills are the user-facing entry points, agents dispatch in parallel via the Task tool, and institutional knowledge accumulates under `docs/solutions/`. Multi-platform manifests ship for Claude Code, Cursor, and Codex.
 
-## <span data-proof="authored" data-by="ai:claude">Architecture</span>
+## Architecture
 
-* **<span data-proof="authored" data-by="ai:claude">Skills</span>** <span data-proof="authored" data-by="ai:claude">(`skills/<name>/SKILL.md`) — User-facing entry points. Auto-route from natural-language phrases via</span> <span data-proof="authored" data-by="ai:claude">`description`</span> <span data-proof="authored" data-by="ai:claude">frontmatter; direct invocation via</span> <span data-proof="authored" data-by="ai:claude">`/sf-<name>`</span> <span data-proof="authored" data-by="ai:claude">also works. Includes the seven core workflow skills (`sf-brainstorm`,</span> <span data-proof="authored" data-by="ai:claude">`sf-plan`,</span> <span data-proof="authored" data-by="ai:claude">`sf-deepen`,</span> <span data-proof="authored" data-by="ai:claude">`sf-work`,</span> <span data-proof="authored" data-by="ai:claude">`sf-review`,</span> <span data-proof="authored" data-by="ai:claude">`sf-compound`,</span> <span data-proof="authored" data-by="ai:claude">`sf-lfg`) and Salesforce domain knowledge skills (governor-limits, apex-patterns, lwc-patterns, etc.).</span>
+- **Skills** (`skills/<name>/SKILL.md`) — User-facing entry points. Auto-route from natural-language phrases via `description` frontmatter; direct invocation via `/sf-<name>` also works. Includes the seven core workflow skills (`sf-brainstorm`, `sf-plan`, `sf-deepen`, `sf-work`, `sf-review`, `sf-compound`, `sf-lfg`) and Salesforce domain knowledge skills (governor-limits, apex-patterns, lwc-patterns, etc.).
+- **Agents** (`agents/<name>.agent.md`, flat) — Specialized review/research/workflow personas dispatched in parallel via the Task tool. Topical groupings (Apex / LWC / Flow / Integration / Architecture / Research / Workflow) are documentation aids, not filesystem paths.
+- **Knowledge** (`docs/solutions/`) — Institutional knowledge with YAML frontmatter validated against `schema.yaml`. Searched by `sf-learnings-researcher`.
+- **Multi-platform manifests** — `.claude-plugin/`, `.cursor-plugin/`, `.codex-plugin/` carry per-platform plugin metadata.
 
-* **<span data-proof="authored" data-by="ai:claude">Agents</span>** <span data-proof="authored" data-by="ai:claude">(`agents/<name>.agent.md`, flat) — Specialized review/research/workflow personas dispatched in parallel via the Task tool. Topical groupings (Apex / LWC / Flow / Integration / Architecture / Research / Workflow) are documentation aids, not filesystem paths.</span>
+There is no `commands/` directory in V3. Skills replaced commands cleanly.
 
-* **<span data-proof="authored" data-by="ai:claude">Knowledge</span>** <span data-proof="authored" data-by="ai:claude">(`docs/solutions/`) — Institutional knowledge with YAML frontmatter validated against</span> <span data-proof="authored" data-by="ai:claude">`schema.yaml`. Searched by</span> <span data-proof="authored" data-by="ai:claude">`sf-learnings-researcher`.</span>
-
-* **<span data-proof="authored" data-by="ai:claude">Multi-platform manifests</span>** <span data-proof="authored" data-by="ai:claude">—</span> <span data-proof="authored" data-by="ai:claude">`.claude-plugin/`,</span> <span data-proof="authored" data-by="ai:claude">`.cursor-plugin/`,</span> <span data-proof="authored" data-by="ai:claude">`.codex-plugin/`</span> <span data-proof="authored" data-by="ai:claude">carry per-platform plugin metadata.</span>
-
-<span data-proof="authored" data-by="ai:claude">There is no</span> <span data-proof="authored" data-by="ai:claude">`commands/`</span> <span data-proof="authored" data-by="ai:claude">directory in V3. Skills replaced commands cleanly.</span>
-
-## <span data-proof="authored" data-by="ai:claude">Workflow</span>
+## Workflow
 
 ```
 /sf-brainstorm → /sf-plan → /sf-deepen → /sf-work → /sf-review → /sf-compound
                                     └── /sf-lfg (full autonomous pipeline) ──┘
 ```
 
-<span data-proof="authored" data-by="ai:claude">All seven entry points are skills (under</span> <span data-proof="authored" data-by="ai:claude">`skills/`), not commands. The harness routes natural-language phrases to the right skill via the skill's</span> <span data-proof="authored" data-by="ai:claude">`description`</span> <span data-proof="authored" data-by="ai:claude">frontmatter.</span>
+All seven entry points are skills (under `skills/`), not commands. The harness routes natural-language phrases to the right skill via the skill's `description` frontmatter.
 
-## <span data-proof="authored" data-by="ai:claude">Protected Artifacts</span>
+## Protected Artifacts
 
-**<span data-proof="authored" data-by="ai:claude">NEVER delete or overwrite these directories or their contents:</span>**
+**NEVER delete or overwrite these directories or their contents:**
 
-* <span data-proof="authored" data-by="ai:claude">`docs/plans/`</span> <span data-proof="authored" data-by="ai:claude">— Plan documents are permanent project records</span>
+- `docs/plans/` — Plan documents are permanent project records
+- `docs/solutions/` — Institutional knowledge is cumulative and must never be lost
+- `docs/brainstorms/` — Brainstorm records provide context for decisions
 
-* <span data-proof="authored" data-by="ai:claude">`docs/solutions/`</span> <span data-proof="authored" data-by="ai:claude">— Institutional knowledge is cumulative and must never be lost</span>
+These directories contain the compounded knowledge of the project. Deleting them destroys institutional memory. If content needs correction, **edit** existing files rather than deleting them. If content is obsolete, add a `status: deprecated` field to the YAML frontmatter.
 
-* <span data-proof="authored" data-by="ai:claude">`docs/brainstorms/`</span> <span data-proof="authored" data-by="ai:claude">— Brainstorm records provide context for decisions</span>
+## Conventions
 
-<span data-proof="authored" data-by="ai:claude">These directories contain the compounded knowledge of the project. Deleting them destroys institutional memory. If content needs correction,</span> **<span data-proof="authored" data-by="ai:claude">edit</span>** <span data-proof="authored" data-by="ai:claude">existing files rather than deleting them. If content is obsolete, add a</span> <span data-proof="authored" data-by="ai:claude">`status: deprecated`</span> <span data-proof="authored" data-by="ai:claude">field to the YAML frontmatter.</span>
+- **Agent files** use V3 frontmatter: `name`, `description`, `model`, `tools`, `color`. The `scope` field has been retired. Filenames use the `<name>.agent.md` suffix.
+- **Skill files** use V3 frontmatter: `name`, `description`, `argument-hint`. `description` enumerates Salesforce-flavored trigger phrases for auto-routing. Each skill lives under `skills/<name>/SKILL.md`.
+- **Solution documents** (`docs/solutions/`) use YAML frontmatter validated against `schema.yaml`.
+- **Skills dispatch agents** in parallel using the Task tool. The seven core workflow skills (`sf-review`, `sf-doc-review`, `sf-work`, etc.) wire up parallel persona dispatch internally.
+- **Model selection**: research agents use `model: haiku` for speed (`sf-learnings-researcher`); deep-analysis agents use `model: sonnet` (`sf-spec-flow-analyzer`); review and workflow agents default to `model: inherit`.
+- **Tool sets**: review/research agents get `Read, Grep, Glob, Bash`; workflow agents that may write files (`sf-bug-reproduction-validator`, `sf-pr-comment-resolver`, `sf-deployment-verification-agent`, `sf-mcp-tool-builder-agent`) get the full `Read, Edit, Write, Grep, Glob, Bash`.
+- **File names** use kebab-case with date prefixes for time-ordered documents (`docs/plans/YYYY-MM-DD-NNN-<type>-<name>-plan.md`).
+- **`sf-` prefix** is the Salesforce namespace, used for every agent and skill in this plugin.
 
-## <span data-proof="authored" data-by="ai:claude">Conventions</span>
+## MCP Servers
 
-* **<span data-proof="authored" data-by="ai:claude">Agent files</span>** <span data-proof="authored" data-by="ai:claude">use V3 frontmatter:</span> <span data-proof="authored" data-by="ai:claude">`name`,</span> <span data-proof="authored" data-by="ai:claude">`description`,</span> <span data-proof="authored" data-by="ai:claude">`model`,</span> <span data-proof="authored" data-by="ai:claude">`tools`,</span> <span data-proof="authored" data-by="ai:claude">`color`. The</span> <span data-proof="authored" data-by="ai:claude">`scope`</span> <span data-proof="authored" data-by="ai:claude">field has been retired. Filenames use the</span> <span data-proof="authored" data-by="ai:claude">`<name>.agent.md`</span> <span data-proof="authored" data-by="ai:claude">suffix.</span>
+- **Context7**: Framework documentation via `@upstash/context7-mcp`. Configured in `.claude-plugin/plugin.json` and `.mcp.json`.
+- **Salesforce DX**: Live org operations via `@salesforce/mcp` (60+ tools — SOQL, deploy, retrieve, code analysis, LWC experts, testing). Configured in `.mcp.json`.
+- **Hosted MCP Servers**: Salesforce's cloud-managed MCP infrastructure (GA April 2026). Not configured in `.mcp.json` — this is per-org setup. See `hosted-mcp-servers` and `mcp-tool-builder` skills for setup and development guidance.
 
-* **<span data-proof="authored" data-by="ai:claude">Skill files</span>** <span data-proof="authored" data-by="ai:claude">use V3 frontmatter:</span> <span data-proof="authored" data-by="ai:claude">`name`,</span> <span data-proof="authored" data-by="ai:claude">`description`,</span> <span data-proof="authored" data-by="ai:claude">`argument-hint`.</span> <span data-proof="authored" data-by="ai:claude">`description`</span> <span data-proof="authored" data-by="ai:claude">enumerates Salesforce-flavored trigger phrases for auto-routing. Each skill lives under</span> <span data-proof="authored" data-by="ai:claude">`skills/<name>/SKILL.md`.</span>
+### Hosted MCP Key Gotchas (From Real Testing)
 
-* **<span data-proof="authored" data-by="ai:claude">Solution documents</span>** <span data-proof="authored" data-by="ai:claude">(`docs/solutions/`) use YAML frontmatter validated against</span> <span data-proof="authored" data-by="ai:claude">`schema.yaml`.</span>
+1. **`global` not `public`** — MCP tools require `global` access modifier on class, method, AND all inner classes. `public` silently hides the tool.
+2. **Flow data providers break MCP** — `templateDataProviders` with `flow://` causes "Failed to attach prompt" in Claude. Remove for MCP templates.
+3. **Claude ignores template formatting** — Prompt templates are passive in MCP. Pre-format output server-side or include EXAMPLE OUTPUT in template.
+4. **Template type** — Use `einstein_gpt__global` for MCP (not `FlexTemplate` which the API rejects). Use `einstein_gpt__flex` for Agentforce.
+5. **Input definitions** — Use `primitive://String` for text inputs (undocumented — discovered from standard templates). Use `SOBJECT://ObjectName` for records.
+6. **API 66.0 changes** — Omit `activeVersion` (removed) and `versionIdentifier` (let platform auto-generate).
+7. **Dual architecture** — Same Apex can serve both MCP and Agentforce but needs separate templates and wiring. Share the service layer.
+8. **Accept both IDs and names** — AI clients pass Case Numbers, not Salesforce IDs. Tools should detect format and query accordingly.
 
-* **<span data-proof="authored" data-by="ai:claude">Skills dispatch agents</span>** <span data-proof="authored" data-by="ai:claude">in parallel using the Task tool. The seven core workflow skills (`sf-review`,</span> <span data-proof="authored" data-by="ai:claude">`sf-doc-review`,</span> <span data-proof="authored" data-by="ai:claude">`sf-work`, etc.) wire up parallel persona dispatch internally.</span>
+## Key Files
 
-* **<span data-proof="authored" data-by="ai:claude">Model selection</span>**<span data-proof="authored" data-by="ai:claude">: research agents use</span> <span data-proof="authored" data-by="ai:claude">`model: haiku`</span> <span data-proof="authored" data-by="ai:claude">for speed (`sf-learnings-researcher`); deep-analysis agents use</span> <span data-proof="authored" data-by="ai:claude">`model: sonnet`</span> <span data-proof="authored" data-by="ai:claude">(`sf-spec-flow-analyzer`); review and workflow agents default to</span> <span data-proof="authored" data-by="ai:claude">`model: inherit`.</span>
+| File                              | Purpose                                                                                          |
+| --------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `agents/index.md`                 | Agent index — flat `sf-*.agent.md` listing organized by topical concern                          |
+| `skills/index.md`                 | Skill index — core workflow skills, domain knowledge skills, V3 capability skills                |
+| `.claude-plugin/plugin.json`      | Claude Code manifest with `mcpServers` (Context7)                                                |
+| `.cursor-plugin/plugin.json`      | Cursor manifest                                                                                  |
+| `.codex-plugin/plugin.json`       | Codex manifest with `skills` path and `interface` metadata                                       |
+| `.claude-plugin/marketplace.json` | Marketplace catalog entry                                                                        |
+| `.mcp.json`                       | Project-level MCP server configuration (Context7 + Salesforce DX)                                |
+| `schema.yaml`                     | YAML frontmatter validation schema for solution documents                                        |
+| `docs/plans/`                     | Implementation plans (protected — see "Protected Artifacts" above)                               |
+| `docs/solutions/`                 | Institutional knowledge (protected — see "Protected Artifacts" above)                            |
+| `docs/brainstorms/`               | Pre-planning exploration records (protected — see "Protected Artifacts" above)                   |
 
-* **<span data-proof="authored" data-by="ai:claude">Tool sets</span>**<span data-proof="authored" data-by="ai:claude">: review/research agents get</span> <span data-proof="authored" data-by="ai:claude">`Read, Grep, Glob, Bash`; workflow agents that may write files (`sf-bug-reproduction-validator`,</span> <span data-proof="authored" data-by="ai:claude">`sf-pr-comment-resolver`,</span> <span data-proof="authored" data-by="ai:claude">`sf-deployment-verification-agent`,</span> <span data-proof="authored" data-by="ai:claude">`sf-mcp-tool-builder-agent`) get the full</span> <span data-proof="authored" data-by="ai:claude">`Read, Edit, Write, Grep, Glob, Bash`.</span>
+## Component Counts (v3.0.0-beta.1)
 
-* **<span data-proof="authored" data-by="ai:claude">File names</span>** <span data-proof="authored" data-by="ai:claude">use kebab-case with date prefixes for time-ordered documents (`docs/plans/YYYY-MM-DD-NNN-<type>-<name>-plan.md`).</span>
-
-* **<span data-proof="authored" data-by="ai:claude">`sf-`</span><span data-proof="authored" data-by="ai:claude">prefix</span>**  <span data-proof="authored" data-by="ai:claude">is the Salesforce namespace, used for every agent and skill in this plugin (parallel to EveryInc's</span> <span data-proof="authored" data-by="ai:claude">`ce-`</span> <span data-proof="authored" data-by="ai:claude">namespace).</span>
-
-## <span data-proof="authored" data-by="ai:claude">MCP Servers</span>
-
-* **<span data-proof="authored" data-by="ai:claude">Context7</span>**<span data-proof="authored" data-by="ai:claude">: Framework documentation via</span> <span data-proof="authored" data-by="ai:claude">`@upstash/context7-mcp`. Configured in</span> <span data-proof="authored" data-by="ai:claude">`.claude-plugin/plugin.json`</span> <span data-proof="authored" data-by="ai:claude">and</span> <span data-proof="authored" data-by="ai:claude">`.mcp.json`.</span>
-
-* **<span data-proof="authored" data-by="ai:claude">Salesforce DX</span>**<span data-proof="authored" data-by="ai:claude">: Live org operations via</span> <span data-proof="authored" data-by="ai:claude">`@salesforce/mcp`</span> <span data-proof="authored" data-by="ai:claude">(60+ tools — SOQL, deploy, retrieve, code analysis, LWC experts, testing). Configured in</span> <span data-proof="authored" data-by="ai:claude">`.mcp.json`.</span>
-
-* **<span data-proof="authored" data-by="ai:claude">Hosted MCP Servers</span>**<span data-proof="authored" data-by="ai:claude">: Salesforce's cloud-managed MCP infrastructure (GA April 2026). Not configured in</span> <span data-proof="authored" data-by="ai:claude">`.mcp.json`</span> <span data-proof="authored" data-by="ai:claude">— this is per-org setup. See</span> <span data-proof="authored" data-by="ai:claude">`hosted-mcp-servers`</span> <span data-proof="authored" data-by="ai:claude">and</span> <span data-proof="authored" data-by="ai:claude">`mcp-tool-builder`</span> <span data-proof="authored" data-by="ai:claude">skills for setup and development guidance.</span>
-
-### <span data-proof="authored" data-by="ai:claude">Hosted MCP Key Gotchas (From Real Testing)</span>
-
-1. **<span data-proof="authored" data-by="ai:claude">`global`</span>** **<span data-proof="authored" data-by="ai:claude">not</span>** **<span data-proof="authored" data-by="ai:claude">`public`</span>** <span data-proof="authored" data-by="ai:claude">— MCP tools require</span> <span data-proof="authored" data-by="ai:claude">`global`</span> <span data-proof="authored" data-by="ai:claude">access modifier on class, method, AND all inner classes.</span> <span data-proof="authored" data-by="ai:claude">`public`</span> <span data-proof="authored" data-by="ai:claude">silently hides the tool.</span>
-2. **<span data-proof="authored" data-by="ai:claude">Flow data providers break MCP</span>** <span data-proof="authored" data-by="ai:claude">—</span> <span data-proof="authored" data-by="ai:claude">`templateDataProviders`</span> <span data-proof="authored" data-by="ai:claude">with</span> <span data-proof="authored" data-by="ai:claude">`flow://`</span> <span data-proof="authored" data-by="ai:claude">causes "Failed to attach prompt" in Claude. Remove for MCP templates.</span>
-3. **<span data-proof="authored" data-by="ai:claude">Claude ignores template formatting</span>** <span data-proof="authored" data-by="ai:claude">— Prompt templates are passive in MCP. Pre-format output server-side or include EXAMPLE OUTPUT in template.</span>
-4. **<span data-proof="authored" data-by="ai:claude">Template type</span>** <span data-proof="authored" data-by="ai:claude">— Use</span> <span data-proof="authored" data-by="ai:claude">`einstein_gpt__global`</span> <span data-proof="authored" data-by="ai:claude">for MCP (not</span> <span data-proof="authored" data-by="ai:claude">`FlexTemplate`</span> <span data-proof="authored" data-by="ai:claude">which the API rejects). Use</span> <span data-proof="authored" data-by="ai:claude">`einstein_gpt__flex`</span> <span data-proof="authored" data-by="ai:claude">for Agentforce.</span>
-5. **<span data-proof="authored" data-by="ai:claude">Input definitions</span>** <span data-proof="authored" data-by="ai:claude">— Use</span> <span data-proof="authored" data-by="ai:claude">`primitive://String`</span> <span data-proof="authored" data-by="ai:claude">for text inputs (undocumented — discovered from standard templates). Use</span> <span data-proof="authored" data-by="ai:claude">`SOBJECT://ObjectName`</span> <span data-proof="authored" data-by="ai:claude">for records.</span>
-6. **<span data-proof="authored" data-by="ai:claude">API 66.0 changes</span>** <span data-proof="authored" data-by="ai:claude">— Omit</span> <span data-proof="authored" data-by="ai:claude">`activeVersion`</span> <span data-proof="authored" data-by="ai:claude">(removed) and</span> <span data-proof="authored" data-by="ai:claude">`versionIdentifier`</span> <span data-proof="authored" data-by="ai:claude">(let platform auto-generate).</span>
-7. **<span data-proof="authored" data-by="ai:claude">Dual architecture</span>** <span data-proof="authored" data-by="ai:claude">— Same Apex can serve both MCP and Agentforce but needs separate templates and wiring. Share the service layer.</span>
-8. **<span data-proof="authored" data-by="ai:claude">Accept both IDs and names</span>** <span data-proof="authored" data-by="ai:claude">— AI clients pass Case Numbers, not Salesforce IDs. Tools should detect format and query accordingly.</span>
-
-## <span data-proof="authored" data-by="ai:claude">Key Files</span>
-
-| <span data-proof="authored" data-by="ai:claude">File</span>                              | <span data-proof="authored" data-by="ai:claude">Purpose</span>                                                                                                                                                                                                                                                                                |
-| ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <span data-proof="authored" data-by="ai:claude">`agents/index.md`</span>                 | <span data-proof="authored" data-by="ai:claude">Agent index — flat</span> <span data-proof="authored" data-by="ai:claude">`sf-*.agent.md`</span> <span data-proof="authored" data-by="ai:claude">listing organized by topical concern</span>                                                                                                  |
-| <span data-proof="authored" data-by="ai:claude">`skills/index.md`</span>                 | <span data-proof="authored" data-by="ai:claude">Skill index — core workflow skills, domain knowledge skills, V3-port roadmap</span>                                                                                                                                                                                                           |
-| <span data-proof="authored" data-by="ai:claude">`.claude-plugin/plugin.json`</span>      | <span data-proof="authored" data-by="ai:claude">Claude Code manifest with</span> <span data-proof="authored" data-by="ai:claude">`mcpServers`</span> <span data-proof="authored" data-by="ai:claude">(Context7)</span>                                                                                                                        |
-| <span data-proof="authored" data-by="ai:claude">`.cursor-plugin/plugin.json`</span>      | <span data-proof="authored" data-by="ai:claude">Cursor manifest</span>                                                                                                                                                                                                                                                                        |
-| <span data-proof="authored" data-by="ai:claude">`.codex-plugin/plugin.json`</span>       | <span data-proof="authored" data-by="ai:claude">Codex manifest with</span> <span data-proof="authored" data-by="ai:claude">`skills`</span> <span data-proof="authored" data-by="ai:claude">path and</span> <span data-proof="authored" data-by="ai:claude">`interface`</span> <span data-proof="authored" data-by="ai:claude">metadata</span> |
-| <span data-proof="authored" data-by="ai:claude">`.claude-plugin/marketplace.json`</span> | <span data-proof="authored" data-by="ai:claude">Marketplace catalog entry</span>                                                                                                                                                                                                                                                              |
-| <span data-proof="authored" data-by="ai:claude">`.mcp.json`</span>                       | <span data-proof="authored" data-by="ai:claude">Project-level MCP server configuration (Context7 + Salesforce DX)</span>                                                                                                                                                                                                                      |
-| <span data-proof="authored" data-by="ai:claude">`schema.yaml`</span>                     | <span data-proof="authored" data-by="ai:claude">YAML frontmatter validation schema for solution documents</span>                                                                                                                                                                                                                              |
-| <span data-proof="authored" data-by="ai:claude">`docs/plans/`</span>                     | <span data-proof="authored" data-by="ai:claude">Implementation plans (protected — see "Protected Artifacts" above)</span>                                                                                                                                                                                                                     |
-| <span data-proof="authored" data-by="ai:claude">`docs/solutions/`</span>                 | <span data-proof="authored" data-by="ai:claude">Institutional knowledge (protected — see "Protected Artifacts" above)</span>                                                                                                                                                                                                                  |
-| <span data-proof="authored" data-by="ai:claude">`docs/brainstorms/`</span>               | <span data-proof="authored" data-by="ai:claude">Pre-planning exploration records (protected — see "Protected Artifacts" above)</span>                                                                                                                                                                                                         |
-
-## <span data-proof="authored" data-by="ai:claude">Component Counts (v3.0.0-alpha.1)</span>
-
-* **<span data-proof="authored" data-by="ai:claude">Skills</span>**<span data-proof="authored" data-by="ai:claude">: 23 (7 core workflow + 11 Salesforce domain knowledge + 5 workflow support). 22 V3-port skills are scheduled for U6 of the migration plan.</span>
-
-* **<span data-proof="authored" data-by="ai:claude">Agents</span>**<span data-proof="authored" data-by="ai:claude">: 35 (6 Apex + 4 Flow + 5 LWC + 6 Integration + 4 Architecture + 5 Research + 5 Workflow). 23 V3-port agents are scheduled for U7 of the migration plan.</span>
-
-* **<span data-proof="authored" data-by="ai:claude">Commands</span>**<span data-proof="authored" data-by="ai:claude">: 0 (removed in V3 migration; replaced by skills).</span>
-
-* **<span data-proof="authored" data-by="ai:claude">Manifests</span>**<span data-proof="authored" data-by="ai:claude">: 3 (Claude / Cursor / Codex).</span>
-
-* **<span data-proof="authored" data-by="ai:claude">MCP Servers</span>**<span data-proof="authored" data-by="ai:claude">: 2 (Context7, Salesforce DX).</span>
+- **Skills**: 45 (7 core workflow + 11 Salesforce domain knowledge + 5 workflow support + 22 V3 capability skills).
+- **Agents**: 59 (6 Apex + 4 Flow + 5 LWC + 6 Integration + 4 Architecture + 5 Research + 5 Workflow + 24 V3 review/research personas).
+- **Commands**: 0 (removed in V3 migration; replaced by skills).
+- **Manifests**: 3 (Claude / Cursor / Codex).
+- **MCP Servers**: 2 (Context7, Salesforce DX).
