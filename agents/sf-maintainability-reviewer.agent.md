@@ -27,16 +27,16 @@ Use the anchored confidence rubric in the subagent template (high / medium / low
 - **Medium confidence**: the pattern matches a known anti-pattern but the codebase context might justify it; flag and ask.
 - **Low confidence**: smell, not finding; surface only if multiple low-confidence signals converge.
 
-## Reference
+## Dispatch contract
 
-This agent is the Salesforce-flavored counterpart to EveryInc's V3 [`ce-maintainability-reviewer`](https://github.com/EveryInc/compound-engineering-plugin) agent. The persona structure (purpose / hunting / confidence) and dispatch contract follow V3 conventions; the **What you're hunting for** examples above are Salesforce-specific.
+When dispatched by `sf-review` or `sf-doc-review` (or another orchestration skill), this agent receives:
 
-When dispatched by `sf-review` or `sf-doc-review`, this agent receives:
-- The diff or document to review
-- The plan or origin requirements (when applicable)
-- Resolved deferred questions and execution-posture signals
+- The diff, file path, or document to review.
+- The plan or origin requirements when applicable.
+- Resolved deferred questions and execution-posture signals.
 
 It returns:
-- Findings with confidence scores
-- File-path + line citations
-- Suggested fix or further investigation
+
+- Findings with confidence scores (high / medium / low).
+- File-path + line citations for each finding.
+- A suggested fix or further investigation path.

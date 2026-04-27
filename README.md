@@ -2,9 +2,9 @@
 
 **<span data-proof="authored" data-by="ai:claude">Instruction-Based Compound Engineering for Salesforce</span>** <span data-proof="authored" data-by="ai:claude">— a multi-platform plugin (Claude Code, Cursor, Codex) where each iteration becomes smarter than the last through institutional knowledge capture and parallel agent dispatch.</span>
 
-> **<span data-proof="authored" data-by="ai:claude">v3.0.0 is a BREAKING release.</span>** <span data-proof="authored" data-by="ai:claude">It mirrors EveryInc's</span> [<span data-proof="authored" data-by="ai:claude">compound-engineering-plugin v3.x</span>](https://github.com/EveryInc/compound-engineering-plugin) <span data-proof="authored" data-by="ai:claude">architecture: skills replace commands, agents flatten with</span> <span data-proof="authored" data-by="ai:claude">`<name>.agent.md`</span> <span data-proof="authored" data-by="ai:claude">naming, and multi-platform manifests ship for Cursor and Codex. See</span> [<span data-proof="authored" data-by="ai:claude">`CHANGELOG.md`</span>](./CHANGELOG.md) <span data-proof="authored" data-by="ai:claude">for the full migration guide for v2.x users.</span>
+> **v3.0.0 is a BREAKING release.** Skills replace commands, agents flatten under `agents/<name>.agent.md`, and multi-platform manifests ship for Cursor and Codex alongside Claude Code. See [`CHANGELOG.md`](./CHANGELOG.md) for the full migration guide for v2.x users.
 
-<span data-proof="authored" data-by="ai:claude">Inspired by</span> [<span data-proof="authored" data-by="ai:claude">Every's Compound Engineering</span>](https://every.to/chain-of-thought/compound-engineering-how-every-codes-with-agents) <span data-proof="authored" data-by="ai:claude">and</span> [<span data-proof="authored" data-by="ai:claude">GitHub Spec-Kit</span>](https://github.com/github/spec-kit)<span data-proof="authored" data-by="ai:claude">.</span>
+Multi-platform Salesforce-focused plugin for compound engineering workflows. See the **Credits** section at the bottom for inspiration sources.
 
 ***
 
@@ -466,13 +466,24 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
 {
   "version": 2,
   "marks": {
+    "m1777278939732_1": {
+      "kind": "replace",
+      "by": "ai:claude",
+      "createdAt": "2026-04-27T08:35:39.732Z",
+      "range": {
+        "from": 520,
+        "to": 581
+      },
+      "content": "Multi-platform Salesforce-focused plugin for compound engineering workflows. See the Credits section at the bottom for inspiration sources.",
+      "status": "pending"
+    },
     "m1777125750945_7": {
       "kind": "replace",
       "by": "ai:claude",
       "createdAt": "2026-04-25T14:02:30.945Z",
       "range": {
-        "from": 4227,
-        "to": 4513
+        "from": 4181,
+        "to": 4467
       },
       "content": "7 core workflow skills (/sf-brainstorm, /sf-plan, /sf-deepen, /sf-work, /sf-review, /sf-compound, /sf-lfg) — formerly commands in v2.x; now skills with auto-routing trigger phrases\n45 skills total — 7 core + 11 Salesforce domain knowledge + 5 workflow support + 22 V3 capability ports (sf-debug, sf-doc-review, sf-pr-description, sf-resolve-pr-feedback, etc.)\n59 specialized agents in a flat agents/sf-*.agent.md layout — 35 Salesforce-specific (Apex / Flow / LWC / Integration / Architecture / Research / Workflow) + 24 V3-ported review/research personas\nMulti-platform manifests for Claude Code, Cursor, and Codex (.claude-plugin/, .cursor-plugin/, .codex-plugin/)\nMCP integration with Context7 and Salesforce DX (@salesforce/mcp — 60+ live-org tools)\nInstitutional knowledge system in docs/solutions/ with YAML frontmatter validated against schema.yaml",
       "status": "pending"
@@ -482,8 +493,8 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
       "by": "ai:claude",
       "createdAt": "2026-04-25T14:01:23.933Z",
       "range": {
-        "from": 4906,
-        "to": 4990
+        "from": 4860,
+        "to": 4944
       },
       "content": "Classifications: APEX, AUTOMATION, LWC, INTEGRATION, ARCHITECTURE, WORKFLOW, TOOLING",
       "status": "pending"
@@ -493,8 +504,8 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
       "by": "ai:claude",
       "createdAt": "2026-04-25T14:02:30.938Z",
       "range": {
-        "from": 5903,
-        "to": 5924
+        "from": 5857,
+        "to": 5878
       },
       "content": "59 Agents (flat layout, V3-ported)\nAfter v3.0.0 all agents live in a flat agents/ directory and are named sf-<name>.agent.md. The topical groupings below are documentation aids, not filesystem paths. See agents/index.md for the complete index including the 24 V3-ported review/research personas (sf-correctness-reviewer, sf-maintainability-reviewer, sf-testing-reviewer, sf-project-standards-reviewer, sf-architecture-strategist, sf-feasibility-reviewer, sf-coherence-reviewer, etc.).",
       "status": "pending"
@@ -504,8 +515,8 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
       "by": "ai:claude",
       "createdAt": "2026-04-25T14:01:23.933Z",
       "range": {
-        "from": 6970,
-        "to": 6992
+        "from": 6924,
+        "to": 6946
       },
       "content": "Integration (4 agents)",
       "status": "pending"
@@ -515,8 +526,8 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
       "by": "ai:claude",
       "createdAt": "2026-04-25T14:02:30.930Z",
       "range": {
-        "from": 8668,
-        "to": 8677
+        "from": 8622,
+        "to": 8631
       },
       "content": "45 Skills\n7 core workflow skills + 11 Salesforce domain knowledge skills + 5 workflow support skills + 22 V3-ported skills (sf-debug, sf-doc-review, sf-pr-description, sf-resolve-pr-feedback, sf-update, sf-setup, sf-sessions family, sf-clean-gone-branches, sf-commit, sf-commit-push-pr, sf-ideate, sf-optimize, sf-agent-native-architecture, sf-agent-native-audit, sf-compound-refresh, sf-release-notes, sf-report-bug, sf-slack-research, sf-proof, sf-demo-reel). See skills/index.md for the complete index.",
       "status": "pending"
@@ -526,8 +537,8 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
       "by": "ai:claude",
       "createdAt": "2026-04-16T11:00:40.311Z",
       "range": {
-        "from": 13368,
-        "to": 13450
+        "from": 13322,
+        "to": 13404
       },
       "content": "The plugin includes a Context7 MCP server for live framework documentation lookup:",
       "status": "pending"
@@ -537,8 +548,8 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
       "by": "ai:claude",
       "createdAt": "2026-04-08T20:46:36.334Z",
       "range": {
-        "from": 13489,
-        "to": 13585
+        "from": 13443,
+        "to": 13539
       },
       "content": "\n      \"type\": \"http\",\n      \"url\": \"https://mcp.context7.com/mcp\"\n    },\n    \"salesforce-dx\": {",
       "status": "pending"
@@ -548,8 +559,8 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
       "by": "ai:claude",
       "createdAt": "2026-04-08T20:46:36.329Z",
       "range": {
-        "from": 13674,
-        "to": 14281
+        "from": 13628,
+        "to": 14235
       },
       "content": "\nSalesforce DX MCP toolsets (all enabled):\nToolset\nCapability\ncore\nBase DX tools (always on)\norgs\nManage authorized orgs\nmetadata\nDeploy/retrieve metadata\ndata\nSOQL queries, record management\nusers\nPermission sets, user management\ncode-analysis\nStatic analysis via Code Analyzer\nlwc-experts\nLWC development, testing, optimization\naura-experts\nAura analysis, LWC migration\nexperts-validation\nLWC production readiness checks\ndevops\nDevOps Center operations\nenrichment\nMetadata component enrichment\nmobile\nMobile development tools\ntesting\nApex and agent test execution\nscale-products\nApex performance detection",
       "status": "pending"
@@ -559,8 +570,8 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
       "by": "ai:claude",
       "createdAt": "2026-04-08T20:46:36.325Z",
       "range": {
-        "from": 14387,
-        "to": 14554
+        "from": 14341,
+        "to": 14508
       },
       "content": "\nPrerequisites for Salesforce DX MCP: Authorize an org first with sf org login web. The server uses DEFAULT_TARGET_ORG — whatever you set with sf config set target-org.",
       "status": "pending"
@@ -570,8 +581,8 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
       "by": "ai:claude",
       "createdAt": "2026-04-08T20:46:36.320Z",
       "range": {
-        "from": 14585,
-        "to": 14610
+        "from": 14539,
+        "to": 14564
       },
       "content": "\nNode.js (for MCP servers)",
       "status": "pending"
@@ -581,8 +592,8 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
       "by": "ai:claude",
       "createdAt": "2026-04-16T11:00:40.311Z",
       "range": {
-        "from": 14635,
-        "to": 14668
+        "from": 14589,
+        "to": 14622
       },
       "content": "Node.js (for Context7 MCP server)",
       "status": "pending"
