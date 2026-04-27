@@ -100,32 +100,7 @@ bunx @sangameshgupta/sf-compound-plugin sync
 
 The plugin provides:
 
-* **<span data-proof="suggestion" data-id="m1777125750945_7" data-by="ai:claude" data-kind="replace">7 slash commands</span>** <span data-proof="suggestion" data-id="m1777125750945_7" data-by="ai:claude" data-kind="replace">for the full compound engineering workflow</span>
-
-* **<span data-proof="suggestion" data-id="m1777125750945_7" data-by="ai:claude" data-kind="replace">33 specialized agents</span>** <span data-proof="suggestion" data-id="m1777125750945_7" data-by="ai:claude" data-kind="replace">across 7 categories</span>
-
-* **<span data-proof="suggestion" data-id="m1777125750945_7" data-by="ai:claude" data-kind="replace">12 skills</span>** <span data-proof="suggestion" data-id="m1777125750945_7" data-by="ai:claude" data-kind="replace">with Salesforce domain knowledge</span>
-
-* **<span data-proof="suggestion" data-id="m1777125750945_7" data-by="ai:claude" data-kind="replace">MCP integration</span>** <span data-proof="suggestion" data-id="m1777125750945_7" data-by="ai:claude" data-kind="replace">with Context7 for live framework documentation</span>
-
-* **<span data-proof="suggestion" data-id="m1777125750945_7" data-by="ai:claude" data-kind="replace">Institutional knowledge system</span>** <span data-proof="suggestion" data-id="m1777125750945_7" data-by="ai:claude" data-kind="replace">in</span> <span data-proof="suggestion" data-id="m1777125750945_7" data-by="ai:claude" data-kind="replace">`docs/solutions/`</span> <span data-proof="suggestion" data-id="m1777125750945_7" data-by="ai:claude" data-kind="replace">with YAML schema</span>
-
-* **Index-based routing** for low-context, selective agent/skill dispatch
-
-***
-
-## <span data-proof="authored" data-by="ai:claude">How It Works</span>
-
-<span data-proof="authored" data-by="ai:claude">Commands tell Claude the</span> **<span data-proof="authored" data-by="ai:claude">goal</span>** <span data-proof="authored" data-by="ai:claude">and</span> **<span data-proof="authored" data-by="ai:claude">where to find knowledge</span>**<span data-proof="authored" data-by="ai:claude">. Claude decides</span> **<span data-proof="authored" data-by="ai:claude">which agents and skills are relevant</span>** <span data-proof="authored" data-by="ai:claude">for each specific task.</span>
-
-### <span data-proof="authored" data-by="ai:claude">Index-Based Routing</span>
-
-```
-agents/index.md  →  Classification → Dispatch relevant agents in parallel
-skills/index.md  →  Classification → Read only relevant skill sections
-```
-
-<span data-proof="suggestion" data-id="m1776337295868_17" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">Classifications:</span></span> <span data-proof="suggestion" data-id="m1776337295868_17" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">`APEX`,</span></span> <span data-proof="suggestion" data-id="m1776337295868_17" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">`AUTOMATION`,</span></span> <span data-proof="suggestion" data-id="m1776337295868_17" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">`LWC`,</span></span> <span data-proof="suggestion" data-id="m1776337295868_17" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">`INTEGRATION`,</span></span> <span data-proof="suggestion" data-id="m1776337295868_17" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">`ARCHITECTURE`,</span></span> <span data-proof="suggestion" data-id="m1776337295868_17" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">`WORKFLOW`,</span></span> <span data-proof="suggestion" data-id="m1776337295868_17" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">`TOOLING`</span></span>
+* **       
 
 ***
 
@@ -155,7 +130,7 @@ Plan → Deepen → Work → Review → Resolve → Test → Deploy → Compound
 
 ***
 
-## <span data-proof="suggestion" data-id="m1777125750938_6" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">33 Agents by Category</span></span>
+## 
 
 ### <span data-proof="authored" data-by="ai:claude">Apex (6 agents)</span>
 
@@ -187,7 +162,7 @@ Plan → Deepen → Work → Review → Resolve → Test → Deploy → Compound
 | <span data-proof="authored" data-by="ai:claude">Process Automation Strategist</span> | <span data-proof="authored" data-by="ai:claude">Flow vs Apex decisions</span>          |
 | <span data-proof="authored" data-by="ai:claude">Validation Rule Reviewer</span>      | <span data-proof="authored" data-by="ai:claude">Rule complexity, error messages</span> |
 
-### <span data-proof="suggestion" data-id="m1776337295821_15" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">Integration (4 agents)</span></span>
+### 
 
 | <span data-proof="authored" data-by="ai:claude">Agent</span>                         | <span data-proof="authored" data-by="ai:claude">Checks For</span>                       |
 | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
@@ -231,7 +206,7 @@ Plan → Deepen → Work → Review → Resolve → Test → Deploy → Compound
 
 ***
 
-## <span data-proof="suggestion" data-id="m1777125750930_5" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">12 Skills</span></span>
+## 
 
 ### <span data-proof="authored" data-by="ai:claude">Domain Skills</span>
 
@@ -366,7 +341,7 @@ sf-compound-engineering-plugin/
 
 ## <span data-proof="authored" data-by="ai:claude">MCP Integration</span>
 
-<span data-proof="suggestion" data-id="m1775681196339_10" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">The plugin includes a Context7 MCP server for live framework documentation lookup:</span></span>
+
 
 ```json proof:W3sidHlwZSI6InByb29mQXV0aG9yZWQiLCJmcm9tIjowLCJ0byI6MzcsImF0dHJzIjp7ImJ5IjoiYWk6Y2xhdWRlIn19LHsidHlwZSI6InByb29mU3VnZ2VzdGlvbiIsImZyb20iOjM3LCJ0byI6MTMzLCJhdHRycyI6eyJpZCI6Im0xNzc1NjgxMTk2MzM0XzkiLCJraW5kIjoiaW5zZXJ0IiwiYnkiOiJhaTpjbGF1ZGUiLCJjb250ZW50IjoiXG4gICAgICBcInR5cGVcIjogXCJodHRwXCIsXG4gICAgICBcInVybFwiOiBcImh0dHBzOi8vbWNwLmNvbnRleHQ3LmNvbS9tY3BcIlxuICAgIH0sXG4gICAgXCJzYWxlc2ZvcmNlLWR4XCI6IHsiLCJzdGF0dXMiOiJwZW5kaW5nIiwiY3JlYXRlZEF0IjoiMjAyNi0wNC0wOFQyMDo0NjozNi4zMzRaIiwicnVuSWQiOm51bGwsImZvY3VzQXJlYUlkIjpudWxsLCJmb2N1c0FyZWFOYW1lIjpudWxsLCJhZ2VudElkIjpudWxsLCJwcm9wb3NhbElkIjpudWxsLCJwcm92aXNpb25hbCI6bnVsbCwib3JjaGVzdHJhdG9yIjpudWxsLCJkZWJ1Z0F1dG9GaXhlZFF1b3RlcyI6bnVsbCwiZGVidWdBdXRvRml4ZWRRdW90ZXNSZWFzb24iOm51bGx9fSx7InR5cGUiOiJwcm9vZlN1Z2dlc3Rpb24iLCJmcm9tIjoyMjIsInRvIjo4MjksImF0dHJzIjp7ImlkIjoibTE3NzU2ODExOTYzMjlfOCIsImtpbmQiOiJpbnNlcnQiLCJieSI6ImFpOmNsYXVkZSIsImNvbnRlbnQiOiJcblNhbGVzZm9yY2UgRFggTUNQIHRvb2xzZXRzIChhbGwgZW5hYmxlZCk6XG5Ub29sc2V0XG5DYXBhYmlsaXR5XG5jb3JlXG5CYXNlIERYIHRvb2xzIChhbHdheXMgb24pXG5vcmdzXG5NYW5hZ2UgYXV0aG9yaXplZCBvcmdzXG5tZXRhZGF0YVxuRGVwbG95L3JldHJpZXZlIG1ldGFkYXRhXG5kYXRhXG5TT1FMIHF1ZXJpZXMsIHJlY29yZCBtYW5hZ2VtZW50XG51c2Vyc1xuUGVybWlzc2lvbiBzZXRzLCB1c2VyIG1hbmFnZW1lbnRcbmNvZGUtYW5hbHlzaXNcblN0YXRpYyBhbmFseXNpcyB2aWEgQ29kZSBBbmFseXplclxubHdjLWV4cGVydHNcbkxXQyBkZXZlbG9wbWVudCwgdGVzdGluZywgb3B0aW1pemF0aW9uXG5hdXJhLWV4cGVydHNcbkF1cmEgYW5hbHlzaXMsIExXQyBtaWdyYXRpb25cbmV4cGVydHMtdmFsaWRhdGlvblxuTFdDIHByb2R1Y3Rpb24gcmVhZGluZXNzIGNoZWNrc1xuZGV2b3BzXG5EZXZPcHMgQ2VudGVyIG9wZXJhdGlvbnNcbmVucmljaG1lbnRcbk1ldGFkYXRhIGNvbXBvbmVudCBlbnJpY2htZW50XG5tb2JpbGVcbk1vYmlsZSBkZXZlbG9wbWVudCB0b29sc1xudGVzdGluZ1xuQXBleCBhbmQgYWdlbnQgdGVzdCBleGVjdXRpb25cbnNjYWxlLXByb2R1Y3RzXG5BcGV4IHBlcmZvcm1hbmNlIGRldGVjdGlvbiIsInN0YXR1cyI6InBlbmRpbmciLCJjcmVhdGVkQXQiOiIyMDI2LTA0LTA4VDIwOjQ2OjM2LjMyOVoiLCJydW5JZCI6bnVsbCwiZm9jdXNBcmVhSWQiOm51bGwsImZvY3VzQXJlYU5hbWUiOm51bGwsImFnZW50SWQiOm51bGwsInByb3Bvc2FsSWQiOm51bGwsInByb3Zpc2lvbmFsIjpudWxsLCJvcmNoZXN0cmF0b3IiOm51bGwsImRlYnVnQXV0b0ZpeGVkUXVvdGVzIjpudWxsLCJkZWJ1Z0F1dG9GaXhlZFF1b3Rlc1JlYXNvbiI6bnVsbH19XQ==
 {
@@ -426,7 +401,7 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
 
 * <span data-proof="authored" data-by="ai:claude">Git (recommended)</span>
 
-* <span data-proof="suggestion" data-id="m1775681196313_5" data-by="ai:claude" data-kind="replace"><span data-proof="authored" data-by="ai:claude">Node.js (for Context7 MCP server)</span></span>
+* 
 
 ***
 
@@ -466,10 +441,10 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
 {
   "version": 2,
   "marks": {
-    "m1777278939732_1": {
+    "m1777279526790_2": {
       "kind": "replace",
       "by": "ai:claude",
-      "createdAt": "2026-04-27T08:35:39.732Z",
+      "createdAt": "2026-04-27T08:45:26.790Z",
       "range": {
         "from": 520,
         "to": 581
