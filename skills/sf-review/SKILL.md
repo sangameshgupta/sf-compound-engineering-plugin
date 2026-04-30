@@ -6,101 +6,161 @@ argument-hint: "[optional: file path, directory, PR number; defaults to uncommit
 
 # /sf-review
 
+> **Principles enforced:** 1 (preserve the quality ceiling), 3 (jagged intelligence), 5 (taste and oversight). See `PRINCIPLES.md`.
+
+## Copy-paste-to-agent
+
+```
+Review Salesforce code by dispatching parallel review agents based on file type
+(Apex / LWC / Flow / Integration / Architecture). Output findings categorized as
+Critical / High / Medium / Low. Critical and High findings are non-negotiable
+abort triggers — see "Non-Negotiable Gates" below. If the target isn't specified,
+review the current git diff.
+```
+
 You are reviewing Salesforce code using parallel agent dispatch for speed and thoroughness.
 
 ## Goal
 
 Review the code at: `$ARGUMENTS.target`
 
-If no target specified, review uncommitted changes (`git diff`).
+<span data-proof="authored" data-by="ai:claude">If no target specified, review uncommitted changes (`git diff`).</span>
 
----
+***
 
-## Review Depth Levels
+## <span data-proof="authored" data-by="ai:claude">Non-Negotiable Gates (Principle 1)</span>
 
-Select depth based on `$ARGUMENTS.depth` (default: thorough):
+<span data-proof="authored" data-by="ai:claude">The following findings are</span> **<span data-proof="authored" data-by="ai:claude">abort triggers</span>**<span data-proof="authored" data-by="ai:claude">, not warnings. They block the review from passing regardless of how minor the surrounding diff is. They exist because vibe coding does not exempt the diff from production-grade Salesforce constraints.</span>
 
-| Level | Agents | Use Case |
-|---|---|---|
-| **fast** | Stack-specific agents only | Quick checks, small changes |
-| **thorough** | All applicable agents | Standard review (default) |
-| **comprehensive** | All + research + deployment verification | Pre-production, risky changes |
+| <span data-proof="authored" data-by="ai:claude">Gate</span>                    | <span data-proof="authored" data-by="ai:claude">What it catches</span>                                                                                                                                                 | <span data-proof="authored" data-by="ai:claude">Owning agent</span>                                                                                                                                                                                     |
+| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **<span data-proof="authored" data-by="ai:claude">Security regression</span>** | <span data-proof="authored" data-by="ai:claude">CRUD/FLS bypass, SOQL injection, sharing-model violation, hardcoded credential, unsafe</span> <span data-proof="authored" data-by="ai:claude">`without sharing`</span> | <span data-proof="authored" data-by="ai:claude">`apex-security-sentinel`,</span> <span data-proof="authored" data-by="ai:claude">`lwc-security-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`integration-security-sentinel`</span> |
+| **<span data-proof="authored" data-by="ai:claude">Governor regression</span>** | <span data-proof="authored" data-by="ai:claude">SOQL/DML inside loops, missing bulkification, non-selective query on >100k-row object</span>                                                                           | <span data-proof="authored" data-by="ai:claude">`apex-governor-guardian`,</span> <span data-proof="authored" data-by="ai:claude">`apex-bulkification-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`flow-governor-monitor`</span>   |
+| **Test coverage regression**                                                   | Production class without test class, test class with no `assertEquals`/`assertTrue`, bulk path untested at 200+ records                                                                                                | `apex-test-coverage-analyst`                                                                                                                                                                                                                            |
+| **Trigger context regression**                                                 | Recursion guard missing, mixed-DML violation, handler bypassing the project's trigger framework                                                                                                                        | `apex-trigger-architect`                                                                                                                                                                                                                                |
+| **Sharing regression**                                                         | <span data-proof="authored" data-by="ai:claude">`without sharing`</span> <span data-proof="authored" data-by="ai:claude">introduced without justification, sharing-recalculation skipped on owner change</span>        | <span data-proof="authored" data-by="ai:claude">`sharing-security-analyst`</span> <span data-proof="authored" data-by="ai:claude">(when present)</span>                                                                                                 |
 
----
+<span data-proof="authored" data-by="ai:claude">If any gate fires, the review output must include the gate name in the Critical section, and</span> <span data-proof="authored" data-by="ai:claude">`/sf-lfg`</span> <span data-proof="authored" data-by="ai:claude">must abort the pipeline. Do not route gate findings to "warnings."</span>
+
+***
+
+## <span data-proof="authored" data-by="ai:claude">Review Depth Levels</span>
+
+<span data-proof="authored" data-by="ai:claude">Select depth based on</span> <span data-proof="authored" data-by="ai:claude">`$ARGUMENTS.depth`</span> <span data-proof="authored" data-by="ai:claude">(default: thorough):</span>
+
+| <span data-proof="authored" data-by="ai:claude">Level</span>             | <span data-proof="authored" data-by="ai:claude">Agents</span>                                   | <span data-proof="authored" data-by="ai:claude">Use Case</span>                    |
+| ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **<span data-proof="authored" data-by="ai:claude">fast</span>**          | <span data-proof="authored" data-by="ai:claude">Stack-specific agents only</span>               | <span data-proof="authored" data-by="ai:claude">Quick checks, small changes</span> |
+| **<span data-proof="authored" data-by="ai:claude">thorough</span>**      | <span data-proof="authored" data-by="ai:claude">All applicable agents</span>                    | <span data-proof="authored" data-by="ai:claude">Standard review (default)</span>   |
+| **<span data-proof="authored" data-by="ai:claude">comprehensive</span>** | <span data-proof="authored" data-by="ai:claude">All + research + deployment verification</span> | Pre-production, risky changes                                                      |
+
+***
 
 ## Step 1: Identify and Classify Files
 
 1. Get files in scope (git diff, directory listing, or PR files).
 2. Classify each file by type:
-   - `.cls`, `.trigger` → APEX
-   - `.flow-meta.xml` → AUTOMATION
-   - `.js`, `.html` (in `lwc/`) → LWC
-   - `.xml` (metadata) → ARCHITECTURE
-   - Callout/API related → INTEGRATION
 
----
+   * `.cls`, `.trigger` → APEX
+
+   * `.flow-meta.xml` → AUTOMATION
+
+   * `.js`, `.html` (in `lwc/`) → LWC
+
+   * `.xml` (metadata) → ARCHITECTURE
+
+   * Callout/API related → INTEGRATION
+
+***
 
 ## Step 2: Dispatch Review Agents in Parallel
 
-Based on file classification, dispatch applicable agents using the **Agent tool** (subagent_type matching the agent name).
+Based on file classification, dispatch applicable agents using the **Agent tool** (subagent\_type matching the agent name).
 
 ### For APEX files — dispatch in parallel:
-- Task apex-governor-guardian(files, code_context)
-- Task apex-security-sentinel(files, code_context)
-- Task apex-bulkification-reviewer(files, code_context)
-- Task apex-trigger-architect(files, code_context) — if triggers present
-- Task apex-exception-handler(files, code_context)
-- Task apex-test-coverage-analyst(files, code_context) — if test classes present
+
+* Task apex-governor-guardian(files, code\_context)
+
+* Task apex-security-sentinel(files, code\_context)
+
+* Task apex-bulkification-reviewer(files, code\_context)
+
+* Task apex-trigger-architect(files, code\_context) — if triggers present
+
+* Task apex-exception-handler(files, code\_context)
+
+* Task apex-test-coverage-analyst(files, code\_context) — if test classes present
 
 ### For AUTOMATION files — dispatch in parallel:
-- Task flow-governor-monitor(files, code_context)
-- Task flow-complexity-analyzer(files, code_context)
-- Task process-automation-strategist(files, code_context)
-- Task validation-rule-reviewer(files, code_context) — if validation rules
+
+* Task flow-governor-monitor(files, code\_context)
+
+* Task flow-complexity-analyzer(files, code\_context)
+
+* Task process-automation-strategist(files, code\_context)
+
+* Task validation-rule-reviewer(files, code\_context) — if validation rules
 
 ### For LWC files — dispatch in parallel:
-- Task lwc-architecture-strategist(files, code_context)
-- Task lwc-performance-oracle(files, code_context)
-- Task lwc-security-reviewer(files, code_context)
-- Task lwc-accessibility-guardian(files, code_context)
+
+* Task lwc-architecture-strategist(files, code\_context)
+
+* Task lwc-performance-oracle(files, code\_context)
+
+* Task lwc-security-reviewer(files, code\_context)
+
+* Task lwc-accessibility-guardian(files, code\_context)
 
 ### For INTEGRATION files — dispatch in parallel:
-- Task rest-api-architect(files, code_context)
-- Task callout-pattern-reviewer(files, code_context)
-- Task integration-security-sentinel(files, code_context)
+
+* Task rest-api-architect(files, code\_context)
+
+* Task callout-pattern-reviewer(files, code\_context)
+
+* Task integration-security-sentinel(files, code\_context)
 
 ### Always include (ARCHITECTURE — universal):
-- Task pattern-recognition-specialist(files, code_context)
-- Task metadata-consistency-checker(files, code_context)
+
+* Task pattern-recognition-specialist(files, code\_context)
+
+* Task metadata-consistency-checker(files, code\_context)
 
 ### Additional agents for "comprehensive" depth:
-- Task sf-code-simplicity-reviewer(files, code_context)
-- Task sf-deployment-verification-agent(files, code_context)
-- Task sf-git-history-analyzer(files, code_context)
 
----
+* Task sf-code-simplicity-reviewer(files, code\_context)
+
+* Task sf-deployment-verification-agent(files, code\_context)
+
+* Task sf-git-history-analyzer(files, code\_context)
+
+***
 
 ## Step 3: Parallel Research (comprehensive depth only)
 
 For comprehensive reviews, also dispatch:
-- Task sf-best-practices-researcher(feature_context)
-- Task sf-framework-docs-researcher(feature_context)
+
+* Task sf-best-practices-researcher(feature\_context)
+
+* Task sf-framework-docs-researcher(feature\_context)
 
 Validate findings against official docs:
-- `site:developer.salesforce.com`
-- `site:salesforce.stackexchange.com`
 
----
+* `site:developer.salesforce.com`
+
+* `site:salesforce.stackexchange.com`
+
+***
 
 ## Step 4: Consolidate Findings
 
 Collect results from all dispatched agents and:
+
 1. Deduplicate findings across agents.
 2. Categorize by severity: Critical, High, Medium, Low.
 3. Group by file for easy navigation.
 4. Include fix suggestions with code references.
 
----
+***
 
 ## Output Format
 

@@ -4,18 +4,40 @@ description: "Deepen an existing Salesforce plan by dispatching parallel researc
 argument-hint: "[plan file path under docs/plans/]"
 ---
 
-# <span data-proof="authored" data-by="ai:claude">/sf-deepen</span>
+# /sf-deepen
 
-<feature_description>
+> **Principles enforced:** 4 (spec is the artifact), 2 (verifiability). See `PRINCIPLES.md`.
+
+## Copy-paste-to-agent
+
+```
+Tighten an existing Salesforce plan into a load-bearing spec. This is NOT a research dump
+— it is a spec-tightening pass. For each major plan section, dispatch the appropriate
+research agent in parallel, then merge findings into the plan AS spec constraints (governor
+caps, sharing-model implications, order-of-execution placement, API-version dependencies),
+not as appended prose. If the plan's Verification Strategy from /sf-plan is incomplete or
+hand-waved, fill the five fields concretely before returning.
+```
+
+## Relationship to /sf-plan
+
+<span data-proof="authored" data-by="ai:claude">`/sf-plan`</span> <span data-proof="authored" data-by="ai:claude">produces the spec.</span> <span data-proof="authored" data-by="ai:claude">`/sf-deepen`</span> <span data-proof="authored" data-by="ai:claude">tightens it. The split is:</span>
+
+* **<span data-proof="authored" data-by="ai:claude">`/sf-plan`</span>** <span data-proof="authored" data-by="ai:claude">— runs once, produces the initial spec/plan/verification/tasks artifacts via parallel research.</span>
+
+* **<span data-proof="authored" data-by="ai:claude">`/sf-deepen`</span>** <span data-proof="authored" data-by="ai:claude">— runs against an existing plan file, adds Salesforce-specific depth (governor analysis, sharing impact, order-of-execution placement, known issues) and concretes any vague verification fields.</span>
+
+<span data-proof="authored" data-by="ai:claude">If you just created a plan with</span> <span data-proof="authored" data-by="ai:claude">`/sf-plan`</span> <span data-proof="authored" data-by="ai:claude">and want it deeper, run</span> <span data-proof="authored" data-by="ai:claude">`/sf-deepen <plan_path>`. Don't run</span> <span data-proof="authored" data-by="ai:claude">`/sf-plan`</span> <span data-proof="authored" data-by="ai:claude">twice on the same feature.</span>
+
+<span data-proof="authored" data-by="ai:claude"><feature_description>
 #$ARGUMENTS
-</feature_description>
+</feature_description></span>
 
-## Interaction Method
+## <span data-proof="authored" data-by="ai:claude">Interaction Method</span>
 
-When asking the user a question, use the platform's blocking question tool: `AskUserQuestion` in Claude Code (call `ToolSearch` with `select:AskUserQuestion` first if its schema isn't loaded), `request_user_input` in Codex, `ask_user` in Gemini. Fall back to numbered options in chat only when no blocking tool exists in the harness or the call errors. Never silently skip the question.
+<span data-proof="authored" data-by="ai:claude">When asking the user a question, use the platform's blocking question tool:</span> <span data-proof="authored" data-by="ai:claude">`AskUserQuestion`</span> <span data-proof="authored" data-by="ai:claude">in Claude Code (call</span> <span data-proof="authored" data-by="ai:claude">`ToolSearch`</span> <span data-proof="authored" data-by="ai:claude">with</span> <span data-proof="authored" data-by="ai:claude">`select:AskUserQuestion`</span> <span data-proof="authored" data-by="ai:claude">first if its schema isn't loaded),</span> <span data-proof="authored" data-by="ai:claude">`request_user_input`</span> <span data-proof="authored" data-by="ai:claude">in Codex,</span> <span data-proof="authored" data-by="ai:claude">`ask_user`</span> <span data-proof="authored" data-by="ai:claude">in Gemini. Fall back to numbered options in chat only when no blocking tool exists in the harness or the call errors. Never silently skip the question.</span>
 
-Ask one question at a time. Prefer a concise single-select choice when natural options exist.
-
+<span data-proof="authored" data-by="ai:claude">Ask one question at a time. Prefer a concise single-select choice when natural options exist.</span>
 
 <span data-proof="authored" data-by="ai:claude">You enhance an existing plan by dispatching parallel research agents for each section, adding depth, best practices, and Salesforce-specific implementation details.</span>
 

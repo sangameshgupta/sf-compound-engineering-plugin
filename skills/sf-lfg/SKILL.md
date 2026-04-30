@@ -4,18 +4,28 @@ description: "Full autonomous Salesforce delivery pipeline: brainstorm (if neede
 argument-hint: "[feature description or plan path; optionally pass 'deploy=scratch'/'deploy=sandbox'/'deploy=none']"
 ---
 
-# <span data-proof="authored" data-by="ai:claude">/sf-lfg</span>
+# /sf-lfg
+
+> **Principles enforced:** all seven, but especially 1 (preserve the quality ceiling) and 2 (verifiability). See `PRINCIPLES.md`.
+
+## Copy-paste-to-agent
+
+```
+Run the full Salesforce delivery pipeline: brainstorm (if needed) → plan → deepen → work →
+review → resolve → test → deploy. Each stage has a gate. Aborts on Critical/High security
+findings, governor regressions, missing Verification Strategy, repeated test failures, or
+deploy-validation failures. Honors $ARGUMENTS.deploy = scratch | sandbox | none.
+```
 
 <feature_description>
 #$ARGUMENTS
 </feature_description>
 
-## Interaction Method
+## <span data-proof="authored" data-by="ai:claude">Interaction Method</span>
 
-When asking the user a question, use the platform's blocking question tool: `AskUserQuestion` in Claude Code (call `ToolSearch` with `select:AskUserQuestion` first if its schema isn't loaded), `request_user_input` in Codex, `ask_user` in Gemini. Fall back to numbered options in chat only when no blocking tool exists in the harness or the call errors. Never silently skip the question.
+<span data-proof="authored" data-by="ai:claude">When asking the user a question, use the platform's blocking question tool:</span> <span data-proof="authored" data-by="ai:claude">`AskUserQuestion`</span> <span data-proof="authored" data-by="ai:claude">in Claude Code (call</span> <span data-proof="authored" data-by="ai:claude">`ToolSearch`</span> <span data-proof="authored" data-by="ai:claude">with</span> <span data-proof="authored" data-by="ai:claude">`select:AskUserQuestion`</span> <span data-proof="authored" data-by="ai:claude">first if its schema isn't loaded),</span> <span data-proof="authored" data-by="ai:claude">`request_user_input`</span> <span data-proof="authored" data-by="ai:claude">in Codex,</span> <span data-proof="authored" data-by="ai:claude">`ask_user`</span> <span data-proof="authored" data-by="ai:claude">in Gemini. Fall back to numbered options in chat only when no blocking tool exists in the harness or the call errors. Never silently skip the question.</span>
 
-Ask one question at a time. Prefer a concise single-select choice when natural options exist.
-
+<span data-proof="authored" data-by="ai:claude">Ask one question at a time. Prefer a concise single-select choice when natural options exist.</span>
 
 <span data-proof="authored" data-by="ai:claude">Full autonomous pipeline. Takes a feature from idea to deployment with minimal human intervention.</span>
 
@@ -61,7 +71,7 @@ Ask one question at a time. Prefer a concise single-select choice when natural o
    * <span data-proof="authored" data-by="ai:claude">Task sf-spec-flow-analyzer(plan)</span>
 5. <span data-proof="authored" data-by="ai:claude">Save to</span> <span data-proof="authored" data-by="ai:claude">`docs/plans/YYYY-MM-DD-feat-{slug}-plan.md`.</span>
 
-**<span data-proof="authored" data-by="ai:claude">Gate:</span>** <span data-proof="authored" data-by="ai:claude">Plan must have acceptance criteria and task list before proceeding.</span>
+**Gate (Principle 2):** Plan must have acceptance criteria, task list, AND a complete five-field Verification Strategy section: acceptance assertion, bulk threshold, governor boundary, sharing scenario, integration mock or dry-run. Hand-waved fields ("we'll add tests later") fail the gate. If the gate fails, return to Stage 1.
 
 ***
 
@@ -211,17 +221,15 @@ sf project deploy start --target-org lfg-test --test-level RunLocalTests
 
 ## <span data-proof="authored" data-by="ai:claude">Abort Conditions</span>
 
-<span data-proof="authored" data-by="ai:claude">The pipeline aborts and asks for human input if:</span>
+The pipeline aborts and asks for human input if any of the following fire. These map to the principles in `PRINCIPLES.md` — they are not advisory.
 
-* <span data-proof="authored" data-by="ai:claude">Plan has no clear acceptance criteria (Stage 1)</span>
-
-* <span data-proof="authored" data-by="ai:claude">Spec flow analysis finds Critical gaps with no obvious fix (Stage 1)</span>
-
-* <span data-proof="authored" data-by="ai:claude">Review finds security vulnerabilities (Stage 4)</span>
-
-* <span data-proof="authored" data-by="ai:claude">Tests fail after 2 resolve cycles (Stage 5-6 loop)</span>
-
-* <span data-proof="authored" data-by="ai:claude">Deployment validation fails (Stage 7)</span>
+* Plan has no clear acceptance criteria (Stage 1).
+* Plan is missing a complete five-field Verification Strategy section, or any field is hand-waved (Stage 1, Principle 2).
+* Spec flow analysis finds Critical gaps with no obvious fix (Stage 1).
+* Review fires any non-negotiable gate from `sf-review`: security regression, governor regression, test coverage regression, trigger context regression, or sharing regression (Stage 4, Principle 1).
+* Tests fail after 2 resolve cycles (Stage 5-6 loop).
+* Deployment validation fails (Stage 7).
+* Agent confidence is low on a jagged-edge call — order of execution, mixed-DML, sharing recalculation, async-context governor — and no human has reviewed (Principle 3). When in doubt, abort and ask.
 
 ***
 

@@ -4,18 +4,30 @@ description: "Execute work efficiently against a Salesforce plan or feature desc
 argument-hint: "[plan file path under docs/plans/, or feature description for bare-prompt work]"
 ---
 
-# <span data-proof="authored" data-by="ai:claude">/sf-work</span>
+# /sf-work
+
+> **Principles enforced:** 1 (preserve the quality ceiling), 2 (verifiability), 3 (jagged intelligence). See `PRINCIPLES.md`.
+
+## Copy-paste-to-agent
+
+```
+Implement a Salesforce feature against an existing plan. Before writing code, dispatch
+sf-learnings-researcher and sf-repo-research-analyst in parallel. Then write code AND tests
+together — verification is not a follow-up. Before declaring complete, answer all five
+System-Wide Test Check questions: trigger contexts, bulk at 200+, governor limits, sharing,
+integration mocks. If the plan has a Verification Strategy section, the implementation must
+satisfy every field; do not relax it.
+```
 
 <feature_description>
 #$ARGUMENTS
 </feature_description>
 
-## Interaction Method
+## <span data-proof="authored" data-by="ai:claude">Interaction Method</span>
 
-When asking the user a question, use the platform's blocking question tool: `AskUserQuestion` in Claude Code (call `ToolSearch` with `select:AskUserQuestion` first if its schema isn't loaded), `request_user_input` in Codex, `ask_user` in Gemini. Fall back to numbered options in chat only when no blocking tool exists in the harness or the call errors. Never silently skip the question.
+<span data-proof="authored" data-by="ai:claude">When asking the user a question, use the platform's blocking question tool:</span> <span data-proof="authored" data-by="ai:claude">`AskUserQuestion`</span> <span data-proof="authored" data-by="ai:claude">in Claude Code (call</span> <span data-proof="authored" data-by="ai:claude">`ToolSearch`</span> <span data-proof="authored" data-by="ai:claude">with</span> <span data-proof="authored" data-by="ai:claude">`select:AskUserQuestion`</span> <span data-proof="authored" data-by="ai:claude">first if its schema isn't loaded),</span> <span data-proof="authored" data-by="ai:claude">`request_user_input`</span> <span data-proof="authored" data-by="ai:claude">in Codex,</span> <span data-proof="authored" data-by="ai:claude">`ask_user`</span> <span data-proof="authored" data-by="ai:claude">in Gemini. Fall back to numbered options in chat only when no blocking tool exists in the harness or the call errors. Never silently skip the question.</span>
 
-Ask one question at a time. Prefer a concise single-select choice when natural options exist.
-
+<span data-proof="authored" data-by="ai:claude">Ask one question at a time. Prefer a concise single-select choice when natural options exist.</span>
 
 <span data-proof="authored" data-by="ai:claude">You are implementing a Salesforce feature with parallel agent support and built-in quality checks.</span>
 
