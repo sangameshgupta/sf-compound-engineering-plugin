@@ -6,6 +6,20 @@ argument-hint: "[optional: scope of what to compound; defaults to recent work in
 
 # /sf-compound
 
+> **Principles enforced:** 5 (taste and oversight), 7 (institutional memory). See `PRINCIPLES.md`.
+
+## Copy-paste-to-agent
+
+```
+Capture learnings from completed Salesforce work into docs/solutions/ as YAML-frontmatter
+solution documents validated against schema.yaml. Capture two kinds of learning explicitly:
+(1) bug-fix learnings (symptom → root cause → resolution → prevention) and (2) aesthetic
+or pattern learnings (the "works but gross" code we cleaned up, the abstraction we picked,
+the convention we standardized on). Search existing solutions first — update existing
+entries instead of duplicating. Update CLAUDE.md, agents, and skills only when the
+learning generalizes beyond a single solution.
+```
+
 <feature_description>
 #$ARGUMENTS
 </feature_description>

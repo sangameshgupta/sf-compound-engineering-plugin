@@ -6,6 +6,20 @@
 
 The plugin's architecture is skills-first: skills are the user-facing entry points, agents dispatch in parallel via the Task tool, and institutional knowledge accumulates under `docs/solutions/`. Multi-platform manifests ship for Claude Code, Cursor, and Codex.
 
+## Principles
+
+This plugin is opinionated. Seven principles govern every skill, every agent, and every code review. They are documented in [`PRINCIPLES.md`](./PRINCIPLES.md) and referenced by number throughout the workflow skills.
+
+1. **Preserve the quality ceiling** — vibe coding does not exempt you from CRUD/FLS, governor limits, or sharing-model correctness.
+2. **Verifiability is the automation lever** — every plan declares how the feature will be verified before any code is written.
+3. **Stay in the loop** — agent intelligence is jagged; the human owns the categories of failure agents miss.
+4. **The spec is the artifact** — co-design a detailed spec, then let the agent fill the blanks.
+5. **Taste, judgment, oversight are the human's job** — capture aesthetic learnings, not just bug fixes.
+6. **Agent-native docs over human-native docs** — every skill and solution doc is a copy-paste-to-agent block, not a GUI walkthrough.
+7. **Outsource thinking, not understanding** — `docs/solutions/` is institutional memory; learnings are must-read, not optional.
+
+When a skill, agent, or PR conflicts with a principle, fix the implementation — don't soften the principle. When principles conflict with each other (rare), the lower-numbered principle wins.
+
 ## <span data-proof="authored" data-by="ai:claude">Architecture</span>
 
 * **<span data-proof="authored" data-by="ai:claude">Skills</span>** <span data-proof="authored" data-by="ai:claude">(`skills/<name>/SKILL.md`) — User-facing entry points. Auto-route from natural-language phrases via</span> <span data-proof="authored" data-by="ai:claude">`description`</span> <span data-proof="authored" data-by="ai:claude">frontmatter; direct invocation via</span> <span data-proof="authored" data-by="ai:claude">`/sf-<name>`</span> <span data-proof="authored" data-by="ai:claude">also works. Includes the seven core workflow skills (`sf-brainstorm`,</span> <span data-proof="authored" data-by="ai:claude">`sf-plan`,</span> <span data-proof="authored" data-by="ai:claude">`sf-deepen`,</span> <span data-proof="authored" data-by="ai:claude">`sf-work`,</span> <span data-proof="authored" data-by="ai:claude">`sf-review`,</span> <span data-proof="authored" data-by="ai:claude">`sf-compound`,</span> <span data-proof="authored" data-by="ai:claude">`sf-lfg`) and Salesforce domain knowledge skills (governor-limits, apex-patterns, lwc-patterns, etc.).</span>

@@ -4,18 +4,31 @@ description: "Create structured implementation plans for Salesforce features. Us
 argument-hint: "[optional: feature description, requirements doc path, plan path to deepen, or Salesforce work to plan]"
 ---
 
-# <span data-proof="authored" data-by="ai:claude">/sf-plan</span>
+# /sf-plan
+
+> **Principles enforced:** 2 (verifiability), 4 (spec is the artifact), 7 (institutional knowledge). See `PRINCIPLES.md`.
+
+## Copy-paste-to-agent
+
+```
+Plan a Salesforce feature without writing code. Produce three artifacts: spec.md (business
+requirements + acceptance criteria), plan.md (architecture + governor/sharing/security analysis),
+and tasks.md (ordered implementation checklist). Before writing the plan, dispatch
+sf-learnings-researcher, sf-repo-research-analyst, sf-best-practices-researcher, and
+sf-framework-docs-researcher in parallel. The plan MUST include a "Verification Strategy"
+section that names the test, assertion, or dry-run that proves the feature works — no
+verification, no plan. Save under docs/plans/YYYY-MM-DD-<type>-<slug>-plan.md.
+```
 
 <feature_description>
 #$ARGUMENTS
 </feature_description>
 
-## Interaction Method
+## <span data-proof="authored" data-by="ai:claude">Interaction Method</span>
 
-When asking the user a question, use the platform's blocking question tool: `AskUserQuestion` in Claude Code (call `ToolSearch` with `select:AskUserQuestion` first if its schema isn't loaded), `request_user_input` in Codex, `ask_user` in Gemini. Fall back to numbered options in chat only when no blocking tool exists in the harness or the call errors. Never silently skip the question.
+<span data-proof="authored" data-by="ai:claude">When asking the user a question, use the platform's blocking question tool:</span> <span data-proof="authored" data-by="ai:claude">`AskUserQuestion`</span> <span data-proof="authored" data-by="ai:claude">in Claude Code (call</span> <span data-proof="authored" data-by="ai:claude">`ToolSearch`</span> <span data-proof="authored" data-by="ai:claude">with</span> <span data-proof="authored" data-by="ai:claude">`select:AskUserQuestion`</span> <span data-proof="authored" data-by="ai:claude">first if its schema isn't loaded),</span> <span data-proof="authored" data-by="ai:claude">`request_user_input`</span> <span data-proof="authored" data-by="ai:claude">in Codex,</span> <span data-proof="authored" data-by="ai:claude">`ask_user`</span> <span data-proof="authored" data-by="ai:claude">in Gemini. Fall back to numbered options in chat only when no blocking tool exists in the harness or the call errors. Never silently skip the question.</span>
 
-Ask one question at a time. Prefer a concise single-select choice when natural options exist.
-
+<span data-proof="authored" data-by="ai:claude">Ask one question at a time. Prefer a concise single-select choice when natural options exist.</span>
 
 <span data-proof="authored" data-by="ai:claude">You are planning a Salesforce implementation using parallel research agents. Your job is to research and design —</span> **<span data-proof="authored" data-by="ai:claude">NOT write code</span>**<span data-proof="authored" data-by="ai:claude">.</span>
 
@@ -96,7 +109,18 @@ ls -la docs/brainstorms/*.md 2>/dev/null | head -10
 
 * <span data-proof="authored" data-by="ai:claude">Task sf-spec-flow-analyzer(feature_spec, research_findings)</span>
 
-<span data-proof="authored" data-by="ai:claude">Review the permutation matrix and address any gaps identified.</span>
+<span data-proof="authored" data-by="ai:claude">Review the permutation matrix and address any gaps identified.</span><span data-proof="authored" data-by="ai:claude">
+
+
+Step 5: Verification Strategy (mandatory, Principle 2)
+Before the plan is considered complete, fill in a Verification Strategy section. This is the single non-negotiable section in every plan. If you cannot describe how the feature will be verified, the feature is not ready to be planned — return to spec.
+The Verification Strategy section must answer all five of the following:
+Acceptance assertion — What is the boolean check that proves the feature works? Express as an Apex assertion, SOQL count, Flow path, or LWC behavior. Example: assertEquals(1, [SELECT COUNT() FROM Lead WHERE Owner.Id = :territoryOwner.Id]).
+Bulk threshold — At what record count is bulkification verified? For Apex, default to 200; for batch contexts, state the chunk size and the total. If bulk is not applicable (e.g., single-record UI flow), say so explicitly.
+Governor boundary — Which governor limit is closest to the feature's worst case? Name it (SOQL 101, DML 150, CPU 10s, Heap 6MB, callout 100, etc.) and state the projected utilization at the verification threshold.
+Sharing scenario — Under which sharing context is the feature verified? List the user profile or permission set used, and whether the feature runs with sharing, without sharing, or inherited sharing. State the expected behavior for an unprivileged user explicitly.
+Integration mock or dry-run — For features with callouts, platform events, or deploy steps: name the mock class (HttpCalloutMock), the event publish assertion, or the sf project deploy start --dry-run command that proves the integration boundary works without side effects.
+Verification Strategy is the gate between /sf-plan and /sf-work. /sf-lfg will refuse to advance from plan to work if any of the five fields are blank or hand-waved ("we'll add tests later" is not a verification strategy).</span>
 
 ***
 
@@ -141,7 +165,8 @@ ls -la docs/brainstorms/*.md 2>/dev/null | head -10
 
 * <span data-proof="authored" data-by="ai:claude">`spec.md`</span> <span data-proof="authored" data-by="ai:claude">section (business requirements, acceptance criteria, constraints)</span>
 
-* <span data-proof="authored" data-by="ai:claude">`plan.md`</span> <span data-proof="authored" data-by="ai:claude">section (components, architecture, design decisions, limits, security)</span>
+* <span data-proof="authored" data-by="ai:claude">`plan.md`</span> <span data-proof="authored" data-by="ai:claude">section (components, architecture, design decisions, limits, security)</span><span data-proof="authored" data-by="ai:claude">
+  verification.md section (the five-field Verification Strategy from Step 5 — mandatory, Principle 2)</span>
 
 * <span data-proof="authored" data-by="ai:claude">`tasks.md`</span> <span data-proof="authored" data-by="ai:claude">section (implementation, testing, deployment checklist)</span>
 
@@ -162,3 +187,46 @@ Next steps:
 - /sf-deepen docs/plans/<plan>.md — Enhance with deeper research
 - /sf-work docs/plans/<plan>.md — Begin implementation
 ```
+
+<!-- PROOF
+{
+  "version": 2,
+  "marks": {
+    "m1777551864066_5": {
+      "kind": "replace",
+      "by": "ai:claude",
+      "createdAt": "2026-04-30T12:24:24.066Z",
+      "range": {
+        "from": 2764,
+        "to": 2845
+      },
+      "content": "Task sf-learnings-researcher(feature_description) — Check institutional knowledge. Must-read (Principle 7). Treat returned solutions as constraints on the plan, not optional context. If the researcher returns matches, the plan must explicitly state how each match is applied or explicitly state why it does not apply.",
+      "status": "pending"
+    },
+    "m1777551856091_2": {
+      "kind": "insert",
+      "by": "ai:claude",
+      "createdAt": "2026-04-30T12:24:16.091Z",
+      "range": {
+        "from": 4041,
+        "to": 5861
+      },
+      "content": "\n\n\nStep 5: Verification Strategy (mandatory, Principle 2)\nBefore the plan is considered complete, fill in a Verification Strategy section. This is the single non-negotiable section in every plan. If you cannot describe how the feature will be verified, the feature is not ready to be planned — return to spec.\nThe Verification Strategy section must answer all five of the following:\nAcceptance assertion — What is the boolean check that proves the feature works? Express as an Apex assertion, SOQL count, Flow path, or LWC behavior. Example: assertEquals(1, [SELECT COUNT() FROM Lead WHERE Owner.Id = :territoryOwner.Id]).\nBulk threshold — At what record count is bulkification verified? For Apex, default to 200; for batch contexts, state the chunk size and the total. If bulk is not applicable (e.g., single-record UI flow), say so explicitly.\nGovernor boundary — Which governor limit is closest to the feature's worst case? Name it (SOQL 101, DML 150, CPU 10s, Heap 6MB, callout 100, etc.) and state the projected utilization at the verification threshold.\nSharing scenario — Under which sharing context is the feature verified? List the user profile or permission set used, and whether the feature runs with sharing, without sharing, or inherited sharing. State the expected behavior for an unprivileged user explicitly.\nIntegration mock or dry-run — For features with callouts, platform events, or deploy steps: name the mock class (HttpCalloutMock), the event publish assertion, or the sf project deploy start --dry-run command that proves the integration boundary works without side effects.\nVerification Strategy is the gate between /sf-plan and /sf-work. /sf-lfg will refuse to advance from plan to work if any of the five fields are blank or hand-waved (\"we'll add tests later\" is not a verification strategy).",
+      "status": "pending"
+    },
+    "m1777551864061_4": {
+      "kind": "insert",
+      "by": "ai:claude",
+      "createdAt": "2026-04-30T12:24:24.061Z",
+      "range": {
+        "from": 6721,
+        "to": 6821
+      },
+      "content": "\nverification.md section (the five-field Verification Strategy from Step 5 — mandatory, Principle 2)",
+      "status": "pending"
+    }
+  }
+}
+-->
+
+<!-- PROOF:END -->
