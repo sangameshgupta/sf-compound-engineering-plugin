@@ -25,6 +25,8 @@ Brainstorm → Plan (40%) → Deepen → Work (20%) → Review (20%) → Compoun
 
 **<span data-proof="authored" data-by="ai:claude">Each iteration starts smarter</span>** <span data-proof="authored" data-by="ai:claude">because learnings compound into</span> <span data-proof="authored" data-by="ai:claude">`docs/solutions/`, agents, skills, and CLAUDE.md.</span>
 
+> **Principles.** This plugin is opinionated. Seven principles — preserve the quality ceiling, verifiability, stay in the loop, the spec is the artifact, taste over typing, agent-native docs, outsource thinking not understanding — govern every skill and every review. See [`PRINCIPLES.md`](./PRINCIPLES.md). Each of the seven core workflow skills declares which principles it enforces in its frontmatter.
+
 ***
 
 ## <span data-proof="authored" data-by="ai:claude">Quick Start</span>
@@ -100,7 +102,7 @@ bunx @sangameshgupta/sf-compound-plugin sync
 
 The plugin provides:
 
-* **       
+***
 
 ***
 
@@ -130,7 +132,7 @@ Plan → Deepen → Work → Review → Resolve → Test → Deploy → Compound
 
 ***
 
-## 
+##
 
 ### <span data-proof="authored" data-by="ai:claude">Apex (6 agents)</span>
 
@@ -162,7 +164,7 @@ Plan → Deepen → Work → Review → Resolve → Test → Deploy → Compound
 | <span data-proof="authored" data-by="ai:claude">Process Automation Strategist</span> | <span data-proof="authored" data-by="ai:claude">Flow vs Apex decisions</span>          |
 | <span data-proof="authored" data-by="ai:claude">Validation Rule Reviewer</span>      | <span data-proof="authored" data-by="ai:claude">Rule complexity, error messages</span> |
 
-### 
+###
 
 | <span data-proof="authored" data-by="ai:claude">Agent</span>                         | <span data-proof="authored" data-by="ai:claude">Checks For</span>                       |
 | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
@@ -206,7 +208,7 @@ Plan → Deepen → Work → Review → Resolve → Test → Deploy → Compound
 
 ***
 
-## 
+##
 
 ### <span data-proof="authored" data-by="ai:claude">Domain Skills</span>
 
@@ -223,9 +225,9 @@ Plan → Deepen → Work → Review → Resolve → Test → Deploy → Compound
 | Skill                                                                                                   | <br />                                                                  | <br />                                                                                   |
 | Scope                                                                                                   | <br />                                                                  | <br />                                                                                   |
 | Use When                                                                                                | <br />                                                                  | <br />                                                                                   |
-| agent-script                                                                                            | <br />                                                                  | <br />                                                                                   |
-| Agentforce Script Builder                                                                               | <br />                                                                  | <br />                                                                                   |
-| Building Agentforce agents — syntax, blocks, variables, patterns                                        | <br />                                                                  | <br />                                                                                   |
+| `agentforce-develop`                                                                                    | Agentforce                                                              | Build, modify, debug, deploy Agentforce agents — Agent Spec gate, `.agent` authoring, publish/activate |
+| `agentforce-test`                                                                                       | Agentforce                                                              | Smoke + batch testing — `sf agent preview` traces, Testing Center YAML, safety verdict, fix loop       |
+| `agentforce-observe`                                                                                    | Agentforce                                                              | Production observation — STDM session traces in Data Cloud (with fallback), reproduce-classify-improve |
 | prompt-builder                                                                                          | <br />                                                                  | <br />                                                                                   |
 | Agentforce Prompt Builder                                                                               | <br />                                                                  | <br />                                                                                   |
 | Prompt templates — metadata XML, merge fields, grounding, deployment                                    | <br />                                                                  | <br />                                                                                   |
@@ -341,8 +343,6 @@ sf-compound-engineering-plugin/
 
 ## <span data-proof="authored" data-by="ai:claude">MCP Integration</span>
 
-
-
 ```json proof:W3sidHlwZSI6InByb29mQXV0aG9yZWQiLCJmcm9tIjowLCJ0byI6MzcsImF0dHJzIjp7ImJ5IjoiYWk6Y2xhdWRlIn19LHsidHlwZSI6InByb29mU3VnZ2VzdGlvbiIsImZyb20iOjM3LCJ0byI6MTMzLCJhdHRycyI6eyJpZCI6Im0xNzc1NjgxMTk2MzM0XzkiLCJraW5kIjoiaW5zZXJ0IiwiYnkiOiJhaTpjbGF1ZGUiLCJjb250ZW50IjoiXG4gICAgICBcInR5cGVcIjogXCJodHRwXCIsXG4gICAgICBcInVybFwiOiBcImh0dHBzOi8vbWNwLmNvbnRleHQ3LmNvbS9tY3BcIlxuICAgIH0sXG4gICAgXCJzYWxlc2ZvcmNlLWR4XCI6IHsiLCJzdGF0dXMiOiJwZW5kaW5nIiwiY3JlYXRlZEF0IjoiMjAyNi0wNC0wOFQyMDo0NjozNi4zMzRaIiwicnVuSWQiOm51bGwsImZvY3VzQXJlYUlkIjpudWxsLCJmb2N1c0FyZWFOYW1lIjpudWxsLCJhZ2VudElkIjpudWxsLCJwcm9wb3NhbElkIjpudWxsLCJwcm92aXNpb25hbCI6bnVsbCwib3JjaGVzdHJhdG9yIjpudWxsLCJkZWJ1Z0F1dG9GaXhlZFF1b3RlcyI6bnVsbCwiZGVidWdBdXRvRml4ZWRRdW90ZXNSZWFzb24iOm51bGx9fSx7InR5cGUiOiJwcm9vZlN1Z2dlc3Rpb24iLCJmcm9tIjoyMjIsInRvIjo4MjksImF0dHJzIjp7ImlkIjoibTE3NzU2ODExOTYzMjlfOCIsImtpbmQiOiJpbnNlcnQiLCJieSI6ImFpOmNsYXVkZSIsImNvbnRlbnQiOiJcblNhbGVzZm9yY2UgRFggTUNQIHRvb2xzZXRzIChhbGwgZW5hYmxlZCk6XG5Ub29sc2V0XG5DYXBhYmlsaXR5XG5jb3JlXG5CYXNlIERYIHRvb2xzIChhbHdheXMgb24pXG5vcmdzXG5NYW5hZ2UgYXV0aG9yaXplZCBvcmdzXG5tZXRhZGF0YVxuRGVwbG95L3JldHJpZXZlIG1ldGFkYXRhXG5kYXRhXG5TT1FMIHF1ZXJpZXMsIHJlY29yZCBtYW5hZ2VtZW50XG51c2Vyc1xuUGVybWlzc2lvbiBzZXRzLCB1c2VyIG1hbmFnZW1lbnRcbmNvZGUtYW5hbHlzaXNcblN0YXRpYyBhbmFseXNpcyB2aWEgQ29kZSBBbmFseXplclxubHdjLWV4cGVydHNcbkxXQyBkZXZlbG9wbWVudCwgdGVzdGluZywgb3B0aW1pemF0aW9uXG5hdXJhLWV4cGVydHNcbkF1cmEgYW5hbHlzaXMsIExXQyBtaWdyYXRpb25cbmV4cGVydHMtdmFsaWRhdGlvblxuTFdDIHByb2R1Y3Rpb24gcmVhZGluZXNzIGNoZWNrc1xuZGV2b3BzXG5EZXZPcHMgQ2VudGVyIG9wZXJhdGlvbnNcbmVucmljaG1lbnRcbk1ldGFkYXRhIGNvbXBvbmVudCBlbnJpY2htZW50XG5tb2JpbGVcbk1vYmlsZSBkZXZlbG9wbWVudCB0b29sc1xudGVzdGluZ1xuQXBleCBhbmQgYWdlbnQgdGVzdCBleGVjdXRpb25cbnNjYWxlLXByb2R1Y3RzXG5BcGV4IHBlcmZvcm1hbmNlIGRldGVjdGlvbiIsInN0YXR1cyI6InBlbmRpbmciLCJjcmVhdGVkQXQiOiIyMDI2LTA0LTA4VDIwOjQ2OjM2LjMyOVoiLCJydW5JZCI6bnVsbCwiZm9jdXNBcmVhSWQiOm51bGwsImZvY3VzQXJlYU5hbWUiOm51bGwsImFnZW50SWQiOm51bGwsInByb3Bvc2FsSWQiOm51bGwsInByb3Zpc2lvbmFsIjpudWxsLCJvcmNoZXN0cmF0b3IiOm51bGwsImRlYnVnQXV0b0ZpeGVkUXVvdGVzIjpudWxsLCJkZWJ1Z0F1dG9GaXhlZFF1b3Rlc1JlYXNvbiI6bnVsbH19XQ==
 {
   "mcpServers": {
@@ -389,19 +389,19 @@ scale-products
 Apex performance detection
 ```
 
-<span data-proof="authored" data-by="ai:claude">Research agents use Context7 as the second tier (after local skills) before falling back to web search.</span><span data-proof="suggestion" data-id="m1775681196325_7" data-by="ai:claude" data-kind="insert"><span data-proof="authored" data-by="ai:claude">
-Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login web. The server uses DEFAULT_TARGET_ORG — whatever you set with sf config set target-org.</span></span>
+<span data-proof="authored" data-by="ai:claude">Research agents use Context7 as the second tier (after local skills) before falling back to web search.</span><span data-proof="authored" data-by="ai:claude">
+Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login web. The server uses DEFAULT_TARGET_ORG — whatever you set with sf config set target-org.</span>
 
 ***
 
 ## <span data-proof="authored" data-by="ai:claude">Requirements</span>
 
-* <span data-proof="authored" data-by="ai:claude">Claude Code</span><span data-proof="suggestion" data-id="m1775681196320_6" data-by="ai:claude" data-kind="insert"><span data-proof="authored" data-by="ai:claude">
-  Node.js (for MCP servers)</span></span>
+* <span data-proof="authored" data-by="ai:claude">Claude Code</span><span data-proof="authored" data-by="ai:claude">
+  Node.js (for MCP servers)</span>
 
 * <span data-proof="authored" data-by="ai:claude">Git (recommended)</span>
 
-* 
+* <br />
 
 ***
 
@@ -441,90 +441,13 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
 {
   "version": 2,
   "marks": {
-    "m1777279526790_2": {
-      "kind": "replace",
-      "by": "ai:claude",
-      "createdAt": "2026-04-27T08:45:26.790Z",
-      "range": {
-        "from": 520,
-        "to": 581
-      },
-      "content": "Multi-platform Salesforce-focused plugin for compound engineering workflows. See the Credits section at the bottom for inspiration sources.",
-      "status": "pending"
-    },
-    "m1777125750945_7": {
-      "kind": "replace",
-      "by": "ai:claude",
-      "createdAt": "2026-04-25T14:02:30.945Z",
-      "range": {
-        "from": 4181,
-        "to": 4467
-      },
-      "content": "7 core workflow skills (/sf-brainstorm, /sf-plan, /sf-deepen, /sf-work, /sf-review, /sf-compound, /sf-lfg) — formerly commands in v2.x; now skills with auto-routing trigger phrases\n45 skills total — 7 core + 11 Salesforce domain knowledge + 5 workflow support + 22 V3 capability ports (sf-debug, sf-doc-review, sf-pr-description, sf-resolve-pr-feedback, etc.)\n59 specialized agents in a flat agents/sf-*.agent.md layout — 35 Salesforce-specific (Apex / Flow / LWC / Integration / Architecture / Research / Workflow) + 24 V3-ported review/research personas\nMulti-platform manifests for Claude Code, Cursor, and Codex (.claude-plugin/, .cursor-plugin/, .codex-plugin/)\nMCP integration with Context7 and Salesforce DX (@salesforce/mcp — 60+ live-org tools)\nInstitutional knowledge system in docs/solutions/ with YAML frontmatter validated against schema.yaml",
-      "status": "pending"
-    },
-    "m1776337295868_17": {
-      "kind": "replace",
-      "by": "ai:claude",
-      "createdAt": "2026-04-25T14:01:23.933Z",
-      "range": {
-        "from": 4860,
-        "to": 4944
-      },
-      "content": "Classifications: APEX, AUTOMATION, LWC, INTEGRATION, ARCHITECTURE, WORKFLOW, TOOLING",
-      "status": "pending"
-    },
-    "m1777125750938_6": {
-      "kind": "replace",
-      "by": "ai:claude",
-      "createdAt": "2026-04-25T14:02:30.938Z",
-      "range": {
-        "from": 5857,
-        "to": 5878
-      },
-      "content": "59 Agents (flat layout, V3-ported)\nAfter v3.0.0 all agents live in a flat agents/ directory and are named sf-<name>.agent.md. The topical groupings below are documentation aids, not filesystem paths. See agents/index.md for the complete index including the 24 V3-ported review/research personas (sf-correctness-reviewer, sf-maintainability-reviewer, sf-testing-reviewer, sf-project-standards-reviewer, sf-architecture-strategist, sf-feasibility-reviewer, sf-coherence-reviewer, etc.).",
-      "status": "pending"
-    },
-    "m1776337295821_15": {
-      "kind": "replace",
-      "by": "ai:claude",
-      "createdAt": "2026-04-25T14:01:23.933Z",
-      "range": {
-        "from": 6924,
-        "to": 6946
-      },
-      "content": "Integration (4 agents)",
-      "status": "pending"
-    },
-    "m1777125750930_5": {
-      "kind": "replace",
-      "by": "ai:claude",
-      "createdAt": "2026-04-25T14:02:30.930Z",
-      "range": {
-        "from": 8622,
-        "to": 8631
-      },
-      "content": "45 Skills\n7 core workflow skills + 11 Salesforce domain knowledge skills + 5 workflow support skills + 22 V3-ported skills (sf-debug, sf-doc-review, sf-pr-description, sf-resolve-pr-feedback, sf-update, sf-setup, sf-sessions family, sf-clean-gone-branches, sf-commit, sf-commit-push-pr, sf-ideate, sf-optimize, sf-agent-native-architecture, sf-agent-native-audit, sf-compound-refresh, sf-release-notes, sf-report-bug, sf-slack-research, sf-proof, sf-demo-reel). See skills/index.md for the complete index.",
-      "status": "pending"
-    },
-    "m1775681196339_10": {
-      "kind": "replace",
-      "by": "ai:claude",
-      "createdAt": "2026-04-16T11:00:40.311Z",
-      "range": {
-        "from": 13322,
-        "to": 13404
-      },
-      "content": "The plugin includes a Context7 MCP server for live framework documentation lookup:",
-      "status": "pending"
-    },
     "m1775681196334_9": {
       "kind": "insert",
       "by": "ai:claude",
       "createdAt": "2026-04-08T20:46:36.334Z",
       "range": {
-        "from": 13443,
-        "to": 13539
+        "from": 13000,
+        "to": 13096
       },
       "content": "\n      \"type\": \"http\",\n      \"url\": \"https://mcp.context7.com/mcp\"\n    },\n    \"salesforce-dx\": {",
       "status": "pending"
@@ -534,8 +457,8 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
       "by": "ai:claude",
       "createdAt": "2026-04-08T20:46:36.329Z",
       "range": {
-        "from": 13628,
-        "to": 14235
+        "from": 13185,
+        "to": 13792
       },
       "content": "\nSalesforce DX MCP toolsets (all enabled):\nToolset\nCapability\ncore\nBase DX tools (always on)\norgs\nManage authorized orgs\nmetadata\nDeploy/retrieve metadata\ndata\nSOQL queries, record management\nusers\nPermission sets, user management\ncode-analysis\nStatic analysis via Code Analyzer\nlwc-experts\nLWC development, testing, optimization\naura-experts\nAura analysis, LWC migration\nexperts-validation\nLWC production readiness checks\ndevops\nDevOps Center operations\nenrichment\nMetadata component enrichment\nmobile\nMobile development tools\ntesting\nApex and agent test execution\nscale-products\nApex performance detection",
       "status": "pending"
@@ -545,8 +468,8 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
       "by": "ai:claude",
       "createdAt": "2026-04-08T20:46:36.325Z",
       "range": {
-        "from": 14341,
-        "to": 14508
+        "from": 13898,
+        "to": 14065
       },
       "content": "\nPrerequisites for Salesforce DX MCP: Authorize an org first with sf org login web. The server uses DEFAULT_TARGET_ORG — whatever you set with sf config set target-org.",
       "status": "pending"
@@ -556,21 +479,10 @@ Prerequisites for Salesforce DX MCP: Authorize an org first with sf org login we
       "by": "ai:claude",
       "createdAt": "2026-04-08T20:46:36.320Z",
       "range": {
-        "from": 14539,
-        "to": 14564
+        "from": 14096,
+        "to": 14121
       },
       "content": "\nNode.js (for MCP servers)",
-      "status": "pending"
-    },
-    "m1775681196313_5": {
-      "kind": "replace",
-      "by": "ai:claude",
-      "createdAt": "2026-04-16T11:00:40.311Z",
-      "range": {
-        "from": 14589,
-        "to": 14622
-      },
-      "content": "Node.js (for Context7 MCP server)",
       "status": "pending"
     }
   }
