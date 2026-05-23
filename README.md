@@ -1,4 +1,4 @@
-# <span data-proof="authored" data-by="ai:claude">SF Compound Engineering Plugin v3.0.0-beta.1</span>
+# <span data-proof="authored" data-by="ai:claude">SF Compound Engineering Plugin v3.0.0-beta.2</span>
 
 **<span data-proof="authored" data-by="ai:claude">Instruction-Based Compound Engineering for Salesforce</span>** <span data-proof="authored" data-by="ai:claude">— a multi-platform plugin (Claude Code, Cursor, Codex) where each iteration becomes smarter than the last through institutional knowledge capture and parallel agent dispatch.</span>
 
@@ -228,6 +228,13 @@ Plan → Deepen → Work → Review → Resolve → Test → Deploy → Compound
 | `agentforce-develop`                                                                                    | Agentforce                                                              | Build, modify, debug, deploy Agentforce agents — Agent Spec gate, `.agent` authoring, publish/activate |
 | `agentforce-test`                                                                                       | Agentforce                                                              | Smoke + batch testing — `sf agent preview` traces, Testing Center YAML, safety verdict, fix loop       |
 | `agentforce-observe`                                                                                    | Agentforce                                                              | Production observation — STDM session traces in Data Cloud (with fallback), reproduce-classify-improve |
+
+> **⚠️ Agentforce DX Critical Notes (April–May 2026):**
+> - **`topic` is deprecated.** Use `subagent`, `start_agent agent_router:`, and `@subagent.name` everywhere.
+> - **Default preview = simulated.** Without `--use-live-actions`, real Apex is never called. `--mode live` does not exist — the correct flag is `--use-live-actions`.
+> - **Debug logs → Agent User, not admin.** Apex runs as the Einstein Agent User. Setting debug logs on your admin account produces nothing.
+> - **API version must match your org.** Spring '26 = `66.0`, Summer '26 = `67.0`. Mismatches cause `Invalid api version` errors on all Apex classes.
+> - **Multi-component deploys need Package XML.** Use `--manifest manifest/package.xml`, not `--metadata`. The metadata type is `AiAuthoringBundle`.
 | prompt-builder                                                                                          | <br />                                                                  | <br />                                                                                   |
 | Agentforce Prompt Builder                                                                               | <br />                                                                  | <br />                                                                                   |
 | Prompt templates — metadata XML, merge fields, grounding, deployment                                    | <br />                                                                  | <br />                                                                                   |

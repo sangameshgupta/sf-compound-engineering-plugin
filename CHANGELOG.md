@@ -4,25 +4,95 @@
 
 <span data-proof="authored" data-by="ai:claude">The format is based on</span> [<span data-proof="authored" data-by="ai:claude">Keep a Changelog</span>](https://keepachangelog.com/en/1.1.0/) <span data-proof="authored" data-by="ai:claude">and this project adheres to</span> [<span data-proof="authored" data-by="ai:claude">Semantic Versioning</span>](https://semver.org/spec/v2.0.0.html)<span data-proof="authored" data-by="ai:claude">.</span>
 
+## \[3.0.0-beta.2] - 2026-04-30
+
+Opinionated release: introduces a 7-principles framework, replaces the `agent-script` language reference with three Agentforce lifecycle skills, ports eight generating skills from `forcedotcom/afv-library`, and removes the stale CI workflow.
+
+### <span data-proof="authored" data-by="ai:claude">Added</span>
+
+* **<span data-proof="authored" data-by="ai:claude">`PRINCIPLES.md`</span>** <span data-proof="authored" data-by="ai:claude">— seven principles paraphrased from Karpathy's YC AI Startup School talk, governing every skill and review in the plugin: (1) preserve the quality ceiling, (2) verifiability is the automation lever, (3) stay in the loop (jagged intelligence), (4) the spec is the artifact, (5) taste / judgment / oversight is the human's job, (6) agent-native docs over human-native docs, (7) outsource thinking, not understanding.</span>
+
+* **<span data-proof="authored" data-by="ai:claude">3 Agentforce lifecycle skills</span>** <span data-proof="authored" data-by="ai:claude">(adapted from</span> <span data-proof="authored" data-by="ai:claude">`forcedotcom/afv-library`, Apache-2.0):</span>
+
+  * <span data-proof="authored" data-by="ai:claude">`agentforce-develop`</span> <span data-proof="authored" data-by="ai:claude">— Agent Spec gate,</span> <span data-proof="authored" data-by="ai:claude">`.agent`</span> <span data-proof="authored" data-by="ai:claude">authoring, validate / publish / activate.</span>
+
+  * <span data-proof="authored" data-by="ai:claude">`agentforce-test`</span> <span data-proof="authored" data-by="ai:claude">— preview smoke + Testing Center batch, safety verdict, fix loop.</span>
+
+  * <span data-proof="authored" data-by="ai:claude">`agentforce-observe`</span> <span data-proof="authored" data-by="ai:claude">— STDM session traces with fallback, reproduce-classify-improve.</span>
+
+* **<span data-proof="authored" data-by="ai:claude">8 generating skills</span>** <span data-proof="authored" data-by="ai:claude">(Tier 1 + Tier 2 ports from</span> <span data-proof="authored" data-by="ai:claude">`forcedotcom/afv-library`, Apache-2.0):</span>
+
+  * <span data-proof="authored" data-by="ai:claude">Tier 1:</span> <span data-proof="authored" data-by="ai:claude">`apex-generate`</span> <span data-proof="authored" data-by="ai:claude">(class + tests as one unit),</span> <span data-proof="authored" data-by="ai:claude">`flow-generate`</span> <span data-proof="authored" data-by="ai:claude">(3-step MCP pipeline),</span> <span data-proof="authored" data-by="ai:claude">`validation-rule-generate`,</span> <span data-proof="authored" data-by="ai:claude">`apex-trigger-refactor`,</span> <span data-proof="authored" data-by="ai:claude">`slds2-uplift`.</span>
+
+  * <span data-proof="authored" data-by="ai:claude">Tier 2:</span> <span data-proof="authored" data-by="ai:claude">`metadata-generate`</span> <span data-proof="authored" data-by="ai:claude">(single</span> <span data-proof="authored" data-by="ai:claude">`--type`-dispatched generator consolidating six upstream skills: object / field / app / tab / list-view / lightning-type),</span> <span data-proof="authored" data-by="ai:claude">`lightning-page-generate`</span> <span data-proof="authored" data-by="ai:claude">(FlexiPage or full LEX app orchestration),</span> <span data-proof="authored" data-by="ai:claude">`permission-set-generate`</span> <span data-proof="authored" data-by="ai:claude">(least-privilege defaults).</span>
+
+### <span data-proof="authored" data-by="ai:claude">Changed</span>
+
+* **<span data-proof="authored" data-by="ai:claude">`/sf-plan`</span>** <span data-proof="authored" data-by="ai:claude">— now requires a five-field</span> **<span data-proof="authored" data-by="ai:claude">Verification Strategy</span>** <span data-proof="authored" data-by="ai:claude">section (acceptance assertion, bulk threshold, governor boundary, sharing scenario, integration mock) before advancing to</span> <span data-proof="authored" data-by="ai:claude">`/sf-work`. Hand-waved fields fail the gate.</span>
+
+* **<span data-proof="authored" data-by="ai:claude">`/sf-review`</span>** <span data-proof="authored" data-by="ai:claude">— codifies non-negotiable gates at the top: security regression, governor regression, test coverage regression, trigger context regression, sharing regression. These abort</span> <span data-proof="authored" data-by="ai:claude">`/sf-lfg`</span> <span data-proof="authored" data-by="ai:claude">rather than routing to warnings.</span>
+
+* **<span data-proof="authored" data-by="ai:claude">`/sf-lfg`</span>** <span data-proof="authored" data-by="ai:claude">— abort triggers updated to include missing Verification Strategy and any fired review gate.</span>
+
+* **<span data-proof="authored" data-by="ai:claude">`/sf-deepen`</span>** <span data-proof="authored" data-by="ai:claude">— reframed as a spec-tightening pass; cleanly disambiguated from</span> <span data-proof="authored" data-by="ai:claude">`/sf-plan`'s deepen mode.</span>
+
+* **<span data-proof="authored" data-by="ai:claude">`/sf-compound`</span>** <span data-proof="authored" data-by="ai:claude">— captures aesthetic and taste learnings alongside bug fixes.</span>
+
+* **<span data-proof="authored" data-by="ai:claude">All seven core workflow skills</span>** <span data-proof="authored" data-by="ai:claude">carry a</span> <span data-proof="authored" data-by="ai:claude">`## Copy-paste-to-agent`</span> <span data-proof="authored" data-by="ai:claude">block at the top (Principle 6).</span>
+
+* **<span data-proof="authored" data-by="ai:claude">`/sf-work`</span>** <span data-proof="authored" data-by="ai:claude">— Step 1 now dispatches to the new generating skills based on the metadata type detected in the plan.</span>
+
+* **<span data-proof="authored" data-by="ai:claude">`skills/index.md`</span>** <span data-proof="authored" data-by="ai:claude">— new "Generating Skills" section between Domain Knowledge and Workflow Support.</span>
+
+* **<span data-proof="authored" data-by="ai:claude">`CLAUDE.md`</span>** <span data-proof="authored" data-by="ai:claude">— adds a</span> <span data-proof="authored" data-by="ai:claude">`## Principles`</span> <span data-proof="authored" data-by="ai:claude">section linking to</span> <span data-proof="authored" data-by="ai:claude">`PRINCIPLES.md`</span> <span data-proof="authored" data-by="ai:claude">and listing all seven.</span>
+
+* **<span data-proof="authored" data-by="ai:claude">`README.md`</span>** <span data-proof="authored" data-by="ai:claude">— adds a Principles callout near the loop diagram, refreshes the Agentforce skill table.</span>
+
+* <span data-proof="authored" data-by="ai:claude">Plugin version bumped to</span> <span data-proof="authored" data-by="ai:claude">`3.0.0-beta.2`</span> <span data-proof="authored" data-by="ai:claude">across all four manifests.</span>
+
+### <span data-proof="authored" data-by="ai:claude">Removed</span>
+
+* **<span data-proof="authored" data-by="ai:claude">`skills/agent-script/`</span>** <span data-proof="authored" data-by="ai:claude">— the language-reference skill is replaced by the three lifecycle-shaped Agentforce skills above. Language details are linked from each new skill's</span> <span data-proof="authored" data-by="ai:claude">`## Inspiration`</span> <span data-proof="authored" data-by="ai:claude">section.</span>
+
+* **<span data-proof="authored" data-by="ai:claude">`.github/workflows/ci.yml`</span>** <span data-proof="authored" data-by="ai:claude">— the V2-era test job has been red since</span> <span data-proof="authored" data-by="ai:claude">`2026-04-16`</span> <span data-proof="authored" data-by="ai:claude">(asserts</span> <span data-proof="authored" data-by="ai:claude">`version: "2.0.0"`</span> <span data-proof="authored" data-by="ai:claude">and a</span> <span data-proof="authored" data-by="ai:claude">`commands/`</span> <span data-proof="authored" data-by="ai:claude">directory, both removed in V3). Removed as a whole rather than rewritten — it was not pulling its weight.</span>
+
+### <span data-proof="authored" data-by="ai:claude">Stats</span>
+
+* <span data-proof="authored" data-by="ai:claude">Skills: 45 →</span> **<span data-proof="authored" data-by="ai:claude">55</span>** <span data-proof="authored" data-by="ai:claude">(+8 generating, +3 Agentforce, −1 agent-script).</span>
+
+* <span data-proof="authored" data-by="ai:claude">Manifests: 4 (unchanged — Claude / Cursor / Codex / marketplace).</span>
+
+* <span data-proof="authored" data-by="ai:claude">Agents: 59 (unchanged).</span>
+
+* <span data-proof="authored" data-by="ai:claude">MCP servers: 2 (unchanged — Context7, Salesforce DX).</span>
+
+### <span data-proof="authored" data-by="ai:claude">Inspiration</span>
+
+* <span data-proof="authored" data-by="ai:claude">Andrej Karpathy, Y Combinator AI Startup School (transcript ID</span> <span data-proof="authored" data-by="ai:claude">`96jN2OCOfLs`) — the seven-principles framework.</span>
+
+* [<span data-proof="authored" data-by="ai:claude">`forcedotcom/afv-library`</span>](https://github.com/forcedotcom/afv-library) <span data-proof="authored" data-by="ai:claude">(Apache-2.0) — Agentforce lifecycle skills and generating skills.</span>
+
+***
+
 ## <span data-proof="authored" data-by="ai:claude">[3.0.0-beta.1] - 2026-04-25</span>
 
 <span data-proof="authored" data-by="ai:claude">V3 capability ports: 22 V3 skills and 24 V3 review/research agents added as Salesforce-aware sf-* counterparts.</span>
 
 ### <span data-proof="authored" data-by="ai:claude">Added</span>
 
-* ****                           
+***
 
-* ****   
+***
 
-  * <span data-proof="authored" data-by="ai:claude">Always-on review (4):</span> <span data-proof="authored" data-by="ai:claude">`sf-correctness-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-maintainability-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-testing-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-project-standards-reviewer`.</span>
+* <span data-proof="authored" data-by="ai:claude">Always-on review (4):</span> <span data-proof="authored" data-by="ai:claude">`sf-correctness-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-maintainability-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-testing-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-project-standards-reviewer`.</span>
 
-  * <span data-proof="authored" data-by="ai:claude">Conditional review (7):</span> <span data-proof="authored" data-by="ai:claude">`sf-architecture-strategist`,</span> <span data-proof="authored" data-by="ai:claude">`sf-performance-oracle`,</span> <span data-proof="authored" data-by="ai:claude">`sf-performance-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-reliability-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-api-contract-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-data-migrations-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-data-integrity-guardian`.</span>
+* <span data-proof="authored" data-by="ai:claude">Conditional review (7):</span> <span data-proof="authored" data-by="ai:claude">`sf-architecture-strategist`,</span> <span data-proof="authored" data-by="ai:claude">`sf-performance-oracle`,</span> <span data-proof="authored" data-by="ai:claude">`sf-performance-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-reliability-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-api-contract-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-data-migrations-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-data-integrity-guardian`.</span>
 
-  * <span data-proof="authored" data-by="ai:claude">Doc-review lenses (6):</span> <span data-proof="authored" data-by="ai:claude">`sf-feasibility-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-coherence-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-product-lens-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-scope-guardian-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-security-lens-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-design-lens-reviewer`.</span>
+* <span data-proof="authored" data-by="ai:claude">Doc-review lenses (6):</span> <span data-proof="authored" data-by="ai:claude">`sf-feasibility-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-coherence-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-product-lens-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-scope-guardian-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-security-lens-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-design-lens-reviewer`.</span>
 
-  * <span data-proof="authored" data-by="ai:claude">Adversarial (2):</span> <span data-proof="authored" data-by="ai:claude">`sf-adversarial-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-adversarial-document-reviewer`.</span>
+* <span data-proof="authored" data-by="ai:claude">Adversarial (2):</span> <span data-proof="authored" data-by="ai:claude">`sf-adversarial-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-adversarial-document-reviewer`.</span>
 
-  * <span data-proof="authored" data-by="ai:claude">Workflow / research (5):</span> <span data-proof="authored" data-by="ai:claude">`sf-previous-comments-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-issue-intelligence-analyst`,</span> <span data-proof="authored" data-by="ai:claude">`sf-session-historian`,</span> <span data-proof="authored" data-by="ai:claude">`sf-slack-researcher`,</span> <span data-proof="authored" data-by="ai:claude">`sf-web-researcher`.</span>
+* <span data-proof="authored" data-by="ai:claude">Workflow / research (5):</span> <span data-proof="authored" data-by="ai:claude">`sf-previous-comments-reviewer`,</span> <span data-proof="authored" data-by="ai:claude">`sf-issue-intelligence-analyst`,</span> <span data-proof="authored" data-by="ai:claude">`sf-session-historian`,</span> <span data-proof="authored" data-by="ai:claude">`sf-slack-researcher`,</span> <span data-proof="authored" data-by="ai:claude">`sf-web-researcher`.</span>
 
 ### <span data-proof="authored" data-by="ai:claude">Changed</span>
 
@@ -34,11 +104,11 @@
 
 * <span data-proof="authored" data-by="ai:claude">Personality reviewer agents tied to non-Salesforce stacks (Rails, frontend race conditions, Ruby gem READMEs, Swift / iOS).</span>
 
-*       
+* <br />
 
-*  
+* <br />
 
-*     
+* <br />
 
 ## <span data-proof="authored" data-by="ai:claude">[3.0.0-alpha.1] - 2026-04-25</span>
 
@@ -46,7 +116,7 @@
 
 ### <span data-proof="authored" data-by="ai:claude">BREAKING CHANGES</span>
 
-* ****           
+***
 
 * **<span data-proof="authored" data-by="ai:claude">All 35 agents flattened.</span>** <span data-proof="authored" data-by="ai:claude">Files moved from</span> <span data-proof="authored" data-by="ai:claude">`agents/{apex,architecture,automation,integration,lwc,research,workflow}/<name>.md`</span> <span data-proof="authored" data-by="ai:claude">to</span> <span data-proof="authored" data-by="ai:claude">`agents/sf-<name>.agent.md`</span> <span data-proof="authored" data-by="ai:claude">(flat layout,</span> <span data-proof="authored" data-by="ai:claude">`.agent.md`</span> <span data-proof="authored" data-by="ai:claude">suffix). Category folders are removed; topical groupings remain in</span> <span data-proof="authored" data-by="ai:claude">`agents/index.md`</span> <span data-proof="authored" data-by="ai:claude">as documentation aids only.</span>
 
@@ -54,7 +124,7 @@
 
 * **<span data-proof="authored" data-by="ai:claude">Skill frontmatter updated to V3 conventions.</span>** <span data-proof="authored" data-by="ai:claude">Fields:</span> <span data-proof="authored" data-by="ai:claude">`name`,</span> <span data-proof="authored" data-by="ai:claude">`description`,</span> <span data-proof="authored" data-by="ai:claude">`argument-hint`. Skill descriptions enumerate Salesforce-flavored auto-routing trigger phrases.</span>
 
-* ****   
+***
 
 ### <span data-proof="authored" data-by="ai:claude">Added</span>
 
@@ -64,7 +134,7 @@
 
 * <span data-proof="authored" data-by="ai:claude">`agents/index.md`</span> <span data-proof="authored" data-by="ai:claude">— V3 flat-layout routing index (rewritten).</span>
 
-*  
+* <br />
 
 * <span data-proof="authored" data-by="ai:claude">This</span> <span data-proof="authored" data-by="ai:claude">`CHANGELOG.md`</span> <span data-proof="authored" data-by="ai:claude">file.</span>
 
@@ -102,81 +172,3 @@
 **<span data-proof="authored" data-by="ai:claude">For most users</span>**<span data-proof="authored" data-by="ai:claude">: re-install the plugin (`/plugin update sf-compound-engineering`). Slash invocations (`/sf-plan`,</span> <span data-proof="authored" data-by="ai:claude">`/sf-debug`,</span> <span data-proof="authored" data-by="ai:claude">`/sf-review`) work identically. Custom scripts that hard-coded paths under</span> <span data-proof="authored" data-by="ai:claude">`commands/`</span> <span data-proof="authored" data-by="ai:claude">or</span> <span data-proof="authored" data-by="ai:claude">`agents/<category>/`</span> <span data-proof="authored" data-by="ai:claude">need updating — see the table above.</span>
 
 ## <span data-proof="authored" data-by="ai:claude">[2.2.0] and earlier</span>
-
- [](./Compound-Engineering-Plugin-Teardown.md)
-
-<!-- PROOF
-{
-  "version": 2,
-  "marks": {
-    "m1777279511696_12": {
-      "kind": "replace",
-      "by": "ai:claude",
-      "createdAt": "2026-04-27T08:45:11.696Z",
-      "range": {
-        "from": 345,
-        "to": 1089
-      },
-      "content": "22 V3 capability skills as Salesforce-aware sf-* skeletons. Each carries V3 frontmatter (name, description with auto-routing trigger phrases, argument-hint), a Salesforce Angle bullet list, and a self-contained Procedure section. Skills shipped: sf-debug, sf-doc-review, sf-pr-description, sf-resolve-pr-feedback, sf-update, sf-setup, sf-sessions, sf-session-inventory, sf-session-extract, sf-clean-gone-branches, sf-commit, sf-commit-push-pr, sf-ideate, sf-optimize, sf-agent-native-architecture, sf-agent-native-audit, sf-compound-refresh, sf-release-notes, sf-report-bug, sf-slack-research, sf-proof, sf-demo-reel.\n24 V3 review/research agents as Salesforce-aware personas dispatched by sf-review and sf-doc-review:",
-      "status": "pending"
-    },
-    "m1777279511690_11": {
-      "kind": "replace",
-      "by": "ai:claude",
-      "createdAt": "2026-04-27T08:45:11.690Z",
-      "range": {
-        "from": 2259,
-        "to": 2633
-      },
-      "content": "Non-Salesforce design / test skills (frontend-design, figma-design-sync, design-iterator, design-implementation-reviewer, gemini-imagegen, test-xcode, test-browser).\nUpstream-only experimental beta variants (work-beta, polish-beta).\nA Bun/TypeScript cross-platform converter CLI — deferred; the existing Python sfce.py CLI is retained as-is.",
-      "status": "pending"
-    },
-    "m1777279511684_10": {
-      "kind": "replace",
-      "by": "ai:claude",
-      "createdAt": "2026-04-27T08:45:11.684Z",
-      "range": {
-        "from": 2827,
-        "to": 3189
-      },
-      "content": "commands/ directory removed. All seven workflow entry points (sf-brainstorm, sf-plan, sf-deepen, sf-work, sf-review, sf-compound, sf-lfg) are now skills under skills/<name>/SKILL.md. Direct invocation via /sf-<name> continues to work, and skills now auto-route from natural-language phrases via their description frontmatter — a capability commands cannot match.",
-      "status": "pending"
-    },
-    "m1777279511679_9": {
-      "kind": "replace",
-      "by": "ai:claude",
-      "createdAt": "2026-04-27T08:45:11.679Z",
-      "range": {
-        "from": 4026,
-        "to": 4205
-      },
-      "content": "sf- prefix is now the universal namespace. Every agent and skill is prefixed sf- so the Salesforce identity is unambiguous when the plugin coexists with other compound-engineering-style tools.",
-      "status": "pending"
-    },
-    "m1777279511674_8": {
-      "kind": "replace",
-      "by": "ai:claude",
-      "createdAt": "2026-04-27T08:45:11.674Z",
-      "range": {
-        "from": 4475,
-        "to": 4600
-      },
-      "content": "skills/index.md — V3 skill index covering core workflow skills, domain knowledge skills, and V3 capability skills (rewritten).",
-      "status": "pending"
-    },
-    "m1777279511666_7": {
-      "kind": "replace",
-      "by": "ai:claude",
-      "createdAt": "2026-04-27T08:45:11.666Z",
-      "range": {
-        "from": 6588,
-        "to": 6900
-      },
-      "content": "See git history for v2.x release notes. Background research that informed the v3 migration is captured in Compound-Engineering-Plugin-Teardown.md — a 1628-line gap analysis dated 2026-03-02 that surveyed the broader compound-engineering ecosystem before the v3 migration was scoped.",
-      "status": "pending"
-    }
-  }
-}
--->
-
-<!-- PROOF:END -->

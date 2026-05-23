@@ -49,6 +49,21 @@ Always pass --json on every sf CLI command.
 
 ***
 
+## ⚠️ Deprecated Syntax — Use `subagent` not `topic` (April 2026)
+
+As of April 2026, the `topic` keyword in Agent Script is **deprecated**. Always use the `subagent` equivalents. Using `topic` will produce deprecation warnings and may break in future API versions.
+
+| Deprecated (before April 2026) | Current (April 2026+) |
+|---|---|
+| `topic name:` | `subagent name:` |
+| `start_agent topic_selector:` | `start_agent agent_router:` |
+| `@topic.name` | `@subagent.name` |
+| `go_to_x: @utils.transition to @topic.x` | `go_to_x: @utils.transition to @subagent.x` |
+
+If you see a `.agent` file using the old `topic` syntax, rewrite all occurrences before building on top of it. Mix-and-match is not supported — the entire file must be consistently on one convention.
+
+***
+
 ## <span data-proof="authored" data-by="ai:claude">Step 0: Pre-implementation research (parallel, Principle 7)</span>
 
 <span data-proof="authored" data-by="ai:claude">Before designing the agent, dispatch in parallel:</span>
@@ -165,6 +180,27 @@ sf project deploy start --json --metadata ApexClass:<ClassName>
 
 <span data-proof="authored" data-by="ai:claude">For Flow and Prompt Template stubs, follow the same one-at-a-time discipline.</span>
 
+> **⚠️ API Version must match your org.** Before deploying, always verify the org's current API version:
+> ```bash
+> sf org display --json -o <org> | python3 -c "import json,sys; d=json.load(sys.stdin); print(d['result'].get('apiVersion','check sfdx-project.json'))"
+> ```
+> Set **all** `.cls-meta.xml` files to the org's actual API version (e.g. `66.0` for Spring '26, `67.0` for Summer '26). A mismatch causes `Invalid api version` deploy errors.
+
+> **⚠️ Targeted deploy — use Package XML, not `--metadata` with multiple types.** When deploying an agent bundle alongside Apex classes and a permission set, `--metadata ApexClass:<Name>` only works for a single component type. Use a Package XML manifest instead:
+> ```xml
+> <!-- manifest/package.xml -->
+> <Package xmlns="http://soap.sforce.com/2006/04/metadata">
+>   <types><members>MyClass</members><name>ApexClass</name></types>
+>   <types><members>MyPermSet</members><name>PermissionSet</name></types>
+>   <types><members>MyBundle</members><name>AiAuthoringBundle</name></types>
+>   <version>66.0</version>
+> </Package>
+> ```
+> Deploy with: `sf project deploy start --json --manifest manifest/package.xml -o <org>`
+> This also prevents pre-existing test failures in unrelated components from blocking your deploy.
+>
+> Note: `--source-file` is NOT a valid flag for `sf project deploy start`. Use `--manifest` or `--metadata`.
+
 ***
 
 ## <span data-proof="authored" data-by="ai:claude">Step 7: Preview with live actions and read traces (Principle 3)</span>
@@ -181,6 +217,16 @@ sf agent preview end --json --authoring-bundle <Developer_Name> --session-id <ID
 ```
 
 <span data-proof="authored" data-by="ai:claude">Trace files land at:</span> <span data-proof="authored" data-by="ai:claude">`.sfdx/agents/<Developer_Name>/sessions/<sessionId>/traces/<planId>.json`.</span>
+
+> **⚠️ Default preview is SIMULATED — Apex is never called.** By default, `sf agent preview` runs in simulated mode and mocks all action responses. To invoke real deployed Apex, you MUST pass `--use-live-actions`:
+> ```bash
+> sf agent preview start --json --use-live-actions --authoring-bundle <Developer_Name> -o <org>
+> ```
+> Add `--apex-debug` to generate Apex debug logs during the preview session:
+> ```bash
+> sf agent preview start --json --use-live-actions --apex-debug --authoring-bundle <Developer_Name> -o <org>
+> ```
+> **Debug logs must be set on the Agent User, not the admin user.** The Apex runs in the context of the Einstein Agent User created for your service agent. In Setup → Debug Logs, add the agent user (e.g. `sangameshgella.51a07bde9b13@agentforce.com`) — adding the admin user will produce no logs for agent-invoked Apex.
 
 <span data-proof="authored" data-by="ai:claude">Confirm subagent routing, gating, and action invocations match the Agent Spec. If behavior diverges from spec, the diagnosis flow is in</span> <span data-proof="authored" data-by="ai:claude">`/agentforce-observe`</span> <span data-proof="authored" data-by="ai:claude">(jq queries against trace JSON to surface routing, action invocation, grounding, and safety scores). Return here only after correcting.</span>
 

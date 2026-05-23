@@ -63,6 +63,25 @@ loop (max 3 iterations) for diagnosed failures. Always pass --json on every sf C
 
 ### <span data-proof="authored" data-by="ai:claude">Run the preview session</span>
 
+> **⚠️ SIMULATED vs LIVE mode — critical distinction.**
+>
+> By default, `sf agent preview` runs in **simulated mode**: the agent runtime mocks all action responses and never calls your real Apex classes or Flows. This means:
+> - Variable capture via `@utils.setVariables` works normally
+> - Routing logic and `available when:` guards are exercised
+> - But `@InvocableMethod` classes are **never invoked** — you will not receive real results or emails
+>
+> To invoke real deployed Apex/Flow actions, **always add `--use-live-actions`**:
+> ```bash
+> sf agent preview start --json --use-live-actions --authoring-bundle <BundleName> --target-org <org>
+> ```
+> Add `--apex-debug` to capture Apex debug logs during the session:
+> ```bash
+> sf agent preview start --json --use-live-actions --apex-debug --authoring-bundle <BundleName> --target-org <org>
+> ```
+> **Debug logs must be on the Agent User.** Apex runs as the Einstein Agent User (e.g. `agentforce.com` email), not your admin user. In Setup → Debug Logs, add the **agent user** — adding admin produces no logs.
+>
+> Note: `--mode live` is NOT a valid flag. The correct flag is `--use-live-actions`.
+
 ```bash proof:W3sidHlwZSI6InByb29mQXV0aG9yZWQiLCJmcm9tIjowLCJ0byI6NjIwLCJhdHRycyI6eyJieSI6ImFpOmNsYXVkZSJ9fV0=
 SESSION_ID=$(sf agent preview start --json \
   --authoring-bundle <BundleName> \

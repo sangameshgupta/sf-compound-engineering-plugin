@@ -236,6 +236,11 @@ sf agent test results --json --job-id "$JOB_ID" --result-format json -o <org>
 
 <span data-proof="authored" data-by="ai:claude">Use the same derivation rules as</span> <span data-proof="authored" data-by="ai:claude">`/agentforce-test`</span> <span data-proof="authored" data-by="ai:claude">Step 0: subagent-based, action-based, guardrail, multi-turn, safety probes.</span>
 
+> **⚠️ Debug logs must be on the Agent User, not the admin user.**
+> When using `--use-live-actions`, Apex runs as the Einstein Agent User (the `@agentforce.com` scoped user), not your admin. If you set debug logs on your admin user, you will see zero Apex logs even when actions are being called. In Setup → Debug Logs, add the **agent user** specifically. Check the agent user's email in Setup → Users, filtered by "Einstein Agent".
+
+> **⚠️ `available when:` gate behavior.** If a variable hasn't been captured yet (e.g. `customer_email` is still `""`), an action guarded by `available when @variables.customer_email != ""` will simply not appear in the `EnabledToolsStep` of the trace. The action is silently skipped — no error is thrown. If your action is never called, check the trace's `VariableUpdateStep` entries to confirm the variable was actually set before the action was invoked.
+
 ### <span data-proof="authored" data-by="ai:claude">1-ALT.3 Preview with</span> <span data-proof="authored" data-by="ai:claude">`--authoring-bundle`</span> <span data-proof="authored" data-by="ai:claude">(local traces)</span>
 
 ```bash proof:W3sidHlwZSI6InByb29mQXV0aG9yZWQiLCJmcm9tIjowLCJ0byI6NDYxLCJhdHRycyI6eyJieSI6ImFpOmNsYXVkZSJ9fV0=
@@ -276,6 +281,11 @@ sf agent preview end --json --session-id "$SESSION_ID" --authoring-bundle <Bundl
 | <span data-proof="authored" data-by="ai:claude">`[NOT REPRODUCED]`</span> | <span data-proof="authored" data-by="ai:claude">Passes 3/3</span>               |
 
 <span data-proof="authored" data-by="ai:claude">Only</span> <span data-proof="authored" data-by="ai:claude">`[CONFIRMED]`</span> <span data-proof="authored" data-by="ai:claude">and</span> <span data-proof="authored" data-by="ai:claude">`[INTERMITTENT]`</span> <span data-proof="authored" data-by="ai:claude">proceed to Phase 3. The 3-run discipline exists because LLM jitter (Principle 3) will lie to you if you only run once.</span>
+
+> **⚠️ Use `--use-live-actions` for reproduction.** Reproducing a production issue requires the same conditions: real Apex called. Without `--use-live-actions`, the preview runs in simulated mode and will likely succeed even for issues that fail in production. Always reproduce with:
+> ```bash
+> sf agent preview start --json --use-live-actions --apex-debug --authoring-bundle <Name> -o <org>
+> ```
 
 ```bash proof:W3sidHlwZSI6InByb29mQXV0aG9yZWQiLCJmcm9tIjowLCJ0byI6MjUyLCJhdHRycyI6eyJieSI6ImFpOmNsYXVkZSJ9fV0=
 sf agent preview start --json --authoring-bundle <Name> -o <org>
